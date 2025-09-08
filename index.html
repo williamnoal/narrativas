@@ -6,11 +6,8 @@
     <title>Fábrica de Histórias - Escolha sua Aventura</title>
     <style>
         :root {
-            --cor-primaria: #0077b6;
-            --cor-fundo: #edf6f9;
-            --cor-texto: #023047;
-            --cor-branco: #ffffff;
-            --cor-sombra: rgba(0, 0, 0, 0.1);
+            --cor-primaria: #0077b6; --cor-fundo: #edf6f9; --cor-texto: #023047;
+            --cor-branco: #ffffff; --cor-sombra: rgba(0, 0, 0, 0.1);
         }
         body, html {
             height: 100%; margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -23,12 +20,14 @@
         .selection-card {
             background-color: var(--cor-branco); padding: 40px; border-radius: 20px;
             box-shadow: 0 10px 30px var(--cor-sombra); text-align: center;
-            width: 100%; max-width: 900px;
+            width: 100%; max-width: 1000px; /* Aumentado para melhor acomodação */
         }
         h1 { font-size: 2.5rem; color: var(--cor-primaria); margin-top: 0; margin-bottom: 10px; }
         p { font-size: 1.2rem; margin-bottom: 30px; }
         .story-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); /* Define 4 colunas fixas */
+            gap: 20px;
         }
         .story-link {
             display: flex; flex-direction: column; align-items: center; justify-content: center;
