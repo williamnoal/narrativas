@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>História 1: O Mistério do Mascote</title>
+    <style>
+        :root {
+            --cor-primaria: #ff6347; /* Tomato */
+            --cor-fundo: #fdf5e6; /* Old Lace */
+            --cor-texto: #333;
+        }
+        body, html {
+            height: 100%; margin: 0; font-family: 'Segoe UI', sans-serif;
+            background-color: var(--cor-fundo); color: var(--cor-texto); overflow: hidden;
+        }
+        .container {
+            display: flex; justify-content: center; align-items: center; height: 100%;
+            padding: 20px; box-sizing: border-box;
+        }
+        .etapa {
+            background-color: white; padding: 40px; border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1); text-align: center;
+            width: 100%; max-width: 650px;
+        }
+        .hidden { display: none; }
+        h2 { font-size: 1.6rem; color: var(--cor-primaria); margin-top: 0; }
+        p { font-size: 1.1rem; line-height: 1.6; }
+        .options { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; }
+        .choice-btn {
+            padding: 15px; border: 2px solid var(--cor-primaria);
+            border-radius: 10px; background-color: white; color: var(--cor-primaria);
+            font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s;
+        }
+        .choice-btn:hover { background-color: var(--cor-primaria); color: white; }
+        #final-text-container { text-align: left; margin-bottom: 20px; }
+        #senha-final {
+            background-color: #eee; padding: 10px; border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace; font-weight: bold;
+            color: #555; margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="etapa-1" class="etapa">
+            <h2>O mascote da escola, o esquilo Joca, sumiu! Onde você começa a procurar?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(1, 1)">Pelo pátio, onde ele foi visto pela última vez.</button>
+                <button class="choice-btn" onclick="fazerEscolha(1, 2)">Pela cantina, pois ele adora as nozes de lá.</button>
+            </div>
+        </div>
+
+        <div id="etapa-2" class="etapa hidden">
+            <h2>Você encontra uma pista: um pequeno objeto brilhante no chão. O que você faz?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(2, 1)">Pega o objeto para analisar de perto.</button>
+                <button class="choice-btn" onclick="fazerEscolha(2, 2)">Chama o inspetor para relatar sua descoberta.</button>
+            </div>
+        </div>
+
+        <div id="etapa-3" class="etapa hidden">
+            <h2>A pista te leva à ala de artes. A porta do clube de teatro está entreaberta. Qual sua abordagem?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(3, 1)">Entra silenciosamente para não ser notado.</button>
+                <button class="choice-btn" onclick="fazerEscolha(3, 2)">Anuncia sua entrada para não assustar ninguém.</button>
+            </div>
+        </div>
+
+        <div id="etapa-4" class="etapa hidden">
+            <h2>Lá dentro, você vê uma figura de costas, vestindo um casaco grande. O que você diz?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(4, 1)">"Com licença, você viu um esquilo por aqui?"</button>
+                <button class="choice-btn" onclick="fazerEscolha(4, 2)">"Mãos ao alto! Onde está o Joca?"</button>
+            </div>
+        </div>
+
+        <div id="etapa-5" class="etapa hidden">
+            <h2>A pessoa se vira. É a Gabi, do 7º ano. Ela parece assustada e esconde algo. Como você reage?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(5, 1)">Com calma, pergunta o que ela está escondendo.</button>
+                <button class="choice-btn" onclick="fazerEscolha(5, 2)">Com firmeza, insiste que ela mostre o que tem.</button>
+            </div>
+        </div>
+
+        <div id="etapa-6" class="etapa hidden">
+            <h2>Gabi confessa que pegou Joca, mas foi por um bom motivo. Qual sua primeira pergunta?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(6, 1)">"Ele está bem? Onde ele está agora?"</button>
+                <button class="choice-btn" onclick="fazerEscolha(6, 2)">"Por que você o pegou? O que aconteceu?"</button>
+            </div>
+        </div>
+
+        <div id="etapa-7" class="etapa hidden">
+            <h2>Ela explica que Joca parecia doente e ela o levou para a sala de ciências para cuidar dele. Você:</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(7, 1)">Acredita nela e pede para ver o esquilo.</button>
+                <button class="choice-btn" onclick="fazerEscolha(7, 2)">Desconfia e diz que ela deveria ter avisado alguém.</button>
+            </div>
+        </div>
+        
+        <div id="etapa-8" class="etapa hidden">
+            <h2>Joca está bem, apenas comeu frutas demais. A diretora precisa saber da história. Como vocês contam?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(8, 1)">Contam juntos, explicando a boa intenção de Gabi.</button>
+                <button class="choice-btn" onclick="fazerEscolha(8, 2)">Você assume a liderança e explica tudo o que descobriu.</button>
+            </div>
+        </div>
+
+        <div id="etapa-final" class="etapa hidden">
+            <h2>Sua história está completa!</h2>
+            <div id="final-text-container"></div>
+            <p>A sua jornada única gerou a seguinte senha:</p>
+            <div id="senha-final"></div>
+            <div class="options">
+                <button class="choice-btn" onclick="window.location.reload()">Jogar Novamente</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // BANCO DE TEXTOS - Aqui ficam os parágrafos pré-escritos.
+        const BANCO_DE_TEXTOS = {
+            // Parágrafos de INTRODUÇÃO (definidos pelas escolhas 1 e 2)
+            introducao: {
+                '1-1': "O alarme soou na escola: Joca, o esquilo mascote, havia desaparecido. Decidido a resolver o caso, você começou sua busca pelo pátio, o último local onde o viram. Lá, entre as folhas secas, algo brilhou. Era a pequena medalha da coleira de Joca, e ao pegá-la, você percebeu que ela estava arranhada de uma forma estranha, como se apontasse para uma direção específica.",
+                '1-2': "O desaparecimento de Joca, o querido esquilo mascote, mobilizou a todos. Sua primeira ação foi ir ao pátio, mas antes de começar a busca, você decidiu comunicar o inspetor. Juntos, vocês encontraram a medalha da coleira de Joca perto da ala de artes. O inspetor te parabenizou pela iniciativa e te nomeou o detetive oficial do caso.",
+                '2-1': "Sua intuição de detetive te levou à cantina, o lugar favorito de Joca. O cheiro de nozes estava no ar, mas algo mais chamou sua atenção: um brilho metálico debaixo de uma mesa. Era a medalha da coleira dele! Ao pegá-la, você notou que ela estava morna, indicando que alguém esteve ali há pouquíssimo tempo.",
+                '2-2': "Como um bom detetive, você sabia que a cantina seria um ponto-chave na investigação do sumiço de Joca. Antes de mexer em qualquer coisa, você chamou o inspetor. Sua abordagem metódica foi recompensada quando ele encontrou não só a medalha da coleira, mas também pegadas que não eram do esquilo, confirmando que se tratava de um sequestro."
+            },
+            // Parágrafos de DESENVOLVIMENTO 1 (definidos pelas escolhas 3 e 4)
+            desenvolvimento1: {
+                '1-1': "Seguindo a pista, você chegou à porta do clube de teatro. Com o cuidado de um espião, você entrou sem fazer barulho e avistou uma figura misteriosa de costas. Aproximando-se com cautela, você perguntou em um sussurro: 'Com licença, você viu um esquilo por aqui?'. A pessoa se virou lentamente, e o mistério estava prestes a se aprofundar.",
+                '1-2': "A pista te guiou até o clube de teatro. Sem hesitar, você entrou e viu uma pessoa de costas, parecendo suspeita. Com a confiança de quem está no caminho certo, você bradou: 'Mãos ao alto! Onde está o Joca?'. A figura deu um pulo de susto, deixando cair um saco de nozes, e se virou, revelando um rosto completamente surpreso.",
+                '2-1': "A porta entreaberta do clube de teatro era um convite irrecusável. Você decidiu anunciar sua presença para não causar problemas. 'Olá? Tem alguém aí?', você disse. Uma figura de costas se mexeu e, de forma educada, você perguntou sobre o paradeiro de Joca. A resposta que veio a seguir não era nada do que você esperava.",
+                '2-2': "Chegando ao clube de teatro, você não perdeu tempo. Abriu a porta e, ao ver a figura de costas, usou sua voz mais imponente de detetive: 'Mãos ao alto! Onde está o Joca?'. A pessoa se virou assustada, e você percebeu que a situação era mais complexa do que um simples desaparecimento."
+            },
+            // Parágrafos de DESENVOLVIMENTO 2 (definidos pelas escolhas 5 e 6)
+            desenvolvimento2: {
+                '1-1': "A figura era Gabi, do 7º ano. Ela parecia nervosa. Com uma abordagem calma, você perguntou o que ela escondia. Gabi, aliviada por sua gentileza, confessou ter pego Joca. Antes que você pudesse julgar, você fez a pergunta mais importante: 'Ele está bem? Onde ele está agora?'. A resposta dela mudaria todo o rumo do caso.",
+                '1-2': "Era a Gabi, do 7º ano, visivelmente assustada. Você perguntou com tranquilidade o que ela escondia. Gabi admitiu que estava com Joca, e sua curiosidade investigativa te fez perguntar imediatamente: 'Por que você o pegou? O que aconteceu?'. A história que ela contou era uma peça fundamental do quebra-cabeça.",
+                '2-1': "A pessoa misteriosa era Gabi, do 7º ano. Vendo o nervosismo dela, você insistiu com firmeza para que ela mostrasse o que escondia. Pressionada, Gabi revelou que estava com Joca. Sua prioridade foi a segurança do mascote, então você foi direto ao ponto: 'Ele está bem? Onde ele está agora?'.",
+                '2-2': "Gabi, do 7º ano, estava diante de você, acuada. Você insistiu firmemente para saber a verdade. Ela confessou, e sua mente de detetive quis entender a motivação por trás do ato. 'Por que você o pegou? O que aconteceu?', você perguntou, pronto para desvendar a última camada do mistério."
+            },
+            // Parágrafos de CONCLUSÃO (definidos pelas escolhas 7 e 8)
+            conclusao: {
+                '1-1': "Gabi explicou que Joca parecia doente e que, em sua ânsia de ajudar, o levou para a sala de ciências para examiná-lo. Você acreditou em sua história e, juntos, foram até lá. Joca estava ótimo, apenas sonolento por ter comido frutas demais. Na diretoria, vocês contaram a história em conjunto, e a diretora elogiou a boa intenção de Gabi e sua habilidade de detetive, transformando um susto em uma lição sobre cuidado e comunicação.",
+                '1-2': "A intenção de Gabi era boa: ela achou que Joca estava doente. Você acreditou nela e foram juntos ver o esquilo na sala de ciências. Confirmado que tudo estava bem, vocês foram para a diretoria. Lá, você assumiu a frente e narrou todos os passos da sua investigação, concluindo com a atitude bem-intencionada, mas precipitada, de Gabi. A diretora te parabenizou pela liderança e resolveu o caso com uma conversa.",
+                '2-1': "A história de Gabi sobre Joca parecer doente soou estranha. Você manteve a desconfiança, mas concordou em ver o esquilo. De fato, ele estava bem. Na diretoria, vocês contaram a história juntos. Sua perspectiva cética ajudou a diretora a criar uma nova regra: 'Viu um animal precisando de ajuda? Avise um adulto primeiro!'. Gabi entendeu a lição, e você foi reconhecido por sua prudência.",
+                '2-2': "Mesmo com a explicação de Gabi, você sentiu que a atitude dela foi errada por não avisar ninguém. Após confirmar que Joca estava bem, você liderou o relato na diretoria, explicando como a falta de comunicação gerou pânico. A diretora concordou com sua análise e, enquanto Gabi aprendeu uma lição valiosa, você foi elogiado por sua clareza e senso de responsabilidade, resolvendo o mistério com maestria."
+            }
+        };
+
+        // LÓGICA DO JOGO
+        let escolhas = [];
+
+        function fazerEscolha(etapa, numeroDaEscolha) {
+            escolhas.push(numeroDaEscolha);
+            document.getElementById('etapa-' + etapa).classList.add('hidden');
+            
+            if (etapa === 8) {
+                montarTextoFinal();
+            } else {
+                document.getElementById('etapa-' + (etapa + 1)).classList.remove('hidden');
+            }
+        }
+
+        function montarTextoFinal() {
+            // Seleciona os blocos de texto com base nas escolhas
+            const keyIntro = `${escolhas[0]}-${escolhas[1]}`;
+            const keyDev1 = `${escolhas[2]}-${escolhas[3]}`;
+            const keyDev2 = `${escolhas[4]}-${escolhas[5]}`;
+            const keyConc = `${escolhas[6]}-${escolhas[7]}`;
+
+            const paragrafo1 = BANCO_DE_TEXTOS.introducao[keyIntro];
+            const paragrafo2 = BANCO_DE_TEXTOS.desenvolvimento1[keyDev1];
+            const paragrafo3 = BANCO_DE_TEXTOS.desenvolvimento2[keyDev2];
+            const paragrafo4 = BANCO_DE_TEXTOS.conclusao[keyConc];
+
+            const textoFinal = `<p>${paragrafo1}</p><p>${paragrafo2}</p><p>${paragrafo3}</p><p>${paragrafo4}</p>`;
+            
+            // Exibe o resultado
+            document.getElementById('final-text-container').innerHTML = textoFinal;
+            document.getElementById('senha-final').innerText = `5: ${escolhas.join('-')}`; // Assumindo que esta é a história 5 no futuro
+            document.getElementById('etapa-final').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
