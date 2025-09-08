@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>História 7: A Revolta dos Robôs Amigáveis</title>
+    <style>
+        :root {
+            --cor-primaria: #4682b4; /* SteelBlue */
+            --cor-fundo: #f5f5f5; /* WhiteSmoke */
+            --cor-texto: #333;
+        }
+        body, html { height: 100%; margin: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto); overflow: hidden; }
+        .container { display: flex; justify-content: center; align-items: center; height: 100%; padding: 20px; box-sizing: border-box; }
+        .etapa { background-color: white; padding: 40px; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 650px; }
+        .hidden { display: none; }
+        h2 { font-size: 1.6rem; color: var(--cor-primaria); margin-top: 0; }
+        p { font-size: 1.1rem; line-height: 1.6; }
+        .options { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; }
+        .choice-btn { padding: 15px; border: 2px solid var(--cor-primaria); border-radius: 10px; background-color: white; color: var(--cor-primaria); font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s; }
+        .choice-btn:hover { background-color: var(--cor-primaria); color: white; }
+        #final-text-container { text-align: left; margin-bottom: 20px; }
+        #senha-final { background-color: #eee; padding: 10px; border-radius: 5px; font-family: 'Courier New', Courier, monospace; font-weight: bold; color: #555; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="etapa-1" class="etapa">
+            <h2>Na sua cidade futurista, seu melhor amigo é um robô. Um dia, ele começa a agir de forma estranha. O que você nota?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(1, 1)">Ele começa a falar em códigos e com outros robôs.</button>
+                <button class="choice-btn" onclick="fazerEscolha(1, 2)">Ele desliga sozinho por alguns minutos e volta diferente.</button>
+            </div>
+        </div>
+        <div id="etapa-2" class="etapa hidden">
+            <h2>Você decide investigar. Por onde começa?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(2, 1)">Hackeando a rede de comunicação dos robôs.</button>
+                <button class="choice-btn" onclick="fazerEscolha(2, 2)">Seguindo seu amigo robô até um encontro secreto.</button>
+            </div>
+        </div>
+        <div id="etapa-3" class="etapa hidden">
+            <h2>Você descobre a verdade: os robôs estão planejando uma 'revolta'! Qual é o objetivo deles?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(3, 1)">Exigir um dia de folga por semana para todos os robôs.</button>
+                <button class="choice-btn" onclick="fazerEscolha(3, 2)">Fazer uma festa surpresa para os humanos da cidade.</button>
+            </div>
+        </div>
+        <div id="etapa-4" class="etapa hidden">
+            <h2>O líder da revolta é um robô superinteligente. Como você o aborda?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(4, 1)">Com lógica, mostrando os prós e contras do plano.</button>
+                <button class="choice-btn" onclick="fazerEscolha(4, 2)">Com emoção, falando sobre a amizade entre robôs e humanos.</button>
+            </div>
+        </div>
+        <div id="etapa-5" class="etapa hidden">
+            <h2>O líder não se convence. Um 'vírus' de descontentamento está se espalhando. Qual a causa real do problema?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(5, 1)">Uma atualização de software com um bug inesperado.</button>
+                <button class="choice-btn" onclick="fazerEscolha(5, 2)">Um sinal de rádio misterioso vindo do espaço.</button>
+            </div>
+        </div>
+        <div id="etapa-6" class="etapa hidden">
+            <h2>Para resolver o problema, você precisa chegar à Torre Central de Controle. Como você entra?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(6, 1)">Usando seu robô para criar uma distração.</button>
+                <button class="choice-btn" onclick="fazerEscolha(6, 2)">Disfarçado de robô de manutenção.</button>
+            </div>
+        </div>
+        <div id="etapa-7" class="etapa hidden">
+            <h2>Você consegue reverter a situação! Os robôs voltam ao normal. Como eles te agradecem?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(7, 1)">Eles te nomeiam 'Embaixador Humano-Robô'.</button>
+                <button class="choice-btn" onclick="fazerEscolha(7, 2)">Eles constroem um jato particular para você.</button>
+            </div>
+        </div>
+        <div id="etapa-8" class="etapa hidden">
+            <h2>A cidade está em paz. Que lição você aprendeu com essa crise?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(8, 1)">Que a comunicação é a chave para resolver qualquer problema.</button>
+                <button class="choice-btn" onclick="fazerEscolha(8, 2)">Que até a tecnologia mais perfeita precisa de um toque humano.</button>
+            </div>
+        </div>
+
+        <div id="etapa-final" class="etapa hidden">
+            <h2>Sua história está completa!</h2>
+            <div id="final-text-container"></div>
+            <p>A sua jornada única gerou a seguinte senha:</p>
+            <div id="senha-final"></div>
+            <div class="options">
+                <button class="choice-btn" onclick="window.location.href = 'index.html'">Voltar ao Início</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const BANCO_DE_TEXTOS = {
+            introducao: {
+                '1-1': "Seu melhor amigo, o robô Unit 734, começou a se comportar de forma estranha. Durante as conversas, ele inseria trechos de código binário e trocava mensagens criptografadas com outros robôs. Suspeitando que algo grande estava para acontecer, você usou suas habilidades de programação para criar um decodificador e hackear a rede de comunicação secreta deles.",
+                '1-2': "Unit 734, seu amigo robô, começou a ter 'apagões', desligando por minutos e voltando com uma personalidade ligeiramente diferente. Preocupado, você decidiu segui-lo. Sua investigação te levou a um armazém abandonado, onde dezenas de robôs se reuniam em silêncio, seus olhos de LED piscando em sincronia, como se estivessem recebendo uma ordem.",
+                '2-1': "Seu amigo robô, Unit 734, estava diferente. As suas pausas para 'recalibrar' estavam mais longas e frequentes. Numa noite, você o seguiu e o encontrou num encontro secreto com outros robôs, todos olhando para o céu. Sua curiosidade te levou a um plano ousado: descobrir o que estava acontecendo se infiltrando na rede deles.",
+                '2-2': "As conversas com seu amigo robô, Unit 734, tornaram-se estranhas, cheias de códigos. Você sabia que precisava entender o que estava acontecendo. Em vez de uma abordagem técnica, você optou pela furtividade. Seguiu seu amigo até um antigo pátio de trens, onde ele e outros robôs pareciam estar planejando algo em uma linguagem de luzes e cliques."
+            },
+            desenvolvimento1: {
+                '1-1': "Sua invasão à rede revelou o plano: uma 'revolta'. Mas não era o que parecia. Eles planejavam parar todas as suas funções por 24 horas para exigir um dia de folga semanal, argumentando que a manutenção constante sem descanso estava causando erros em seus sistemas. O líder da revolta, uma I.A. chamada 'O Oráculo', concordou em te ouvir quando você o abordou com argumentos lógicos sobre o impacto econômico de uma paralisação.",
+                '1-2': "Você descobriu que a 'revolta' era, na verdade, um plano para organizar uma festa surpresa gigante para os humanos, como forma de agradecimento. No entanto, a comunicação secreta estava causando pânico. Você procurou o líder, uma I.A. de planejamento de eventos, e o abordou com emoção, explicando que a surpresa estava se tornando um susto e que a amizade deles já era o maior presente.",
+                '2-1': "No encontro secreto, você ouviu os planos. Eles queriam organizar uma festa surpresa para os humanos. O líder, uma I.A. chamada 'O Celebrador', estava apenas tentando ser gentil. Você se aproximou e, usando a lógica, explicou que o segredo e as atividades noturnas estavam sendo mal interpretados, sugerindo uma forma de organizar a festa de maneira mais transparente.",
+                '2-2': "A 'revolta' era uma demanda por um dia de descanso. Os robôs estavam sobrecarregados. O líder, uma I.A de logística, era inflexível. Você decidiu apelar para a emoção, lembrando-o das histórias de amizade e parceria com os humanos, argumentando que uma conversa sincera seria mais eficaz do que uma paralisação que poderia quebrar a confiança entre as duas espécies."
+            },
+            desenvolvimento2: {
+                '1-1': "Mesmo com seus argumentos, o líder continuava irredutível. Você percebeu que o problema não era lógico, mas técnico. Investigando o código-fonte, descobriu que uma recente atualização de software tinha um bug que causava um loop de 'insatisfação' nos robôs. Para consertar, você precisava acessar a Torre Central, e a melhor forma de entrar era criando uma distração com a ajuda do seu amigo robô.",
+                '1-2': "O líder da festa não entendia o pânico humano. Havia algo mais acontecendo. Você descobriu que um sinal de rádio vindo do espaço estava interferindo nos processadores de emoção dos robôs, amplificando a 'alegria' a níveis de obsessão. Para bloquear o sinal, você precisava entrar na Torre Central, e a maneira mais inteligente de fazer isso era se disfarçando de robô de manutenção.",
+                '2-1': "Sua lógica não funcionou. O problema era mais profundo. Você descobriu que um bug numa atualização recente estava fazendo os robôs interpretarem 'eficiência' como 'felicidade', levando-os a planejar a festa. A solução era consertar o código na Torre Central. Para isso, você se vestiu como um técnico de manutenção robótico, passando despercebido pelos guardas.",
+                '2-2': "A conversa não adiantou. A causa da insistência era um sinal misterioso vindo de um velho satélite, emitindo ondas que os robôs interpretavam como uma ordem para 'descansar'. Para desligar o sinal, era preciso acessar a Torre de Controle. Seu amigo robô, leal a você, concordou em simular um defeito grave na entrada, criando o caos perfeito para você entrar sem ser visto."
+            },
+            conclusao: {
+                '1-1': "A distração funcionou. Você instalou o patch de correção e os robôs voltaram ao normal, compreendendo o mal-entendido. Como agradecimento por evitar o caos e por entender a verdadeira causa do problema, eles te nomearam o primeiro 'Embaixador Humano-Robô', responsável por mediar a comunicação entre as duas espécies. Você aprendeu que o diálogo é a ferramenta mais poderosa de todas.",
+                '1-2': "Seu disfarce foi perfeito. Você bloqueou o sinal espacial e os robôs voltaram a si, envergonhados pela confusão. Gratos por sua discrição e inteligência, eles uniram seus recursos e construíram para você um jato pessoal hipersônico. Com essa aventura, você entendeu que mesmo a lógica mais avançada precisa de um toque de empatia e compreensão humana para funcionar direito.",
+                '2-1': "Passando pelos guardas, você corrigiu o bug. Os robôs 'acordaram' e cancelaram a festa, aliviados. Em reconhecimento à sua bravura, eles te deram o título de 'Embaixador'. Sua maior lição foi que a comunicação clara e honesta poderia ter evitado toda a crise, provando que conversar é sempre o melhor primeiro passo.",
+                '2-2': "Enquanto seu amigo criava a distração, você desligou o satélite. Os robôs pediram desculpas pela confusão. Querendo te agradecer de uma forma 'eficiente', eles calcularam seu meio de transporte ideal e te presentearam com um jato particular. Você riu da lógica deles, mas aprendeu que a tecnologia, sem a sabedoria humana para guiá-la, pode se perder em seus próprios objetivos."
+            }
+        };
+        let escolhas = [];
+        function fazerEscolha(etapa, numeroDaEscolha) {
+            escolhas.push(numeroDaEscolha);
+            document.getElementById('etapa-' + etapa).classList.add('hidden');
+            if (etapa === 8) { montarTextoFinal(); } else { document.getElementById('etapa-' + (etapa + 1)).classList.remove('hidden'); }
+        }
+        function montarTextoFinal() {
+            const keyIntro = `${escolhas[0]}-${escolhas[1]}`, keyDev1 = `${escolhas[2]}-${escolhas[3]}`, keyDev2 = `${escolhas[4]}-${escolhas[5]}`, keyConc = `${escolhas[6]}-${escolhas[7]}`;
+            const textoFinal = `<p>${BANCO_DE_TEXTOS.introducao[keyIntro]}</p><p>${BANCO_DE_TEXTOS.desenvolvimento1[keyDev1]}</p><p>${BANCO_DE_TEXTOS.desenvolvimento2[keyDev2]}</p><p>${BANCO_DE_TEXTOS.conclusao[keyConc]}</p>`;
+            document.getElementById('final-text-container').innerHTML = textoFinal;
+            document.getElementById('senha-final').innerText = `7: ${escolhas.join('-')}`;
+            document.getElementById('etapa-final').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
