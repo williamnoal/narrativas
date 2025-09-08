@@ -6,33 +6,24 @@
     <title>História 2: A Viagem no Tempo Acidental</title>
     <style>
         :root {
-            --cor-primaria: #8a2be2; --cor-fundo: #f3e5f5; --cor-texto: #333;
-            --cor-sucesso: #28a745; --cor-alternativa: #17a2b8;
+            --cor-primaria: #8a2be2;
+            --cor-fundo: #f3e5f5;
+            --cor-texto: #333;
         }
-        body, html { height: 100%; margin: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto); }
-        .container { display: flex; justify-content: center; align-items: center; min-height: 100%; padding: 20px; box-sizing: border-box; }
-        .etapa { background-color: white; padding: 40px; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 650px; margin: 20px 0; }
+        body, html { height: 100%; margin: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto); overflow: hidden; }
+        .container { display: flex; justify-content: center; align-items: center; height: 100%; padding: 20px; box-sizing: border-box; }
+        .etapa { background-color: white; padding: 40px; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 650px; }
         .hidden { display: none; }
         h2 { font-size: 1.6rem; color: var(--cor-primaria); margin-top: 0; }
-        p { font-size: 1.1rem; line-height: 1.6; }
         .options { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; }
         .choice-btn { padding: 15px; border: 2px solid var(--cor-primaria); border-radius: 10px; background-color: white; color: var(--cor-primaria); font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s; }
         .choice-btn:hover { background-color: var(--cor-primaria); color: white; }
-        #final-title { color: var(--cor-sucesso); font-size: 2rem; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        #final-text-container p { text-align: justify; text-indent: 2em; }
-        #senha-final { background-color: #eee; padding: 10px; border-radius: 5px; font-family: 'Courier New', Courier, monospace; font-weight: bold; color: #555; margin-top: 20px; display: inline-block; }
-        .final-box { text-align: left; margin-top: 30px; padding: 20px; border-radius: 10px; }
-        #alternative-ending { background-color: #eef7f9; border-left: 5px solid var(--cor-alternativa); }
-        #glossary { background-color: #fff8e1; border-left: 5px solid #ffc107; }
-        .final-box h3 { margin-top: 0; color: var(--cor-alternativa); }
-        #glossary h3 { color: #ffc107; }
-        .glossary-item b { color: var(--cor-texto); }
     </style>
 </head>
 <body>
     <div class="container">
         <div id="etapa-1" class="etapa">
-            <h2>Explorando o porão da escola, você encontra um objeto antigo. O que é?</h2>
+            <h2>A explorar o porão da escola, você encontra um objeto antigo. O que é?</h2>
             <div class="options">
                 <button class="choice-btn" onclick="fazerEscolha(1, 1)">Um relógio de bolso que não marca as horas.</button>
                 <button class="choice-btn" onclick="fazerEscolha(1, 2)">Uma bússola cujo ponteiro gira sem parar.</button>
@@ -46,7 +37,7 @@
             </div>
         </div>
         <div id="etapa-3" class="etapa hidden">
-            <h2>Uma luz forte te cega e, ao abrir os olhos, você está em outro lugar! Onde você está?</h2>
+            <h2>Uma luz forte cega-o e, ao abrir os olhos, você está noutro lugar! Onde você está?</h2>
             <div class="options">
                 <button class="choice-btn" onclick="fazerEscolha(3, 1)">Numa cidade futurista com carros voadores.</button>
                 <button class="choice-btn" onclick="fazerEscolha(3, 2)">Numa vila medieval com cavaleiros e um castelo.</button>
@@ -60,136 +51,46 @@
             </div>
         </div>
         <div id="etapa-5" class="etapa hidden">
-            <h2>O objeto que te trouxe até aqui apagou. Você precisa de uma fonte de energia. Onde procurar?</h2>
+            <h2>O objeto que o trouxe até aqui apagou-se. Você precisa de uma fonte de energia. Onde procurar?</h2>
             <div class="options">
                 <button class="choice-btn" onclick="fazerEscolha(5, 1)">No laboratório central da cidade.</button>
                 <button class="choice-btn" onclick="fazerEscolha(5, 2)">Na torre do mago do castelo.</button>
             </div>
         </div>
         <div id="etapa-6" class="etapa hidden">
-            <h2>Você precisa convencer a pessoa no comando a te ajudar. Qual seu argumento?</h2>
+            <h2>Você precisa de convencer a pessoa no comando a ajudá-lo. Qual o seu argumento?</h2>
             <div class="options">
-                <button class="choice-btn" onclick="fazerEscolha(6, 1)">"Sou um viajante do tempo e preciso voltar para casa."</button>
+                <button class="choice-btn" onclick="fazerEscolha(6, 1)">"Sou um viajante do tempo e preciso de voltar para casa."</button>
                 <button class="choice-btn" onclick="fazerEscolha(6, 2)">"Tenho informações valiosas sobre o futuro/passado."</button>
             </div>
         </div>
         <div id="etapa-7" class="etapa hidden">
-            <h2>Com a energia restaurada, o portal para seu tempo se abre. O que você faz?</h2>
+            <h2>Com a energia restaurada, o portal para o seu tempo abre-se. O que você faz?</h2>
             <div class="options">
                 <button class="choice-btn" onclick="fazerEscolha(7, 1)">Agradece e volta para casa imediatamente.</button>
                 <button class="choice-btn" onclick="fazerEscolha(7, 2)">Pede um pequeno objeto como lembrança antes de ir.</button>
             </div>
         </div>
         <div id="etapa-8" class="etapa hidden">
-            <h2>Você está de volta ao porão. O objeto some, mas algo ficou com você. O quê?</h2>
+            <h2>Você está de volta ao porão. O objeto some, mas algo ficou consigo. O quê?</h2>
             <div class="options">
                 <button class="choice-btn" onclick="fazerEscolha(8, 1)">Apenas a incrível memória da sua aventura.</button>
                 <button class="choice-btn" onclick="fazerEscolha(8, 2)">O pequeno souvenir que você guardou no bolso.</button>
             </div>
         </div>
-        <div id="etapa-final" class="etapa hidden">
-            <h1 id="final-title">O Título da Sua História</h1>
-            <div id="final-text-container"></div>
-            <p>A sua jornada única gerou a seguinte senha: <span id="senha-final"></span></p>
-            <div id="alternative-ending" class="final-box">
-                <h3>Um Final Alternativo...</h3>
-                <p id="alternative-ending-text"></p>
-            </div>
-            <div id="glossary" class="final-box">
-                <h3>Glossário da Aventura</h3>
-                <div id="glossary-items"></div>
-            </div>
-            <div class="options">
-                <button class="choice-btn" onclick="window.location.href = 'index.html'">Voltar ao Início</button>
-            </div>
-        </div>
     </div>
     <script>
-        const BANCO_DE_TITULOS = {
-            '1-1': "O Segredo do Relógio Parado", '1-2': "O Mistério do Anel Giratório",
-            '2-1': "O Enigma da Bússola Infinita", '2-2': "O Portal do Porão"
-        };
-        const GLOSSARIO = {
-            'ornamentado': 'Decorado com detalhes, enfeitado.',
-            'turbilhão': 'Movimento muito rápido e giratório de ar, água, poeira, etc.',
-            'inerte': 'Que não se move, sem reação, parado.',
-            'cética': 'Pessoa que duvida de tudo ou precisa de provas para acreditar.',
-            'blefou': 'Ato de enganar ou mentir para obter vantagem, como em um jogo.'
-        };
-        const BANCO_DE_TEXTOS = {
-            introducao: {
-                '1-1': "A poeira dançava no ar do velho porão da escola quando você encontrou um antigo relógio de bolso. Seus ponteiros estavam parados, mas um pequeno botão na lateral parecia chamar por um toque. Sem pensar duas vezes, você o pressionou. O mundo ao seu redor se dissolveu em um turbilhão de luz e cores, uma sensação de vertigem seguida por um silêncio absoluto.",
-                '1-2': "No meio da tralha do porão da escola, um relógio de bolso chamou sua atenção. Era pesado e ornamentado, mas não funcionava. Ao examiná-lo, você descobriu um anel metálico em sua volta e, movido pela curiosidade, o girou. Imediatamente, o objeto vibrou em sua mão, e o chão sob seus pés pareceu desaparecer, substituído por um túnel de luz ofuscante.",
-                '2-1': "Foi uma bússola estranha que você achou no porão, com um ponteiro que girava loucamente, como se buscasse um norte que não existia. Em sua lateral, um botão minúsculo quase passava despercebido. Um clique foi o suficiente. O som da bússola se intensificou, o ar ficou elétrico e, num piscar de olhos, o porão familiar se desfez em pura energia.",
-                '2-2': "Entre caixas velhas, uma bússola antiga se destacava. Seu ponteiro girava sem parar, hipnótico. Você notou que a borda do objeto era um anel que podia ser girado. Ao fazer isso, um zumbido baixo começou, crescendo em volume até que tudo ao seu redor se tornou um borrão. Você sentiu um puxão, como se estivesse sendo sugado para dentro da própria bússola."
-            },
-            desenvolvimento1: {
-                '1-1': "Quando sua visão voltou, arranha-céus que tocavam as nuvens e carros que voavam em rios de luz compunham a paisagem. Você estava numa cidade do futuro! Antes que pudesse assimilar tudo, um robô flutuante e amigável se aproximou, oferecendo um tour. Sua surpresa era tão grande que você apenas concordou, tentando entender como voltar para casa.",
-                '1-2': "O cenário era de tirar o fôlego: uma cidade futurista, com prédios espelhados e veículos silenciosos que deslizavam pelo ar. Sua presença com roupas do 'passado' não demorou a chamar atenção. Um guarda em uma armadura tecnológica se aproximou, com uma expressão séria, e perguntou de qual setor histórico você havia escapado. O perigo parecia iminente.",
-                '2-1': "O cheiro de terra e fumaça de lenha substituiu o de poeira. Você estava numa vila medieval, com um imponente castelo ao fundo. Cavaleiros passavam montados em seus cavalos, e as pessoas te olhavam com estranheza. De repente, um robô surgiu do seu lado, oferecendo um tour. Espera, um robô? A confusão se instalou: você estava no passado ou num parque temático?",
-                '2-2': "Você aterrissou em uma rua de paralelepípedos, cercado por casas de madeira e um castelo no horizonte. Era a Idade Média! Suas roupas coloridas logo atraíram a atenção de um guarda, cuja armadura fazia barulho a cada passo. Ele apontou uma lança em sua direção e, com uma voz grave, exigiu saber quem era você e a serviço de qual rei estava."
-            },
-            desenvolvimento2: {
-                '1-1': "O objeto em sua mão estava apagado. Você precisava de energia. O lugar mais lógico para procurar era o laboratório central daquela cidade futurista. Lá, você encontrou a cientista-chefe e, tomando coragem, contou a verdade: 'Sou um viajante do tempo e preciso voltar para casa'. Cética, mas intrigada, ela decidiu ouvir sua história e examinar o objeto.",
-                '1-2': "Para voltar, era preciso reativar o dispositivo, agora inerte. O laboratório central da cidade parecia o local ideal. Ao encontrar a líder dos cientistas, você decidiu usar uma abordagem mais ousada: 'Tenho informações valiosas sobre o seu passado'. A promessa de conhecimento perdido foi a isca perfeita, garantindo a atenção e a ajuda dela para consertar seu 'bilhete' de volta.",
-                '2-1': "Seu passaporte para casa estava sem energia. Naquele lugar medieval, a única fonte de poder incomum só poderia estar na torre do mago do castelo. Chegando lá, você foi direto e honesto com o velho feiticeiro: 'Sou um viajante do tempo e preciso voltar'. O mago, que já tinha visto muitas coisas estranhas, sorriu e pediu para ver o 'artefato mágico' que você carregava.",
-                '2-2': "A energia do objeto se esgotou. A solução, naquele tempo antigo, só poderia ser mágica. Você buscou ajuda na torre do mago e, para ganhar sua confiança, blefou: 'Tenho informações valiosas sobre o futuro que podem interessar ao rei'. O mago, cujos olhos brilhavam de curiosidade e ambição, concordou em ajudar a recarregar seu artefato em troca de um vislumbre do que estava por vir."
-            },
-            conclusao: {
-                '1-1': "Com o dispositivo recarregado, um portal cintilante se abriu de volta para o porão da escola. Você agradeceu a todos pela ajuda e, sem hesitar, pulou de volta para seu tempo. Ao aterrissar, o objeto se desfez em pó, mas a experiência e o conhecimento que você adquiriu naquela aventura ficariam guardados para sempre em sua memória, um segredo só seu.",
-                '1-2': "O portal para casa se abriu, mas antes de partir, você pediu uma pequena lembrança daquela experiência incrível. Com um sorriso, seu novo amigo te deu um pequeno dispositivo. Você atravessou o portal e, ao chegar no porão, o objeto principal virou pó. No seu bolso, no entanto, o souvenir permaneceu: uma prova real e palpável da sua fantástica viagem no tempo.",
-                '2-1': "Após conseguir a ajuda necessária, o caminho de volta se materializou. Com um aceno de despedida, você atravessou o portal. O objeto se desintegrou ao chegar, mas você não precisava dele para se lembrar. A aventura, com todos os seus detalhes vívidos, estava agora gravada em sua mente, uma história tão incrível que parecia um sonho.",
-                '2-2': "O portal estava aberto, mas você não resistiu e pediu uma pequena recordação. Com o souvenir no bolso, você voltou para casa. O objeto de viagem se foi, mas a pequena peça do outro tempo permaneceu, um segredo que você podia tocar sempre que a saudade da sua aventura acidental batesse. Ninguém acreditaria, mas você sabia a verdade."
-            }
-        };
+        const ID_DA_HISTORIA = 2;
         let escolhas = [];
         function fazerEscolha(etapa, numeroDaEscolha) {
             escolhas.push(numeroDaEscolha);
             document.getElementById('etapa-' + etapa).classList.add('hidden');
             if (etapa === 8) {
-                document.body.style.overflow = 'auto';
-                montarTextoFinal();
+                const senha = escolhas.join('-');
+                window.location.href = `resultado.html?historia=${ID_DA_HISTORIA}&escolhas=${senha}`;
             } else {
                 document.getElementById('etapa-' + (etapa + 1)).classList.remove('hidden');
             }
-        }
-        function montarTextoFinal() {
-            const keyIntro = `${escolhas[0]}-${escolhas[1]}`, keyDev1 = `${escolhas[2]}-${escolhas[3]}`,
-                  keyDev2 = `${escolhas[4]}-${escolhas[5]}`, keyConc = `${escolhas[6]}-${escolhas[7]}`;
-            const textoCompleto = [BANCO_DE_TEXTOS.introducao[keyIntro], BANCO_DE_TEXTOS.desenvolvimento1[keyDev1], BANCO_DE_TEXTOS.desenvolvimento2[keyDev2], BANCO_DE_TEXTOS.conclusao[keyConc]];
-            document.getElementById('final-title').innerText = BANCO_DE_TITULOS[keyIntro] || "Uma Aventura no Tempo";
-            document.getElementById('final-text-container').innerHTML = textoCompleto.map(p => `<p>${p}</p>`).join('');
-            document.getElementById('senha-final').innerText = `2: ${escolhas.join('-')}`;
-            gerarFinalAlternativo();
-            gerarGlossario(textoCompleto.join(' '));
-            document.getElementById('etapa-final').classList.remove('hidden');
-        }
-        function gerarFinalAlternativo() {
-            const etapaAleatoria = Math.floor(Math.random() * 8);
-            const escolhaOriginal = escolhas[etapaAleatoria];
-            const escolhaAlternativa = escolhaOriginal === 1 ? 2 : 1;
-            const escolhasAlternativas = [...escolhas];
-            escolhasAlternativas[etapaAleatoria] = escolhaAlternativa;
-            let paragrafoAlternativo = "";
-            if (etapaAleatoria < 2) { paragrafoAlternativo = BANCO_DE_TEXTOS.introducao[`${escolhasAlternativas[0]}-${escolhasAlternativas[1]}`]; }
-            else if (etapaAleatoria < 4) { paragrafoAlternativo = BANCO_DE_TEXTOS.desenvolvimento1[`${escolhasAlternativas[2]}-${escolhasAlternativas[3]}`]; }
-            else if (etapaAleatoria < 6) { paragrafoAlternativo = BANCO_DE_TEXTOS.desenvolvimento2[`${escolhasAlternativas[4]}-${escolhasAlternativas[5]}`]; }
-            else { paragrafoAlternativo = BANCO_DE_TEXTOS.conclusao[`${escolhasAlternativas[6]}-${escolhasAlternativas[7]}`]; }
-            document.getElementById('alternative-ending-text').innerHTML = `Se na etapa ${etapaAleatoria + 1}, você tivesse feito uma escolha diferente, o rumo daquele parágrafo da sua história seria: <em>"${paragrafoAlternativo}"</em>`;
-        }
-        function gerarGlossario(texto) {
-            const containerGlossario = document.getElementById('glossary-items');
-            containerGlossario.innerHTML = ''; let palavrasEncontradas = 0;
-            for (const palavra in GLOSSARIO) {
-                const regex = new RegExp(`\\b${palavra}\\b`, 'i');
-                if (regex.test(texto)) {
-                    const item = document.createElement('p');
-                    item.className = 'glossary-item';
-                    item.innerHTML = `<b>${palavra.charAt(0).toUpperCase() + palavra.slice(1)}:</b> ${GLOSSARIO[palavra]}`;
-                    containerGlossario.appendChild(item); palavrasEncontradas++;
-                }
-            }
-            if (palavrasEncontradas === 0) { containerGlossario.innerHTML = '<p>Nenhuma palavra do glossário foi encontrada na sua versão da história.</p>'; }
         }
     </script>
 </body>
