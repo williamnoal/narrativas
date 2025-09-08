@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>História 5: A Odisseia do Cometa Perdido</title>
+    <style>
+        :root {
+            --cor-primaria: #2f4f4f; /* DarkSlateGray */
+            --cor-fundo: #e6e6fa; /* Lavender */
+            --cor-texto: #333;
+        }
+        /* O restante do CSS é idêntico ao da história anterior, então pode ser mantido */
+        body, html { height: 100%; margin: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto); overflow: hidden; }
+        .container { display: flex; justify-content: center; align-items: center; height: 100%; padding: 20px; box-sizing: border-box; }
+        .etapa { background-color: white; padding: 40px; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 650px; }
+        .hidden { display: none; }
+        h2 { font-size: 1.6rem; color: var(--cor-primaria); margin-top: 0; }
+        p { font-size: 1.1rem; line-height: 1.6; }
+        .options { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; }
+        .choice-btn { padding: 15px; border: 2px solid var(--cor-primaria); border-radius: 10px; background-color: white; color: var(--cor-primaria); font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s; }
+        .choice-btn:hover { background-color: var(--cor-primaria); color: white; }
+        #final-text-container { text-align: left; margin-bottom: 20px; }
+        #senha-final { background-color: #eee; padding: 10px; border-radius: 5px; font-family: 'Courier New', Courier, monospace; font-weight: bold; color: #555; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="etapa-1" class="etapa">
+            <h2>Você está no espaço! De repente, um alarme soa na nave. O que está acontecendo?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(1, 1)">Um cometa desconhecido saiu de sua rota e se aproxima.</button>
+                <button class="choice-btn" onclick="fazerEscolha(1, 2)">A nave detectou uma anomalia magnética estranha.</button>
+            </div>
+        </div>
+        <div id="etapa-2" class="etapa hidden">
+            <h2>O objeto misterioso está perto. Qual sua primeira ação?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(2, 1)">Correr para o computador para analisar os dados.</button>
+                <button class="choice-btn" onclick="fazerEscolha(2, 2)">Olhar pelo telescópio principal da nave.</button>
+            </div>
+        </div>
+        <div id="etapa-3" class="etapa hidden">
+            <h2>Sua análise revela algo incrível! O que é o objeto?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(3, 1)">Uma nave-semente, carregando vida para outros planetas.</button>
+                <button class="choice-btn" onclick="fazerEscolha(3, 2)">Uma criatura espacial gigante, feita de cristal.</button>
+            </div>
+        </div>
+        <div id="etapa-4" class="etapa hidden">
+            <h2>A entidade espacial envia uma transmissão para sua nave. O que ela contém?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(4, 1)">Um pedido de ajuda em forma de equações matemáticas.</button>
+                <button class="choice-btn" onclick="fazerEscolha(4, 2)">Um mapa de uma galáxia desconhecida.</button>
+            </div>
+        </div>
+        <div id="etapa-5" class="etapa hidden">
+            <h2>A criatura precisa de energia para continuar sua jornada. Onde encontrá-la?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(5, 1)">Em um cinturão de asteroides rico em minerais raros.</button>
+                <button class="choice-btn" onclick="fazerEscolha(5, 2)">Em uma nebulosa colorida, coletando partículas.</button>
+            </div>
+        </div>
+        <div id="etapa-6" class="etapa hidden">
+            <h2>Sua ajuda é necessária. Que tarefa você assume?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(6, 1)">Pilotar uma sonda de mineração até um asteroide.</button>
+                <button class="choice-btn" onclick="fazerEscolha(6, 2)">Reconfigurar os escudos para absorver energia.</button>
+            </div>
+        </div>
+        <div id="etapa-7" class="etapa hidden">
+            <h2>A missão é um sucesso! A criatura te dá um presente de despedida. O que é?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(7, 1)">Um pequeno cristal que contém todo o conhecimento dela.</button>
+                <button class="choice-btn" onclick="fazerEscolha(7, 2)">A habilidade de entender qualquer linguagem do universo.</button>
+            </div>
+        </div>
+        <div id="etapa-8" class="etapa hidden">
+            <h2>Você volta para a Terra como herói. O que você faz com sua experiência?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(8, 1)">Mantém a existência da criatura em segredo.</button>
+                <button class="choice-btn" onclick="fazerEscolha(8, 2)">Relata tudo ao comando, mudando o futuro da exploração.</button>
+            </div>
+        </div>
+
+        <div id="etapa-final" class="etapa hidden">
+            <h2>Sua história está completa!</h2>
+            <div id="final-text-container"></div>
+            <p>A sua jornada única gerou a seguinte senha:</p>
+            <div id="senha-final"></div>
+            <div class="options">
+                <button class="choice-btn" onclick="window.location.href = 'index.html'">Voltar ao Início</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const BANCO_DE_TEXTOS = {
+            introducao: {
+                '1-1': "O silêncio do espaço foi quebrado por uma sirene. Um cometa, não registrado em nenhuma carta estelar, havia mudado de curso e estava em rota de colisão com sua nave. Correndo para o painel de controle, você iniciou uma análise de dados frenética. Os números que apareceram na tela não faziam sentido para um simples cometa; havia padrões, complexidade, quase... inteligência.",
+                '1-2': "Em sua viagem espacial, o capitão anunciou um evento raro: um cometa passaria perto o suficiente para ser visto a olho nu. Você correu para o telescópio principal, ansioso pelo espetáculo. Mas o que você viu não era gelo e rocha. Eram luzes pulsantes, formas geométricas que mudavam, uma superfície que parecia orgânica. Aquilo não era um cometa.",
+                '2-1': "As luzes de alerta piscaram. Uma anomalia magnética, diferente de tudo já registrado, surgiu do nada. Enquanto a tripulação se preocupava com os sistemas da nave, sua curiosidade te levou ao computador principal. Você filtrou as leituras e descobriu a fonte: um objeto metálico gigante, escondido da visão por um campo de camuflagem, se revelando lentamente.",
+                '2-2': "Uma anomalia magnética desconhecida fez os instrumentos da nave oscilarem. Ignorando os protocolos, você foi para o observatório, apontando o telescópio para a fonte da perturbação. Seus olhos se arregalaram ao ver uma estrutura que parecia uma flor metálica gigante, desabrochando lentamente no vácuo do espaço. Era a coisa mais assustadora e bela que você já vira."
+            },
+            desenvolvimento1: {
+                '1-1': "A análise confirmou suas suspeitas. O objeto era uma 'Nave-Semente', uma arca biológica colossal viajando pelo universo e plantando vida em planetas estéreis. Ela estava em silêncio há eras. De repente, uma transmissão chegou, não em palavras, mas em pura matemática: uma sequência de números primos, um pedido de ajuda universal que qualquer civilização inteligente poderia entender.",
+                '1-2': "Os dados eram claros: aquilo era uma nave biológica, uma 'Nave-Semente' projetada para carregar ecossistemas inteiros. Ela estava danificada e à deriva. Enquanto você observava, a nave projetou um feixe de luz que pintou o espaço à sua frente. Era um mapa, mostrando sua rota original e um ponto de destino: uma galáxia distante e desconhecida, cheia de estrelas jovens.",
+                '2-1': "O telescópio revelou a verdade: o objeto era uma forma de vida, uma criatura espacial colossal feita de cristais que refletiam a luz das estrelas. Ela se movia com uma graça impossível, e parecia antiga e sábia. Uma onda de energia emanou dela e atingiu sua nave, mas não era um ataque. Era uma mensagem, um pedido de socorro traduzido em equações sobre energia e entropia.",
+                '2-2': "Não era uma nave, mas sim um ser vivo. Uma criatura majestosa, feita de cristal e luz, do tamanho de uma lua pequena. Ela parecia cantar uma canção silenciosa para as estrelas. A criatura então focou sua atenção em sua nave, enviando uma transmissão psíquica que preencheu sua mente com imagens de estrelas, planetas e um mapa de um caminho seguro através de um setor perigoso do espaço."
+            },
+            desenvolvimento2: {
+                '1-1': "O pedido de ajuda era claro: a Nave-Semente estava sem energia para a próxima etapa de sua jornada. A única fonte compatível por perto eram os cristais de irídio encontrados em um denso cinturão de asteroides. A missão era arriscada, e a tripulação escolheu você, por sua precisão e calma, para pilotar uma pequena sonda de mineração e coletar os cristais necessários.",
+                '1-2': "A criatura precisava de energia. O mapa que ela enviou mostrava a localização de uma nebulosa rica em partículas exóticas que poderiam recarregá-la. A tarefa exigia uma manobra delicada: reconfigurar os escudos defletores da sua nave para que, em vez de repelir, eles absorvessem e canalizassem a energia da nebulosa. Sua habilidade com engenharia te tornou a pessoa ideal para o trabalho.",
+                '2-1': "Para ajudar a criatura de cristal, vocês precisavam minerar um tipo específico de asteroide. A tarefa de pilotar a sonda de perfuração caiu em suas mãos. Você navegou cuidadosamente pelo campo de detritos espaciais, localizou o asteroide correto e extraiu o núcleo de energia, tudo isso enquanto a criatura gigante te observava com suas luzes pulsantes.",
+                '2-2': "A solução para o problema de energia da criatura estava em uma nebulosa próxima. A tripulação precisava de alguém com conhecimento em física de partículas para adaptar os escudos da nave para coletar a energia sem causar uma sobrecarga. Você passou horas recalculando as equações e, finalmente, conseguiu criar um 'coletor de energia' improvisado, mas funcional."
+            },
+            conclusao: {
+                '1-1': "A mineração foi um sucesso. Com a energia restaurada, a Nave-Semente agradeceu enviando um presente: um pequeno cristal que, ao ser tocado, preenchia sua mente com o vasto conhecimento de sua jornada milenar. De volta à Terra, você decidiu manter essa descoberta em segredo, protegendo a nobre missão da nave e guardando para si os segredos do universo.",
+                '1-2': "Sua engenhosidade funcionou. A criatura de cristal, agora brilhando com força total, te concedeu um dom: a habilidade de compreender telepaticamente qualquer forma de comunicação, de qualquer espécie. Ao retornar, você relatou tudo ao comando espacial. Sua história e seu novo dom abriram as portas para uma nova era de diplomacia intergaláctica e exploração pacífica.",
+                '2-1': "Com a energia entregue, a criatura se despediu. Como agradecimento, ela te deu um de seus próprios cristais. Em casa, você descobriu que o cristal continha todo o conhecimento da criatura. Você decidiu guardar esse segredo, usando o conhecimento para inventar tecnologias que melhorariam a vida na Terra discretamente, sem revelar sua origem.",
+                '2-2': "A energia da nebulosa salvou a criatura. Em troca, ela alterou sutilmente suas vias neurais, dando-lhe o dom de compreender todas as línguas do universo. Quando você voltou e relatou sua experiência, foi inicialmente recebido com ceticismo. Mas ao demonstrar sua habilidade, você se tornou a chave para a comunicação com novas espécies e o maior explorador da história."
+            }
+        };
+
+        let escolhas = [];
+        function fazerEscolha(etapa, numeroDaEscolha) {
+            escolhas.push(numeroDaEscolha);
+            document.getElementById('etapa-' + etapa).classList.add('hidden');
+            if (etapa === 8) { montarTextoFinal(); } else { document.getElementById('etapa-' + (etapa + 1)).classList.remove('hidden'); }
+        }
+        function montarTextoFinal() {
+            const keyIntro = `${escolhas[0]}-${escolhas[1]}`, keyDev1 = `${escolhas[2]}-${escolhas[3]}`, keyDev2 = `${escolhas[4]}-${escolhas[5]}`, keyConc = `${escolhas[6]}-${escolhas[7]}`;
+            const textoFinal = `<p>${BANCO_DE_TEXTOS.introducao[keyIntro]}</p><p>${BANCO_DE_TEXTOS.desenvolvimento1[keyDev1]}</p><p>${BANCO_DE_TEXTOS.desenvolvimento2[keyDev2]}</p><p>${BANCO_DE_TEXTOS.conclusao[keyConc]}</p>`;
+            document.getElementById('final-text-container').innerHTML = textoFinal;
+            document.getElementById('senha-final').innerText = `5: ${escolhas.join('-')}`;
+            document.getElementById('etapa-final').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
