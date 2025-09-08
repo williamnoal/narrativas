@@ -6,43 +6,30 @@
     <title>História 3: O Reino Submerso</title>
     <style>
         :root {
-            --cor-primaria: #1e90ff; /* DodgerBlue */
-            --cor-fundo: #f0f8ff; /* AliceBlue */
-            --cor-texto: #333;
+            --cor-primaria: #1e90ff; --cor-fundo: #f0f8ff; --cor-texto: #333;
+            --cor-sucesso: #28a745; --cor-alternativa: #17a2b8;
         }
-        body, html {
-            height: 100%; margin: 0; font-family: 'Segoe UI', sans-serif;
-            background-color: var(--cor-fundo); color: var(--cor-texto); overflow: hidden;
-        }
-        .container {
-            display: flex; justify-content: center; align-items: center; height: 100%;
-            padding: 20px; box-sizing: border-box;
-        }
-        .etapa {
-            background-color: white; padding: 40px; border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1); text-align: center;
-            width: 100%; max-width: 650px;
-        }
+        body, html { height: 100%; margin: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto); }
+        .container { display: flex; justify-content: center; align-items: center; min-height: 100%; padding: 20px; box-sizing: border-box; }
+        .etapa { background-color: white; padding: 40px; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 650px; margin: 20px 0; }
         .hidden { display: none; }
         h2 { font-size: 1.6rem; color: var(--cor-primaria); margin-top: 0; }
         p { font-size: 1.1rem; line-height: 1.6; }
         .options { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; }
-        .choice-btn {
-            padding: 15px; border: 2px solid var(--cor-primaria);
-            border-radius: 10px; background-color: white; color: var(--cor-primaria);
-            font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s;
-        }
+        .choice-btn { padding: 15px; border: 2px solid var(--cor-primaria); border-radius: 10px; background-color: white; color: var(--cor-primaria); font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s; }
         .choice-btn:hover { background-color: var(--cor-primaria); color: white; }
-        #final-text-container { text-align: left; margin-bottom: 20px; }
-        #senha-final {
-            background-color: #eee; padding: 10px; border-radius: 5px;
-            font-family: 'Courier New', Courier, monospace; font-weight: bold;
-            color: #555; margin-top: 20px;
-        }
+        #final-title { color: var(--cor-sucesso); font-size: 2rem; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        #final-text-container p { text-align: justify; text-indent: 2em; }
+        #senha-final { background-color: #eee; padding: 10px; border-radius: 5px; font-family: 'Courier New', Courier, monospace; font-weight: bold; color: #555; margin-top: 20px; display: inline-block; }
+        .final-box { text-align: left; margin-top: 30px; padding: 20px; border-radius: 10px; }
+        #alternative-ending { background-color: #eef7f9; border-left: 5px solid var(--cor-alternativa); }
+        #glossary { background-color: #fff8e1; border-left: 5px solid #ffc107; }
+        .final-box h3 { margin-top: 0; color: var(--cor-alternativa); }
+        #glossary h3 { color: #ffc107; }
+        .glossary-item b { color: var(--cor-texto); }
     </style>
 </head>
 <body>
-
     <div class="container">
         <div id="etapa-1" class="etapa">
             <h2>Em um dia na praia, um objeto curioso na areia chama sua atenção. O que você encontra?</h2>
@@ -100,19 +87,35 @@
                 <button class="choice-btn" onclick="fazerEscolha(8, 2)">O presente mágico que recebeu, que ainda funciona.</button>
             </div>
         </div>
-        
         <div id="etapa-final" class="etapa hidden">
-            <h2>Sua história está completa!</h2>
+            <h1 id="final-title">O Título da Sua História</h1>
             <div id="final-text-container"></div>
-            <p>A sua jornada única gerou a seguinte senha:</p>
-            <div id="senha-final"></div>
+            <p>A sua jornada única gerou a seguinte senha: <span id="senha-final"></span></p>
+            <div id="alternative-ending" class="final-box">
+                <h3>Um Final Alternativo...</h3>
+                <p id="alternative-ending-text"></p>
+            </div>
+            <div id="glossary" class="final-box">
+                <h3>Glossário da Aventura</h3>
+                <div id="glossary-items"></div>
+            </div>
             <div class="options">
                 <button class="choice-btn" onclick="window.location.href = 'index.html'">Voltar ao Início</button>
             </div>
         </div>
     </div>
-
     <script>
+        const BANCO_DE_TITULOS = {
+            '1-1': "O Chamado da Concha Sussurrante", '1-2': "O Mergulho Determinado",
+            '2-1': "O Legado do Medalhão Antigo", '2-2': "O Portal Sob as Ondas"
+        };
+        const GLOSSARIO = {
+            'iridescentes': 'Que reflete as cores do arco-íris, que muda de cor conforme a luz.',
+            'majestosas': 'Que impõe respeito pela sua beleza, grandeza ou nobreza.',
+            'ancestral': 'Muito antigo, que pertenceu aos antepassados.',
+            'abissal': 'Relativo a abismo, uma fossa muito profunda no fundo do mar.',
+            'golem': 'Na mitologia, uma criatura feita de matéria inanimada (como barro ou rocha) que ganha vida.'
+        };
         const BANCO_DE_TEXTOS = {
             introducao: {
                 '1-1': "O sol da tarde dourava a areia quando você encontrou uma concha diferente de todas as outras, com espirais iridescentes. Ao levá-la ao ouvido, em vez do som do mar, você ouviu um sussurro convidativo. Seguindo o chamado, você mergulhou e viu um peixe brilhante, que parecia te esperar. Você o seguiu por entre os corais, sentindo que uma aventura estava prestes a começar.",
@@ -139,19 +142,54 @@
                 '2-2': "Com a sabedoria da Tartaruga Anciã, você restaurou o poder da cidade. Agradecidos, os habitantes te declararam um herói. Você participou de uma festa inesquecível, dançando com seres marinhos. Ao final, decidiu voltar. Na praia, tudo parecia um sonho, até você olhar para seu pulso e ver uma pulseira de coral luminoso, um presente que brilhava com a magia do reino submerso."
             }
         };
-
         let escolhas = [];
         function fazerEscolha(etapa, numeroDaEscolha) {
             escolhas.push(numeroDaEscolha);
             document.getElementById('etapa-' + etapa).classList.add('hidden');
-            if (etapa === 8) { montarTextoFinal(); } else { document.getElementById('etapa-' + (etapa + 1)).classList.remove('hidden'); }
+            if (etapa === 8) {
+                document.body.style.overflow = 'auto';
+                montarTextoFinal();
+            } else {
+                document.getElementById('etapa-' + (etapa + 1)).classList.remove('hidden');
+            }
         }
         function montarTextoFinal() {
-            const keyIntro = `${escolhas[0]}-${escolhas[1]}`, keyDev1 = `${escolhas[2]}-${escolhas[3]}`, keyDev2 = `${escolhas[4]}-${escolhas[5]}`, keyConc = `${escolhas[6]}-${escolhas[7]}`;
-            const textoFinal = `<p>${BANCO_DE_TEXTOS.introducao[keyIntro]}</p><p>${BANCO_DE_TEXTOS.desenvolvimento1[keyDev1]}</p><p>${BANCO_DE_TEXTOS.desenvolvimento2[keyDev2]}</p><p>${BANCO_DE_TEXTOS.conclusao[keyConc]}</p>`;
-            document.getElementById('final-text-container').innerHTML = textoFinal;
+            const keyIntro = `${escolhas[0]}-${escolhas[1]}`, keyDev1 = `${escolhas[2]}-${escolhas[3]}`,
+                  keyDev2 = `${escolhas[4]}-${escolhas[5]}`, keyConc = `${escolhas[6]}-${escolhas[7]}`;
+            const textoCompleto = [BANCO_DE_TEXTOS.introducao[keyIntro], BANCO_DE_TEXTOS.desenvolvimento1[keyDev1], BANCO_DE_TEXTOS.desenvolvimento2[keyDev2], BANCO_DE_TEXTOS.conclusao[keyConc]];
+            document.getElementById('final-title').innerText = BANCO_DE_TITULOS[keyIntro] || "A Cidade Perdida";
+            document.getElementById('final-text-container').innerHTML = textoCompleto.map(p => `<p>${p}</p>`).join('');
             document.getElementById('senha-final').innerText = `3: ${escolhas.join('-')}`;
+            gerarFinalAlternativo();
+            gerarGlossario(textoCompleto.join(' '));
             document.getElementById('etapa-final').classList.remove('hidden');
+        }
+        function gerarFinalAlternativo() {
+            const etapaAleatoria = Math.floor(Math.random() * 8);
+            const escolhaOriginal = escolhas[etapaAleatoria];
+            const escolhaAlternativa = escolhaOriginal === 1 ? 2 : 1;
+            const escolhasAlternativas = [...escolhas];
+            escolhasAlternativas[etapaAleatoria] = escolhaAlternativa;
+            let paragrafoAlternativo = "";
+            if (etapaAleatoria < 2) { paragrafoAlternativo = BANCO_DE_TEXTOS.introducao[`${escolhasAlternativas[0]}-${escolhasAlternativas[1]}`]; }
+            else if (etapaAleatoria < 4) { paragrafoAlternativo = BANCO_DE_TEXTOS.desenvolvimento1[`${escolhasAlternativas[2]}-${escolhasAlternativas[3]}`]; }
+            else if (etapaAleatoria < 6) { paragrafoAlternativo = BANCO_DE_TEXTOS.desenvolvimento2[`${escolhasAlternativas[4]}-${escolhasAlternativas[5]}`]; }
+            else { paragrafoAlternativo = BANCO_DE_TEXTOS.conclusao[`${escolhasAlternativas[6]}-${escolhasAlternativas[7]}`]; }
+            document.getElementById('alternative-ending-text').innerHTML = `Se na etapa ${etapaAleatoria + 1}, você tivesse feito uma escolha diferente, o rumo daquele parágrafo da sua história seria: <em>"${paragrafoAlternativo}"</em>`;
+        }
+        function gerarGlossario(texto) {
+            const containerGlossario = document.getElementById('glossary-items');
+            containerGlossario.innerHTML = ''; let palavrasEncontradas = 0;
+            for (const palavra in GLOSSARIO) {
+                const regex = new RegExp(`\\b${palavra}\\b`, 'i');
+                if (regex.test(texto)) {
+                    const item = document.createElement('p');
+                    item.className = 'glossary-item';
+                    item.innerHTML = `<b>${palavra.charAt(0).toUpperCase() + palavra.slice(1)}:</b> ${GLOSSARIO[palavra]}`;
+                    containerGlossario.appendChild(item); palavrasEncontradas++;
+                }
+            }
+            if (palavrasEncontradas === 0) { containerGlossario.innerHTML = '<p>Nenhuma palavra do glossário foi encontrada na sua versão da história.</p>'; }
         }
     </script>
 </body>
