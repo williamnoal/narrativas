@@ -6,21 +6,27 @@
     <title>História 6: O Torneio dos Dragões</title>
     <style>
         :root {
-            --cor-primaria: #dc143c; /* Crimson */
-            --cor-fundo: #fff5ee; /* SeaShell */
-            --cor-texto: #333;
+            --cor-primaria: #dc143c; --cor-fundo: #fff5ee; --cor-texto: #333;
+            --cor-sucesso: #28a745; --cor-alternativa: #17a2b8;
         }
-        body, html { height: 100%; margin: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto); overflow: hidden; }
-        .container { display: flex; justify-content: center; align-items: center; height: 100%; padding: 20px; box-sizing: border-box; }
-        .etapa { background-color: white; padding: 40px; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 650px; }
+        body, html { height: 100%; margin: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto); }
+        .container { display: flex; justify-content: center; align-items: center; min-height: 100%; padding: 20px; box-sizing: border-box; }
+        .etapa { background-color: white; padding: 40px; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 650px; margin: 20px 0; }
         .hidden { display: none; }
         h2 { font-size: 1.6rem; color: var(--cor-primaria); margin-top: 0; }
         p { font-size: 1.1rem; line-height: 1.6; }
         .options { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; }
         .choice-btn { padding: 15px; border: 2px solid var(--cor-primaria); border-radius: 10px; background-color: white; color: var(--cor-primaria); font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s; }
         .choice-btn:hover { background-color: var(--cor-primaria); color: white; }
-        #final-text-container { text-align: left; margin-bottom: 20px; }
-        #senha-final { background-color: #eee; padding: 10px; border-radius: 5px; font-family: 'Courier New', Courier, monospace; font-weight: bold; color: #555; margin-top: 20px; }
+        #final-title { color: var(--cor-sucesso); font-size: 2rem; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        #final-text-container p { text-align: justify; text-indent: 2em; }
+        #senha-final { background-color: #eee; padding: 10px; border-radius: 5px; font-family: 'Courier New', Courier, monospace; font-weight: bold; color: #555; margin-top: 20px; display: inline-block; }
+        .final-box { text-align: left; margin-top: 30px; padding: 20px; border-radius: 10px; }
+        #alternative-ending { background-color: #eef7f9; border-left: 5px solid var(--cor-alternativa); }
+        #glossary { background-color: #fff8e1; border-left: 5px solid #ffc107; }
+        .final-box h3 { margin-top: 0; color: var(--cor-alternativa); }
+        #glossary h3 { color: #ffc107; }
+        .glossary-item b { color: var(--cor-texto); }
     </style>
 </head>
 <body>
@@ -28,7 +34,7 @@
         <div id="etapa-1" class="etapa">
             <h2>Você encontra um ovo estranho e quente numa floresta. O que você faz?</h2>
             <div class="options">
-                <button class="choice-btn" onclick="fazerEscolha(1, 1)">Leva o ovo para casa para mantê-lo seguro.</button>
+                <button class="choice-btn" onclick="fazerEscolha(1, 1)">Leva o ovo para casa para o manter seguro.</button>
                 <button class="choice-btn" onclick="fazerEscolha(1, 2)">Observa o ovo de longe, escondido.</button>
             </div>
         </div>
@@ -40,23 +46,23 @@
             </div>
         </div>
         <div id="etapa-3" class="etapa hidden">
-            <h2>Uma mensagem mágica aparece, te convocando para o Torneio dos Dragões. Qual a sua reação?</h2>
+            <h2>Uma mensagem mágica aparece, a convocá-lo para o Torneio dos Dragões. Qual a sua reação?</h2>
             <div class="options">
                 <button class="choice-btn" onclick="fazerEscolha(3, 1)">Aceita o desafio, animado com a aventura.</button>
                 <button class="choice-btn" onclick="fazerEscolha(3, 2)">Hesita, preocupado com a segurança do seu dragão.</button>
             </div>
         </div>
         <div id="etapa-4" class="etapa hidden">
-            <h2>A primeira prova do torneio é uma corrida nos cânions. Qual a sua estratégia?</h2>
+            <h2>A primeira prova do torneio é uma corrida nos desfiladeiros. Qual a sua estratégia?</h2>
             <div class="options">
-                <button class="choice-btn" onclick="fazerEscolha(4, 1)">Voar baixo e rápido, usando as curvas para se esconder.</button>
+                <button class="choice-btn" onclick="fazerEscolha(4, 1)">Voar baixo e rápido, a usar as curvas para se esconder.</button>
                 <button class="choice-btn" onclick="fazerEscolha(4, 2)">Voar alto para ter uma visão geral e evitar obstáculos.</button>
             </div>
         </div>
         <div id="etapa-5" class="etapa hidden">
-            <h2>Um competidor rival tenta te sabotar durante a prova. O que você faz?</h2>
+            <h2>Um competidor rival tenta sabotá-lo durante a prova. O que você faz?</h2>
             <div class="options">
-                <button class="choice-btn" onclick="fazerEscolha(5, 1)">Usa uma manobra ágil para desviar e ultrapassá-lo.</button>
+                <button class="choice-btn" onclick="fazerEscolha(5, 1)">Usa uma manobra ágil para se desviar e ultrapassá-lo.</button>
                 <button class="choice-btn" onclick="fazerEscolha(5, 2)">Ignora a provocação e mantém o foco na corrida.</button>
             </div>
         </div>
@@ -64,11 +70,11 @@
             <h2>Na prova final, você deve recuperar um tesouro. Onde ele está guardado?</h2>
             <div class="options">
                 <button class="choice-btn" onclick="fazerEscolha(6, 1)">No topo do vulcão mais alto da região.</button>
-                <button class="choice-btn" onclick="fazerEscolha(6, 2)">Numa caverna de cristal atrás de uma cachoeira.</button>
+                <button class="choice-btn" onclick="fazerEscolha(6, 2)">Numa caverna de cristal atrás de uma cascata.</button>
             </div>
         </div>
         <div id="etapa-7" class="etapa hidden">
-            <h2>Você vence o torneio! Qual é o seu grande prêmio?</h2>
+            <h2>Você vence o torneio! Qual é o seu grande prémio?</h2>
             <div class="options">
                 <button class="choice-btn" onclick="fazerEscolha(7, 1)">A lendária Armadura de Escamas de Dragão.</button>
                 <button class="choice-btn" onclick="fazerEscolha(7, 2)">O título de 'Cavaleiro de Dragão' e o respeito de todos.</button>
@@ -78,59 +84,112 @@
             <h2>Com o fim do torneio, qual será o seu futuro e do seu dragão?</h2>
             <div class="options">
                 <button class="choice-btn" onclick="fazerEscolha(8, 1)">Explorar o mundo juntos em busca de novas aventuras.</button>
-                <button class="choice-btn" onclick="fazerEscolha(8, 2)">Voltar para casa e se tornar o guardião da sua vila.</button>
+                <button class="choice-btn" onclick="fazerEscolha(8, 2)">Voltar para casa e tornar-se o guardião da sua vila.</button>
             </div>
         </div>
-
         <div id="etapa-final" class="etapa hidden">
-            <h2>Sua história está completa!</h2>
+            <h1 id="final-title">O Título da Sua História</h1>
             <div id="final-text-container"></div>
-            <p>A sua jornada única gerou a seguinte senha:</p>
-            <div id="senha-final"></div>
+            <p>A sua jornada única gerou a seguinte senha: <span id="senha-final"></span></p>
+            <div id="alternative-ending" class="final-box">
+                <h3>Um Final Alternativo...</h3>
+                <p id="alternative-ending-text"></p>
+            </div>
+            <div id="glossary" class="final-box">
+                <h3>Glossário da Aventura</h3>
+                <div id="glossary-items"></div>
+            </div>
             <div class="options">
                 <button class="choice-btn" onclick="window.location.href = 'index.html'">Voltar ao Início</button>
             </div>
         </div>
     </div>
     <script>
+        const BANCO_DE_TITULOS = {
+            '1-1': "O Protetor do Dragão Verde", '1-2': "O Vínculo com o Dragão de Cristal",
+            '2-1': "O Berço do Dragão de Jade", '2-2': "A Testemunha do Nascimento Azul"
+        };
+        const GLOSSARIO = {
+            'lendária': 'Algo tão famoso e extraordinário que se torna uma lenda.',
+            'sabotar': 'Ato de estragar ou atrapalhar o trabalho ou plano de alguém de propósito.',
+            'manobra': 'Movimento rápido e habilidoso para desviar de algo ou ganhar vantagem.',
+            'artefato': 'Objeto antigo, geralmente com valor mágico ou histórico.',
+            'clãs': 'Grupos de famílias unidas por laços de parentesco ou aliança.'
+        };
         const BANCO_DE_TEXTOS = {
             introducao: {
-                '1-1': "Numa caminhada pela floresta, um ovo do tamanho de um melão, quente ao toque, cruzou seu caminho. Preocupado que estivesse abandonado, você o enrolou em seu casaco e o levou para o calor da sua casa. Durante a noite, o ovo tremeu e rachou, revelando um filhote de dragão verde, cujas escamas brilhavam como folhas novas na primavera.",
-                '1-2': "Você encontrou um ovo estranho na floresta e, em vez de tocá-lo, decidiu observar de uma distância segura. Horas depois, a casca se partiu, e um pequeno dragão azul, com asas que pareciam feitas de cristal, olhou para o mundo pela primeira vez. Ele te viu e, em vez de fugir, caminhou em sua direção, escolhendo você como seu primeiro amigo.",
+                '1-1': "Numa caminhada pela floresta, um ovo do tamanho de um melão, quente ao toque, cruzou o seu caminho. Preocupado que estivesse abandonado, você enrolou-o no seu casaco e levou-o para o calor da sua casa. Durante a noite, o ovo tremeu e rachou, a revelar um filhote de dragão verde, cujas escamas brilhavam como folhas novas na primavera.",
+                '1-2': "Você encontrou um ovo estranho na floresta e, em vez de o tocar, decidiu observar de uma distância segura. Horas depois, a casca partiu-se, e um pequeno dragão azul, com asas que pareciam feitas de cristal, olhou para o mundo pela primeira vez. Ele viu-o e, em vez de fugir, caminhou na sua direção, a escolhê-lo como o seu primeiro amigo.",
                 '2-1': "O ovo, que você protegeu com tanto cuidado em casa, finalmente chocou. De dentro saiu um dragãozinho com escamas da cor de jade, que se camuflava perfeitamente com as plantas da sua sala. Ele era brincalhão e soltava pequenas baforadas de fumaça que cheiravam a terra molhada, um verdadeiro espírito da floresta.",
-                '2-2': "Escondido entre as árvores, você testemunhou o nascimento de uma criatura mágica: um dragão azul com asas de cristal que cintilavam à luz do sol. O pequeno ser te encarou com seus olhos de safira e soltou um pio suave. Naquele momento, um vínculo se formou entre vocês, uma amizade silenciosa e poderosa."
+                '2-2': "Escondido entre as árvores, você testemunhou o nascimento de uma criatura mágica: um dragão azul com asas de cristal que cintilavam à luz do sol. O pequeno ser encarou-o com os seus olhos de safira e soltou um pio suave. Naquele momento, um vínculo formou-se entre vocês, uma amizade silenciosa e poderosa."
             },
             desenvolvimento1: {
-                '1-1': "Assim que o dragão nasceu, um pergaminho materializou-se no ar com um brilho dourado. Era uma convocação para o Torneio dos Dragões, uma competição lendária. Seu coração bateu mais forte com a emoção. Era a chance de uma vida, uma grande aventura para você e seu novo companheiro. Sem hesitar, você aceitou o desafio.",
-                '1-2': "Uma convocação mágica para o Torneio dos Dragões surgiu, mas sua primeira reação foi de preocupação. Seu dragão era apenas um filhote. Seria seguro? O pequeno ser, no entanto, soltou uma pequena chama e bateu as asas com determinação, como se dissesse que estava pronto. Vendo a coragem dele, você decidiu que enfrentariam isso juntos.",
-                '2-1': "O convite para o torneio brilhou diante de você. Era uma oportunidade incrível! Com o espírito aventureiro falando mais alto, você e seu dragão se prepararam para a jornada. A primeira prova era uma corrida por cânions estreitos. Sua estratégia foi voar baixo e rápido, usando as sombras e as curvas para despistar os outros competidores.",
-                '2-2': "Você aceitou o desafio do torneio. A primeira prova, uma corrida, exigia mais do que velocidade. Você decidiu voar alto, acima dos cânions, para ter uma visão clara de todo o percurso. Essa tática permitiu que você desviasse de deslizamentos de rochas e encontrasse atalhos que os outros, voando baixo, não conseguiam ver."
+                '1-1': "Assim que o dragão nasceu, um pergaminho materializou-se no ar com um brilho dourado. Era uma convocação para o Torneio dos Dragões, uma competição lendária. O seu coração bateu mais forte com a emoção. Era a oportunidade de uma vida, uma grande aventura para você e o seu novo companheiro. Sem hesitar, você aceitou o desafio.",
+                '1-2': "Uma convocação mágica para o Torneio dos Dragões surgiu, mas a sua primeira reação foi de preocupação. O seu dragão era apenas um filhote. Seria seguro? O pequeno ser, no entanto, soltou uma pequena chama e bateu as asas com determinação, como se dissesse que estava pronto. Vendo a coragem dele, você decidiu que enfrentariam isso juntos.",
+                '2-1': "O convite para o torneio brilhou diante de você. Era uma oportunidade incrível! Com o espírito aventureiro a falar mais alto, você e o seu dragão prepararam-se para a jornada. A primeira prova era uma corrida por desfiladeiros estreitos. A sua estratégia foi voar baixo e rápido, a usar as sombras e as curvas para despistar os outros competidores.",
+                '2-2': "Você aceitou o desafio do torneio. A primeira prova, uma corrida, exigia mais do que velocidade. Você decidiu voar alto, acima dos desfiladeiros, para ter uma visão clara de todo o percurso. Essa tática permitiu que você se desviasse de deslizamentos de rochas e encontrasse atalhos que os outros, a voar baixo, não conseguiam ver."
             },
             desenvolvimento2: {
-                '1-1': "Durante a corrida, um competidor mais velho tentou te fechar contra uma parede do cânion. Com um comando rápido, seu dragão fez uma manobra impressionante, mergulhando e ressurgindo bem na frente do rival, deixando-o para trás com a poeira. A prova final os aguardava: recuperar um artefato no topo de um vulcão ativo, um teste de coragem contra o calor e o perigo.",
-                '1-2': "Um rival tentou te distrair com provocações, mas você o ignorou, mantendo seus olhos e sua mente focados na linha de chegada. Sua concentração valeu a pena, e você se classificou para a final. A última tarefa era recuperar um tesouro de uma caverna de cristal escondida atrás de uma poderosa cachoeira, um desafio que exigia mais inteligência do que força bruta.",
-                '2-1': "A agilidade do seu dragão foi a chave. Vocês desviaram da sabotagem e seguiram para a final. A missão era clara: pegar um tesouro no pico de um vulcão. Voando através da fumaça e do calor, vocês trabalharam em equipe. Você guiou, e seu dragão usou suas garras para pegar o Símbolo da Chama Eterna, o prêmio da prova.",
-                '2-2': "Focado, você não deu atenção às tentativas de sabotagem. Na final, a prova era encontrar um tesouro numa caverna. A cachoeira que a escondia era uma barreira, mas seu dragão de cristal usou suas asas para refletir a luz do sol de uma maneira que revelou uma passagem secreta, permitindo que vocês pegassem a Gema da Água Clara sem dificuldades."
+                '1-1': "Durante a corrida, um competidor mais velho tentou fechá-lo contra uma parede do desfiladeiro. Com um comando rápido, o seu dragão fez uma manobra impressionante, a mergulhar e a ressurgir bem na frente do rival, deixando-o para trás com a poeira. A prova final aguardava-os: recuperar um artefato no topo de um vulcão ativo, um teste de coragem contra o calor e o perigo.",
+                '1-2': "Um rival tentou distraí-lo com provocações, mas você ignorou-o, a manter os seus olhos e a sua mente focados na linha de chegada. A sua concentração valeu a pena, e você classificou-se para a final. A última tarefa era recuperar um tesouro de uma caverna de cristal escondida atrás de uma poderosa cascata, um desafio que exigia mais inteligência do que força bruta.",
+                '2-1': "A agilidade do seu dragão foi a chave. Vocês desviaram-se da sabotagem e seguiram para a final. A missão era clara: pegar um tesouro no pico de um vulcão. A voar através da fumaça e do calor, vocês trabalharam em equipa. Você guiou, e o seu dragão usou as suas garras para pegar o Símbolo da Chama Eterna, o prémio da prova.",
+                '2-2': "Focado, você não deu atenção às tentativas de sabotagem. Na final, a prova era encontrar um tesouro numa caverna. A cascata que a escondia era uma barreira, mas o seu dragão de cristal usou as suas asas para refletir a luz do sol de uma maneira que revelou uma passagem secreta, a permitir que vocês pegassem a Gema da Água Clara sem dificuldades."
             },
             conclusao: {
-                '1-1': "Sua bravura no vulcão lhes rendeu a vitória. O prêmio era a lendária Armadura de Escamas de Dragão, que te protegia de qualquer fogo. Com o torneio encerrado, vocês decidiram que o mundo era grande demais para ficarem parados. Juntos, voaram em direção ao horizonte, prontos para qualquer aventura que o destino lhes reservasse.",
-                '1-2': "Ao superar a prova da cachoeira, vocês se tornaram os campeões. Seu prêmio foi o título de 'Cavaleiro de Dragão', uma honra que trouxe o respeito de todos os clãs. Após a celebração, você e seu dragão decidiram usar sua nova posição para o bem, retornando à sua vila para se tornarem seus eternos protetores e guardiões.",
-                '2-1': "Vocês venceram! A Armadura de Escamas de Dragão foi sua recompensa, um símbolo da sua coragem. Mas a vida de campeão não era o que vocês queriam. A verdadeira recompensa era a amizade e a emoção da jornada. Assim, vocês partiram para explorar terras desconhecidas, criando suas próprias histórias longe dos holofotes dos torneios.",
-                '2-2': "O título de 'Cavaleiro de Dragão' foi concedido a você. Era uma grande honra, mas seu coração pertencia à sua casa. Você agradeceu a todos e, junto com seu leal dragão azul, voltou para sua vila. Lá, vocês usaram sua fama e habilidade para garantir a paz e a prosperidade, provando que um verdadeiro herói é aquele que cuida do seu povo."
+                '1-1': "A sua bravura no vulcão rendeu-lhes a vitória. O prémio era a lendária Armadura de Escamas de Dragão, que o protegia de qualquer fogo. Com o torneio encerrado, vocês decidiram que o mundo era grande demais para ficarem parados. Juntos, voaram em direção ao horizonte, prontos para qualquer aventura que o destino lhes reservasse.",
+                '1-2': "Ao superar a prova da cascata, vocês tornaram-se os campeões. O seu prémio foi o título de 'Cavaleiro de Dragão', uma honra que trouxe o respeito de todos os clãs. Após a celebração, você e o seu dragão decidiram usar a sua nova posição para o bem, a retornar à sua vila para se tornarem os seus eternos protetores e guardiões.",
+                '2-1': "Vocês venceram! A Armadura de Escamas de Dragão foi a sua recompensa, um símbolo da sua coragem. Mas a vida de campeão não era o que vocês queriam. A verdadeira recompensa era a amizade e a emoção da jornada. Assim, vocês partiram para explorar terras desconhecidas, a criar as suas próprias histórias longe dos holofotes dos torneios.",
+                '2-2': "O título de 'Cavaleiro de Dragão' foi-lhe concedido. Era uma grande honra, mas o seu coração pertencia à sua casa. Você agradeceu a todos e, junto com o seu leal dragão azul, voltou para a sua vila. Lá, vocês usaram a sua fama e habilidade para garantir a paz e a prosperidade, a provar que um verdadeiro herói é aquele que cuida do seu povo."
             }
         };
         let escolhas = [];
         function fazerEscolha(etapa, numeroDaEscolha) {
             escolhas.push(numeroDaEscolha);
             document.getElementById('etapa-' + etapa).classList.add('hidden');
-            if (etapa === 8) { montarTextoFinal(); } else { document.getElementById('etapa-' + (etapa + 1)).classList.remove('hidden'); }
+            if (etapa === 8) {
+                document.body.style.overflow = 'auto';
+                montarTextoFinal();
+            } else {
+                document.getElementById('etapa-' + (etapa + 1)).classList.remove('hidden');
+            }
         }
         function montarTextoFinal() {
-            const keyIntro = `${escolhas[0]}-${escolhas[1]}`, keyDev1 = `${escolhas[2]}-${escolhas[3]}`, keyDev2 = `${escolhas[4]}-${escolhas[5]}`, keyConc = `${escolhas[6]}-${escolhas[7]}`;
-            const textoFinal = `<p>${BANCO_DE_TEXTOS.introducao[keyIntro]}</p><p>${BANCO_DE_TEXTOS.desenvolvimento1[keyDev1]}</p><p>${BANCO_DE_TEXTOS.desenvolvimento2[keyDev2]}</p><p>${BANCO_DE_TEXTOS.conclusao[keyConc]}</p>`;
-            document.getElementById('final-text-container').innerHTML = textoFinal;
+            const keyIntro = `${escolhas[0]}-${escolhas[1]}`, keyDev1 = `${escolhas[2]}-${escolhas[3]}`,
+                  keyDev2 = `${escolhas[4]}-${escolhas[5]}`, keyConc = `${escolhas[6]}-${escolhas[7]}`;
+            const textoCompleto = [BANCO_DE_TEXTOS.introducao[keyIntro], BANCO_DE_TEXTOS.desenvolvimento1[keyDev1], BANCO_DE_TEXTOS.desenvolvimento2[keyDev2], BANCO_DE_TEXTOS.conclusao[keyConc]];
+            document.getElementById('final-title').innerText = BANCO_DE_TITULOS[keyIntro] || "A Lenda do Cavaleiro de Dragão";
+            document.getElementById('final-text-container').innerHTML = textoCompleto.map(p => `<p>${p}</p>`).join('');
             document.getElementById('senha-final').innerText = `6: ${escolhas.join('-')}`;
+            gerarFinalAlternativo();
+            gerarGlossario(textoCompleto.join(' '));
             document.getElementById('etapa-final').classList.remove('hidden');
+        }
+        function gerarFinalAlternativo() {
+            const etapaAleatoria = Math.floor(Math.random() * 8);
+            const escolhaOriginal = escolhas[etapaAleatoria];
+            const escolhaAlternativa = escolhaOriginal === 1 ? 2 : 1;
+            const escolhasAlternativas = [...escolhas];
+            escolhasAlternativas[etapaAleatoria] = escolhaAlternativa;
+            let paragrafoAlternativo = "";
+            if (etapaAleatoria < 2) { paragrafoAlternativo = BANCO_DE_TEXTOS.introducao[`${escolhasAlternativas[0]}-${escolhasAlternativas[1]}`]; }
+            else if (etapaAleatoria < 4) { paragrafoAlternativo = BANCO_DE_TEXTOS.desenvolvimento1[`${escolhasAlternativas[2]}-${escolhasAlternativas[3]}`]; }
+            else if (etapaAleatoria < 6) { paragrafoAlternativo = BANCO_DE_TEXTOS.desenvolvimento2[`${escolhasAlternativas[4]}-${escolhasAlternativas[5]}`]; }
+            else { paragrafoAlternativo = BANCO_DE_TEXTOS.conclusao[`${escolhasAlternativas[6]}-${escolhasAlternativas[7]}`]; }
+            document.getElementById('alternative-ending-text').innerHTML = `Se na etapa ${etapaAleatoria + 1}, você tivesse feito uma escolha diferente, o rumo daquele parágrafo da sua história seria: <em>"${paragrafoAlternativo}"</em>`;
+        }
+        function gerarGlossario(texto) {
+            const containerGlossario = document.getElementById('glossary-items');
+            containerGlossario.innerHTML = ''; let palavrasEncontradas = 0;
+            for (const palavra in GLOSSARIO) {
+                const regex = new RegExp(`\\b${palavra}\\b`, 'i');
+                if (regex.test(texto)) {
+                    const item = document.createElement('p');
+                    item.className = 'glossary-item';
+                    item.innerHTML = `<b>${palavra.charAt(0).toUpperCase() + palavra.slice(1)}:</b> ${GLOSSARIO[palavra]}`;
+                    containerGlossario.appendChild(item); palavrasEncontradas++;
+                }
+            }
+            if (palavrasEncontradas === 0) { containerGlossario.innerHTML = '<p>Nenhuma palavra do glossário foi encontrada na sua versão da história.</p>'; }
         }
     </script>
 </body>
