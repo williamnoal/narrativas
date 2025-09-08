@@ -26,7 +26,7 @@ GLOSSARIO = {
     "artefato": "Objeto feito por humanos, geralmente de interesse histórico ou cultural."
 }
 
-# --- ESTILIZAÇÃO CSS FINAL E APRIMORADA ---
+# --- ESTILIZAÇÃO CSS FINAL ---
 def injetar_css_final():
     st.markdown(r"""
     <style>
@@ -34,91 +34,75 @@ def injetar_css_final():
         
         /* --- LAYOUT GERAL --- */
         .stApp {
-            background-color: #f0f4f8;
-            height: 100vh;
-            overflow: hidden;
-            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8; height: 100vh; overflow: hidden; font-family: 'Poppins', sans-serif;
         }
         .main-container {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
+            width: 100%; height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 2rem;
         }
 
-        /* --- TELA DE SELEÇÃO (COM CARTÕES-BOTÃO) --- */
+        /* --- TELA DE SELEÇÃO (COM CARTÕES CLICÁVEIS CORRIGIDOS) --- */
         .selection-header { text-align: center; margin-bottom: 40px; }
         .selection-header h1 { font-weight: 700; color: #1e3a5f; }
         .selection-header p { font-size: 1.2rem; color: #5a7a9d; }
         .card-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 30px; width: 100%; max-width: 1200px; }
         
-        /* ESTILO DO BOTÃO PARA PARECER UM CARTÃO */
-        .card-grid .stButton button {
+        /* NOVO CONTAINER PARA O CARTÃO E O BOTÃO JUNTOS */
+        .card-wrapper {
             background-color: #ffffff;
-            color: #1e3a5f;
-            border: 1px solid #e6e9ee;
             border-radius: 20px;
             box-shadow: 0 8px 24px rgba(20, 49, 89, 0.1);
-            height: 240px;
-            width: 100%;
-            padding: 25px 20px;
-            font-size: 1.2rem; /* Tamanho da fonte do título */
-            font-weight: 600;
-            white-space: pre-wrap; /* Respeita as quebras de linha (\n) */
-            line-height: 1.4;
             transition: transform 0.3s, box-shadow 0.3s;
+            height: 250px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* Garante que o botão não "vaze" */
+        }
+        .card-wrapper:hover { transform: translateY(-12px); box-shadow: 0 12px 32px rgba(20, 49, 89, 0.15); }
+        
+        .story-card-content {
+            padding: 25px 20px;
+            text-align: center;
+            flex-grow: 1; /* Faz esta parte ocupar o espaço disponível */
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
         }
-        .card-grid .stButton button:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 12px 32px rgba(20, 49, 89, 0.15);
-            background-color: #ffffff; /* Mantém o fundo branco no hover */
-            border-color: #007bff;
+        .story-card-content .icon { font-size: 4.5rem; line-height: 1; }
+        .story-card-content .title { font-size: 1.2rem; font-weight: 600; color: #1e3a5f; margin: 15px 0; }
+        
+        /* BOTÃO INTEGRADO AO CARTÃO */
+        .card-wrapper .stButton button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 0; /* Remove o raio para se juntar ao cartão */
+            font-weight: 600;
+            width: 100%;
+            padding: 12px 0;
+            transition: background-color 0.2s;
         }
-        .card-grid .stButton button:focus {
-            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.4); /* Anel de foco acessível */
-        }
-        .card-grid .stButton button p { /* Para o emoji dentro do botão */
-             font-size: 4.5rem; /* Tamanho do emoji */
-             margin-bottom: 15px;
-             line-height: 1;
+        .card-wrapper .stButton button:hover {
+            background-color: #0056b3;
         }
 
-        /* --- TELA DE JOGO --- */
-        .game-card {
-            background-color: #fff;
-            padding: 50px 60px;
-            border-radius: 20px;
-            box-shadow: 0 8px 30px rgba(20, 49, 89, 0.1);
-            width: 100%;
-            max-width: 1100px;
-            text-align: center;
-        }
+        /* --- TELA DE JOGO (sem alterações críticas) --- */
+        .game-card { background-color: #fff; padding: 50px 60px; border-radius: 20px; box-shadow: 0 8px 30px rgba(20, 49, 89, 0.1); width: 100%; max-width: 1100px; text-align: center; }
         .game-card .question { font-size: 1.8rem; font-weight: 600; color: #1e3a5f; margin: 20px 0 40px 0; min-height: 100px; }
         .choice-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 30px; width: 100%; }
         .choice-grid .stButton button {
-            background-color: #f8f9fa; color: #1e3a5f; border: 2px solid #d3e0ed; padding: 20px;
-            font-size: 1.1rem; font-weight: 600; height: 100%; width: 100%; white-space: normal;
-            border-radius: 12px; transition: all 0.2s ease;
+            background-color: #f8f9fa; color: #1e3a5f; border: 2px solid #d3e0ed; padding: 20px; font-size: 1.1rem; font-weight: 600;
+            height: 100%; width: 100%; white-space: normal; border-radius: 12px; transition: all 0.2s ease;
         }
         .choice-grid .stButton button:hover { border-color: #007bff; background-color: #007bff; color: #ffffff; }
 
-        /* --- TELA FINAL --- */
-        .final-story-card {
-            background: #fff; padding: 40px 60px; border-radius: 20px; box-shadow: 0 8px 30px rgba(20, 49, 89, 0.1);
-            width: 100%; max-width: 1000px; max-height: 90vh; overflow-y: auto;
-        }
+        /* --- TELA FINAL (sem alterações críticas) --- */
+        .final-story-card { background: #fff; padding: 40px 60px; border-radius: 20px; box-shadow: 0 8px 30px rgba(20, 49, 89, 0.1); width: 100%; max-width: 1000px; max-height: 90vh; overflow-y: auto; }
         .final-story-card h1 { text-align: center; color: #1e3a5f; font-weight: 700; margin-bottom: 30px; }
         .final-story-card p { text-indent: 2.5em; line-height: 1.9; font-size: 1.15rem; color: #212529; margin-bottom: 1.5em; }
         .alternative-ending { margin-top: 40px; padding: 25px; background-color: #f8f9fa; border-left: 6px solid #17a2b8; border-radius: 8px; }
         .glossary-section { margin-top: 50px; padding-top: 30px; border-top: 1px solid #e6e9ee; }
-        .glossary-section h2 { text-align: center; color: #1e3a5f; margin-bottom: 25px; }
+        .glossary-section h2 { text-align: center; color: #1e3a5f; }
         .glossary-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .glossary-item { padding: 15px 20px; }
         .glossary-item strong { color: #007bff; }
@@ -130,12 +114,14 @@ def injetar_css_final():
 # --- GERENCIAMENTO DE ESTADO ---
 if 'etapa_app' not in st.session_state:
     st.session_state.etapa_app = 'selecao'
+# ... (o resto do gerenciamento de estado permanece idêntico) ...
 if 'historia_selecionada' not in st.session_state:
     st.session_state.historia_selecionada = None
 if 'estagio_atual' not in st.session_state:
     st.session_state.estagio_atual = 0
 if 'caminho_percorrido' not in st.session_state:
     st.session_state.caminho_percorrido = []
+
 
 # --- FUNÇÕES DE RENDERIZAÇÃO DE TELA (REESCRITAS) ---
 
@@ -149,20 +135,29 @@ def renderizar_tela_selecao():
 
     for i, (id_historia, detalhes) in enumerate(sorted_historias):
         with cols[i]:
-            # Criamos o conteúdo do botão com quebras de linha para separar o emoji do título
-            # O CSS aplicará os estilos corretos para cada parte
-            button_content = f"<p>{detalhes['icone']}</p>{detalhes['titulo']}"
-            
-            # Usamos o botão diretamente como o cartão clicável
-            if st.button(button_content, key=f"btn_{id_historia}", use_container_width=True):
-                st.session_state.etapa_app = 'jogando'
-                st.session_state.historia_selecionada = id_historia
-                st.session_state.estagio_atual = 0
-                st.session_state.caminho_percorrido = []
-                st.rerun()
+            # Criamos um container para o cartão e o botão, que será estilizado pelo CSS
+            with st.container():
+                st.markdown(f"""
+                <div class="card-wrapper">
+                    <div class="story-card-content">
+                        <div class="icon">{detalhes['icone']}</div>
+                        <div class="title">{detalhes['titulo']}</div>
+                    </div>
+                """, unsafe_allow_html=True)
+                
+                if st.button("Começar Aventura", key=f"btn_{id_historia}", use_container_width=True):
+                    st.session_state.etapa_app = 'jogando'
+                    st.session_state.historia_selecionada = id_historia
+                    st.session_state.estagio_atual = 0
+                    st.session_state.caminho_percorrido = []
+                    st.rerun()
+                
+                # Fechamos a div do wrapper aqui, após o botão ser renderizado
+                st.markdown('</div>', unsafe_allow_html=True)
 
     st.markdown('</div></div>', unsafe_allow_html=True)
 
+# ... (As funções renderizar_tela_jogo e renderizar_tela_final permanecem idênticas à versão anterior, pois já estavam estáveis) ...
 
 def renderizar_tela_jogo():
     id_historia = st.session_state.historia_selecionada
@@ -185,7 +180,6 @@ def renderizar_tela_jogo():
                     st.session_state.etapa_app = 'final'
                 st.rerun()
     st.markdown('</div></div></div>', unsafe_allow_html=True)
-
 
 def renderizar_tela_final():
     id_historia = st.session_state.historia_selecionada
@@ -229,13 +223,11 @@ def renderizar_tela_final():
         if st.button("Criar uma Nova História"):
             # Limpa o estado da sessão para um novo jogo
             for key in list(st.session_state.keys()):
-                if key != 'etapa_app': # Mantém o controle da etapa
-                    del st.session_state[key]
+                st.session_state.pop(key)
             st.session_state.etapa_app = 'selecao'
             st.rerun()
         st.markdown('</div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
-
 
 # --- ROTEADOR PRINCIPAL DA APLICAÇÃO ---
 injetar_css_final()
