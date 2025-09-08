@@ -6,27 +6,18 @@
     <title>História 8: O Segredo do Tesouro Pirata</title>
     <style>
         :root {
-            --cor-primaria: #cd853f; --cor-fundo: #f5fffa; --cor-texto: #333;
-            --cor-sucesso: #28a745; --cor-alternativa: #17a2b8;
+            --cor-primaria: #cd853f; /* Peru */
+            --cor-fundo: #f5fffa;    /* MintCream */
+            --cor-texto: #333;
         }
-        body, html { height: 100%; margin: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto); }
-        .container { display: flex; justify-content: center; align-items: center; min-height: 100%; padding: 20px; box-sizing: border-box; }
-        .etapa { background-color: white; padding: 40px; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 650px; margin: 20px 0; }
+        body, html { height: 100%; margin: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto); overflow: hidden; }
+        .container { display: flex; justify-content: center; align-items: center; height: 100%; padding: 20px; box-sizing: border-box; }
+        .etapa { background-color: white; padding: 40px; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 650px; }
         .hidden { display: none; }
         h2 { font-size: 1.6rem; color: var(--cor-primaria); margin-top: 0; }
-        p { font-size: 1.1rem; line-height: 1.6; }
         .options { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; }
         .choice-btn { padding: 15px; border: 2px solid var(--cor-primaria); border-radius: 10px; background-color: white; color: var(--cor-primaria); font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s; }
         .choice-btn:hover { background-color: var(--cor-primaria); color: white; }
-        #final-title { color: var(--cor-sucesso); font-size: 2rem; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        #final-text-container p { text-align: justify; text-indent: 2em; }
-        #senha-final { background-color: #eee; padding: 10px; border-radius: 5px; font-family: 'Courier New', Courier, monospace; font-weight: bold; color: #555; margin-top: 20px; display: inline-block; }
-        .final-box { text-align: left; margin-top: 30px; padding: 20px; border-radius: 10px; }
-        #alternative-ending { background-color: #eef7f9; border-left: 5px solid var(--cor-alternativa); }
-        #glossary { background-color: #fff8e1; border-left: 5px solid #ffc107; }
-        .final-box h3 { margin-top: 0; color: var(--cor-alternativa); }
-        #glossary h3 { color: #ffc107; }
-        .glossary-item b { color: var(--cor-texto); }
     </style>
 </head>
 <body>
@@ -87,109 +78,19 @@
                 <button class="choice-btn" onclick="fazerEscolha(8, 2)">Usa o tesouro para melhorar a vida na sua cidade.</button>
             </div>
         </div>
-        <div id="etapa-final" class="etapa hidden">
-            <h1 id="final-title">O Título da Sua História</h1>
-            <div id="final-text-container"></div>
-            <p>A sua jornada única gerou a seguinte senha: <span id="senha-final"></span></p>
-            <div id="alternative-ending" class="final-box">
-                <h3>Um Final Alternativo...</h3>
-                <p id="alternative-ending-text"></p>
-            </div>
-            <div id="glossary" class="final-box">
-                <h3>Glossário da Aventura</h3>
-                <div id="glossary-items"></div>
-            </div>
-            <div class="options">
-                <button class="choice-btn" onclick="window.location.href = 'index.html'">Voltar ao Início</button>
-            </div>
-        </div>
     </div>
     <script>
-        const BANCO_DE_TITULOS = {
-            '1-1': "O Enigma da Garrafa", '1-2': "A Caça aos Artefactos",
-            '2-1': "A Luneta Mágica", '2-2': "A Sombra do Capitão de Pedra"
-        };
-        const GLOSSARIO = {
-            'luneta': 'Um tipo de telescópio pequeno e portátil para observar objetos distantes.',
-            'artefactos': 'Objetos antigos, feitos por seres humanos, com valor cultural ou histórico.',
-            'descendente': 'Alguém que descende de uma determinada família ou ancestral.',
-            'espectral': 'Relativo a espectro ou fantasma; que tem a aparência de um fantasma.',
-            'ancestral': 'Pessoa de quem se descende; antepassado.'
-        };
-        const BANCO_DE_TEXTOS = {
-            introducao: {
-                '1-1': "No sótão empoeirado, uma garrafa antiga continha mais do que ar velho: um mapa amarelado, com a marca de um 'X' numa ilha desconhecida. O mapa incluía um enigma: 'Onde a maré beija a estrela-do-mar caída do céu, a jornada começa'. Após pesquisar cartas náuticas, você decifrou a charada e partiu para a praia indicada, pronto para a caça ao tesouro.",
-                '1-2': "Entre os pertences do seu avô, você encontrou uma luneta de latão. Ao olhar através dela, o mundo parecia normal, exceto por símbolos brilhantes que surgiam sobre certos objetos. A luneta guiou-o até uma praia, onde revelou três símbolos escondidos: numa rocha, numa palmeira e sob a areia. A sua missão era encontrar os três artefactos correspondentes.",
-                '2-1': "Você achou a luneta mágica. Olhando através dela, você via o mundo de forma diferente, com pistas a brilhar em lugares secretos. A luneta mostrou-lhe a localização de três itens na ilha: uma concha que cantava, uma pedra que flutuava e uma pena que nunca era levada pelo vento. Juntar os três era a chave para o próximo passo.",
-                '2-2': "Dentro da garrafa, um mapa com um enigma desafiou-o. 'Quando a sombra do capitão de pedra apontar para o ninho da tartaruga, cave'. Você esperou pelo pôr do sol e, no momento exato em que a sombra de uma formação rochosa tocou um local específico na areia, você começou a cavar, sentindo que a grande descoberta estava próxima."
-            },
-            desenvolvimento1: {
-                '1-1': "Enquanto você decifrava o enigma, uma pessoa aproximou-se. Ele apresentou-se como o tetraneto do Capitão Barba-Ruiva, o mesmo pirata do mapa. Ele também procurava o tesouro para limpar o nome da família. Vendo que ambos tinham um objetivo nobre, ele sugeriu uma aliança, e você, percebendo que a jornada seria difícil, concordou em trabalhar em equipa.",
-                '1-2': "Ao encontrar o último artefacto, uma figura translúcida surgiu: o fantasma do Capitão Barba-Ruiva! Ele não era assustador, mas melancólico. Ele explicou que o seu espírito estava preso à ilha até que alguém provasse ser digno do tesouro. Ele ofereceu-se para o guiar pela última armadilha, e você aceitou a ajuda do guardião espectral.",
-                '2-1': "Outro caçador de tesouros apareceu. Ele era descendente do capitão e buscava o mesmo que você. Ele propôs uma competição justa, mas ao verem o tamanho do desafio final, perceberam que a colaboração seria mais inteligente. Você, no entanto, decidiu seguir sozinho, confiando na sua própria habilidade para superar o que viesse pela frente.",
-                '2-2': "O fantasma do capitão apareceu, o seu guardião eterno. Ele desafiou-o, dizendo que muitos tentaram, mas todos falharam. Ele ofereceu-se para ajudar, mas em troca, você teria que prometer usar o tesouro com sabedoria. Desconfiado das intenções de um fantasma pirata, você recusou a ajuda, decidido a conquistar o tesouro pelos seus próprios méritos."
-            },
-            desenvolvimento2: {
-                '1-1': "Juntos, vocês chegaram a uma porta de pedra coberta de símbolos. Era um quebra-cabeças que exigia duas mentes para ser resolvido. Enquanto o seu parceiro decifrava as pistas do diário do capitão, você usava a luneta para ver a ordem correta dos símbolos. A porta abriu-se, revelando um baú. Mas dentro não havia ouro, e sim o diário perdido do capitão, com todas as suas histórias.",
-                '1-2': "A armadilha final era uma ponte invisível sobre um abismo. O fantasma explicou que era um teste de fé. A trabalhar juntos, vocês encontraram um padrão nas pedras que indicava o caminho seguro. O baú continha algo mais valioso que ouro: sementes de uma árvore mágica, que, segundo a lenda, poderiam realizar qualquer desejo plantado com um coração puro.",
-                '2-1': "Sozinho, você enfrentou o quebra-cabeças de símbolos. Foi difícil, mas a sua persistência valeu a pena. A porta abriu-se. Dentro do baú, uma surpresa: o diário do capitão. O tesouro não era riqueza, mas conhecimento e as aventuras de uma vida inteira no mar. Era uma herança de histórias, não de moedas.",
-                '2-2': "Você chegou à ponte invisível. Sem ajuda, a travessia foi um teste de coragem e intuição. A cada passo, você sentia o caminho sob os seus pés. Do outro lado, o baú aguardava. Ao abri-lo, encontrou um punhado de sementes brilhantes, o verdadeiro tesouro do capitão: a oportunidade de cultivar um futuro mágico, um poder muito maior que qualquer fortuna."
-            },
-            conclusao: {
-                '1-1': "O descendente do capitão sorriu. O seu único objetivo era encontrar o diário para poder contar a verdadeira história do seu ancestral, que era um explorador, e não um pirata cruel. Ele estava apenas a testar o seu caráter. Satisfeito, ele deu-lhe uma das sementes mágicas que também estavam no baú. Você dividiu o tesouro, e cada um seguiu o seu caminho, tendo encontrado algo mais valioso que ouro: um amigo.",
-                '1-2': "O fantasma explicou que o tesouro era um teste. As sementes só germinariam para alguém que não buscasse riqueza. Por ter passado no teste, ele estava finalmente livre. Ele agradeceu-lhe e desapareceu numa luz suave. Você levou as sementes para casa e usou-as para criar um parque na sua cidade, onde a árvore mágica cresceu, a trazer alegria e a realizar pequenos desejos para todos.",
-                '2-1': "Com o diário em mãos, você preparou-se para ir embora. O descendente do capitão apareceu, a explicar que só queria garantir que o diário caísse em boas mãos. Vendo o seu respeito pela história, ele contou-lhe sobre as sementes mágicas que também estavam no baú. Você ofereceu-se para dividir, e juntos, vocês decidiram usar o conhecimento e a magia para o bem.",
-                '2-2': "O fantasma apareceu assim que você pegou nas sementes. Ele revelou que estava a testá-lo. A sua coragem e autoconfiança provaram que era digno. Como recompensa, ele ensinou-lhe como plantar a primeira semente. Você voltou para casa e plantou a árvore na praça da sua cidade, transformando um lugar comum num ponto de encontro mágico para as futuras gerações."
-            }
-        };
+        const ID_DA_HISTORIA = 8;
         let escolhas = [];
         function fazerEscolha(etapa, numeroDaEscolha) {
             escolhas.push(numeroDaEscolha);
             document.getElementById('etapa-' + etapa).classList.add('hidden');
             if (etapa === 8) {
-                document.body.style.overflow = 'auto';
-                montarTextoFinal();
+                const senha = escolhas.join('-');
+                window.location.href = `resultado.html?historia=${ID_DA_HISTORIA}&escolhas=${senha}`;
             } else {
                 document.getElementById('etapa-' + (etapa + 1)).classList.remove('hidden');
             }
-        }
-        function montarTextoFinal() {
-            const keyIntro = `${escolhas[0]}-${escolhas[1]}`, keyDev1 = `${escolhas[2]}-${escolhas[3]}`,
-                  keyDev2 = `${escolhas[4]}-${escolhas[5]}`, keyConc = `${escolhas[6]}-${escolhas[7]}`;
-            const textoCompleto = [BANCO_DE_TEXTOS.introducao[keyIntro], BANCO_DE_TEXTOS.desenvolvimento1[keyDev1], BANCO_DE_TEXTOS.desenvolvimento2[keyDev2], BANCO_DE_TEXTOS.conclusao[keyConc]];
-            document.getElementById('final-title').innerText = BANCO_DE_TITULOS[keyIntro] || "O Tesouro do Capitão Barba-Ruiva";
-            document.getElementById('final-text-container').innerHTML = textoCompleto.map(p => `<p>${p}</p>`).join('');
-            document.getElementById('senha-final').innerText = `8: ${escolhas.join('-')}`;
-            gerarFinalAlternativo();
-            gerarGlossario(textoCompleto.join(' '));
-            document.getElementById('etapa-final').classList.remove('hidden');
-        }
-        function gerarFinalAlternativo() {
-            const etapaAleatoria = Math.floor(Math.random() * 8);
-            const escolhaOriginal = escolhas[etapaAleatoria];
-            const escolhaAlternativa = escolhaOriginal === 1 ? 2 : 1;
-            const escolhasAlternativas = [...escolhas];
-            escolhasAlternativas[etapaAleatoria] = escolhaAlternativa;
-            let paragrafoAlternativo = "";
-            if (etapaAleatoria < 2) { paragrafoAlternativo = BANCO_DE_TEXTOS.introducao[`${escolhasAlternativas[0]}-${escolhasAlternativas[1]}`]; }
-            else if (etapaAleatoria < 4) { paragrafoAlternativo = BANCO_DE_TEXTOS.desenvolvimento1[`${escolhasAlternativas[2]}-${escolhasAlternativas[3]}`]; }
-            else if (etapaAleatoria < 6) { paragrafoAlternativo = BANCO_DE_TEXTOS.desenvolvimento2[`${escolhasAlternativas[4]}-${escolhasAlternativas[5]}`]; }
-            else { paragrafoAlternativo = BANCO_DE_TEXTOS.conclusao[`${escolhasAlternativas[6]}-${escolhasAlternativas[7]}`]; }
-            document.getElementById('alternative-ending-text').innerHTML = `Se na etapa ${etapaAleatoria + 1}, você tivesse feito uma escolha diferente, o rumo daquele parágrafo da sua história seria: <em>"${paragrafoAlternativo}"</em>`;
-        }
-        function gerarGlossario(texto) {
-            const containerGlossario = document.getElementById('glossary-items');
-            containerGlossario.innerHTML = ''; let palavrasEncontradas = 0;
-            for (const palavra in GLOSSARIO) {
-                const regex = new RegExp(`\\b${palavra}\\b`, 'i');
-                if (regex.test(texto)) {
-                    const item = document.createElement('p');
-                    item.className = 'glossary-item';
-                    item.innerHTML = `<b>${palavra.charAt(0).toUpperCase() + palavra.slice(1)}:</b> ${GLOSSARIO[palavra]}`;
-                    containerGlossario.appendChild(item); palavrasEncontradas++;
-                }
-            }
-            if (palavrasEncontradas === 0) { containerGlossario.innerHTML = '<p>Nenhuma palavra do glossário foi encontrada na sua versão da história.</p>'; }
         }
     </script>
 </body>
