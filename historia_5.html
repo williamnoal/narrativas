@@ -6,27 +6,18 @@
     <title>História 5: A Odisseia do Cometa Perdido</title>
     <style>
         :root {
-            --cor-primaria: #2f4f4f; --cor-fundo: #e6e6fa; --cor-texto: #333;
-            --cor-sucesso: #28a745; --cor-alternativa: #17a2b8;
+            --cor-primaria: #2f4f4f; /* DarkSlateGray */
+            --cor-fundo: #e6e6fa;    /* Lavender */
+            --cor-texto: #333;
         }
-        body, html { height: 100%; margin: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto); }
-        .container { display: flex; justify-content: center; align-items: center; min-height: 100%; padding: 20px; box-sizing: border-box; }
-        .etapa { background-color: white; padding: 40px; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 650px; margin: 20px 0; }
+        body, html { height: 100%; margin: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto); overflow: hidden; }
+        .container { display: flex; justify-content: center; align-items: center; height: 100%; padding: 20px; box-sizing: border-box; }
+        .etapa { background-color: white; padding: 40px; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 650px; }
         .hidden { display: none; }
         h2 { font-size: 1.6rem; color: var(--cor-primaria); margin-top: 0; }
-        p { font-size: 1.1rem; line-height: 1.6; }
         .options { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; }
         .choice-btn { padding: 15px; border: 2px solid var(--cor-primaria); border-radius: 10px; background-color: white; color: var(--cor-primaria); font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s; }
         .choice-btn:hover { background-color: var(--cor-primaria); color: white; }
-        #final-title { color: var(--cor-sucesso); font-size: 2rem; margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 10px; }
-        #final-text-container p { text-align: justify; text-indent: 2em; }
-        #senha-final { background-color: #eee; padding: 10px; border-radius: 5px; font-family: 'Courier New', Courier, monospace; font-weight: bold; color: #555; margin-top: 20px; display: inline-block; }
-        .final-box { text-align: left; margin-top: 30px; padding: 20px; border-radius: 10px; }
-        #alternative-ending { background-color: #eef7f9; border-left: 5px solid var(--cor-alternativa); }
-        #glossary { background-color: #fff8e1; border-left: 5px solid #ffc107; }
-        .final-box h3 { margin-top: 0; color: var(--cor-alternativa); }
-        #glossary h3 { color: #ffc107; }
-        .glossary-item b { color: var(--cor-texto); }
     </style>
 </head>
 <body>
@@ -87,110 +78,19 @@
                 <button class="choice-btn" onclick="fazerEscolha(8, 2)">Relata tudo ao comando, a mudar o futuro da exploração.</button>
             </div>
         </div>
-        <div id="etapa-final" class="etapa hidden">
-            <h1 id="final-title">O Título da Sua História</h1>
-            <div id="final-text-container"></div>
-            <p>A sua jornada única gerou a seguinte senha: <span id="senha-final"></span></p>
-            <div id="alternative-ending" class="final-box">
-                <h3>Um Final Alternativo...</h3>
-                <p id="alternative-ending-text"></p>
-            </div>
-            <div id="glossary" class="final-box">
-                <h3>Glossário da Aventura</h3>
-                <div id="glossary-items"></div>
-            </div>
-            <div class="options">
-                <button class="choice-btn" onclick="window.location.href = 'index.html'">Voltar ao Início</button>
-            </div>
-        </div>
     </div>
     <script>
-        const BANCO_DE_TITULOS = {
-            '1-1': "O Cometa Inteligente", '1-2': "O Visitante Inesperado",
-            '2-1': "O Segredo da Flor Metálica", '2-2': "A Anomalia no Telescópio"
-        };
-        const GLOSSARIO = {
-            'anomalia': 'Algo que se desvia do que é normal, comum ou esperado.',
-            'entidade': 'Algo que existe, um ser. Neste caso, um ser espacial.',
-            'entropia': 'Na física, uma medida da desordem ou energia indisponível em um sistema.',
-            'psíquica': 'Relativo à mente ou aos fenômenos da mente.',
-            'ceticismo': 'Atitude de dúvida ou desconfiança em relação a algo.',
-            'diplomacia': 'A arte de negociar e manter relações pacíficas entre nações (ou, neste caso, espécies).'
-        };
-        const BANCO_DE_TEXTOS = {
-            introducao: {
-                '1-1': "O silêncio do espaço foi quebrado por uma sirene. Um cometa, não registado em nenhuma carta estelar, havia mudado de curso e estava em rota de colisão com a sua nave. A correr para o painel de controlo, você iniciou uma análise de dados frenética. Os números que apareceram no ecrã não faziam sentido para um simples cometa; havia padrões, complexidade, quase... inteligência.",
-                '1-2': "Na sua viagem espacial, o capitão anunciou um evento raro: um cometa passaria perto o suficiente para ser visto a olho nu. Você correu para o telescópio principal, ansioso pelo espetáculo. Mas o que você viu não era gelo e rocha. Eram luzes pulsantes, formas geométricas que mudavam, uma superfície que parecia orgânica. Aquilo não era um cometa.",
-                '2-1': "As luzes de alerta piscaram. Uma anomalia magnética, diferente de tudo já registado, surgiu do nada. Enquanto a tripulação se preocupava com os sistemas da nave, a sua curiosidade levou-o ao computador principal. Você filtrou as leituras e descobriu a fonte: um objeto metálico gigante, escondido da visão por um campo de camuflagem, a revelar-se lentamente.",
-                '2-2': "Uma anomalia magnética desconhecida fez os instrumentos da nave oscilarem. A ignorar os protocolos, você foi para o observatório, a apontar o telescópio para a fonte da perturbação. Os seus olhos arregalaram-se ao ver uma estrutura que parecia uma flor metálica gigante, a desabrochar lentamente no vácuo do espaço. Era a coisa mais assustadora e bela que você já vira."
-            },
-            desenvolvimento1: {
-                '1-1': "A análise confirmou as suas suspeitas. O objeto era uma 'Nave-Semente', uma arca biológica colossal a viajar pelo universo e a plantar vida em planetas estéreis. Ela estava em silêncio há eras. De repente, uma transmissão chegou, não em palavras, mas em pura matemática: uma sequência de números primos, um pedido de ajuda universal que qualquer civilização inteligente poderia entender.",
-                '1-2': "Os dados eram claros: aquilo era uma nave biológica, uma 'Nave-Semente' projetada para carregar ecossistemas inteiros. Ela estava danificada e à deriva. Enquanto você observava, a nave projetou um feixe de luz que pintou o espaço à sua frente. Era um mapa, a mostrar a sua rota original e um ponto de destino: uma galáxia distante e desconhecida, cheia de estrelas jovens.",
-                '2-1': "O telescópio revelou a verdade: o objeto era uma forma de vida, uma criatura espacial colossal feita de cristais que refletiam a luz das estrelas. Ela movia-se com uma graça impossível, e parecia antiga e sábia. Uma onda de energia emanou dela e atingiu a sua nave, mas não era um ataque. Era uma mensagem, um pedido de socorro traduzido em equações sobre energia e entropia.",
-                '2-2': "Não era uma nave, mas sim um ser vivo. Uma criatura majestosa, feita de cristal e luz, do tamanho de uma lua pequena. Ela parecia cantar uma canção silenciosa para as estrelas. A criatura então focou a sua atenção na sua nave, a enviar uma transmissão psíquica que preencheu a sua mente com imagens de estrelas, planetas e um mapa de um caminho seguro através de um setor perigoso do espaço."
-            },
-            desenvolvimento2: {
-                '1-1': "O pedido de ajuda era claro: a Nave-Semente estava sem energia para a próxima etapa da sua jornada. A única fonte compatível por perto eram os cristais de irídio encontrados num denso cinturão de asteroides. A missão era arriscada, e a tripulação escolheu você, pela sua precisão e calma, para pilotar uma pequena sonda de mineração и a coletar os cristais necessários.",
-                '1-2': "A criatura precisava de energia. O mapa que ela enviou mostrava a localização de uma nebulosa rica em partículas exóticas que poderiam recarregá-la. A tarefa exigia uma manobra delicada: reconfigurar os escudos defletores da sua nave para que, em vez de repelir, eles absorvessem e canalizassem a energia da nebulosa. A sua habilidade com engenharia tornou-o a pessoa ideal para o trabalho.",
-                '2-1': "Para ajudar a criatura de cristal, vocês precisavam minerar um tipo específico de asteroide. A tarefa de pilotar a sonda de perfuração caiu nas suas mãos. Você navegou cuidadosamente pelo campo de detritos espaciais, localizou o asteroide correto e extraiu o núcleo de energia, tudo isso enquanto a criatura gigante o observava com as suas luzes pulsantes.",
-                '2-2': "A solução para o problema de energia da criatura estava numa nebulosa próxima. A tripulação precisava de alguém com conhecimento em física de partículas para adaptar os escudos da nave para coletar a energia sem causar uma sobrecarga. Você passou horas a recalcular as equações и, finalmente, conseguiu criar um 'coletor de energia' improvisado, mas funcional."
-            },
-            conclusao: {
-                '1-1': "A mineração foi um sucesso. Com a energia restaurada, a Nave-Semente agradeceu, a enviar um presente: um pequeno cristal que, ao ser tocado, preenchia a sua mente com o vasto conhecimento da sua jornada milenar. De volta à Terra, você decidiu manter essa descoberta em segredo, a proteger a nobre missão da nave e a guardar para si os segredos do universo.",
-                '1-2': "A sua engenhosidade funcionou. A criatura de cristal, agora a brilhar com força total, concedeu-lhe um dom: a habilidade de compreender telepaticamente qualquer forma de comunicação, de qualquer espécie. Ao retornar, você relatou tudo ao comando espacial. A sua história e o seu novo dom abriram as portas para uma nova era de diplomacia intergaláctica e exploração pacífica.",
-                '2-1': "Com a energia entregue, a criatura despediu-se. Como agradecimento, ela deu-lhe um dos seus próprios cristais. Em casa, você descobriu que o cristal continha todo o conhecimento da criatura. Você decidiu guardar esse segredo, a usar o conhecimento para inventar tecnologias que melhorariam a vida na Terra discretamente, sem revelar a sua origem.",
-                '2-2': "A energia da nebulosa salvou a criatura. Em troca, ela alterou subtilmente as suas vias neurais, dando-lhe o dom de compreender todas as línguas do universo. Quando você voltou e relatou a sua experiência, foi inicialmente recebido com ceticismo. Mas ao demonstrar a sua habilidade, você tornou-se a chave para a comunicação com novas espécies e o maior explorador da história."
-            }
-        };
+        const ID_DA_HISTORIA = 5;
         let escolhas = [];
         function fazerEscolha(etapa, numeroDaEscolha) {
             escolhas.push(numeroDaEscolha);
             document.getElementById('etapa-' + etapa).classList.add('hidden');
             if (etapa === 8) {
-                document.body.style.overflow = 'auto';
-                montarTextoFinal();
+                const senha = escolhas.join('-');
+                window.location.href = `resultado.html?historia=${ID_DA_HISTORIA}&escolhas=${senha}`;
             } else {
                 document.getElementById('etapa-' + (etapa + 1)).classList.remove('hidden');
             }
-        }
-        function montarTextoFinal() {
-            const keyIntro = `${escolhas[0]}-${escolhas[1]}`, keyDev1 = `${escolhas[2]}-${escolhas[3]}`,
-                  keyDev2 = `${escolhas[4]}-${escolhas[5]}`, keyConc = `${escolhas[6]}-${escolhas[7]}`;
-            const textoCompleto = [BANCO_DE_TEXTOS.introducao[keyIntro], BANCO_DE_TEXTOS.desenvolvimento1[keyDev1], BANCO_DE_TEXTOS.desenvolvimento2[keyDev2], BANCO_DE_TEXTOS.conclusao[keyConc]];
-            document.getElementById('final-title').innerText = BANCO_DE_TITULOS[keyIntro] || "Odisseia Espacial";
-            document.getElementById('final-text-container').innerHTML = textoCompleto.map(p => `<p>${p}</p>`).join('');
-            document.getElementById('senha-final').innerText = `5: ${escolhas.join('-')}`;
-            gerarFinalAlternativo();
-            gerarGlossario(textoCompleto.join(' '));
-            document.getElementById('etapa-final').classList.remove('hidden');
-        }
-        function gerarFinalAlternativo() {
-            const etapaAleatoria = Math.floor(Math.random() * 8);
-            const escolhaOriginal = escolhas[etapaAleatoria];
-            const escolhaAlternativa = escolhaOriginal === 1 ? 2 : 1;
-            const escolhasAlternativas = [...escolhas];
-            escolhasAlternativas[etapaAleatoria] = escolhaAlternativa;
-            let paragrafoAlternativo = "";
-            if (etapaAleatoria < 2) { paragrafoAlternativo = BANCO_DE_TEXTOS.introducao[`${escolhasAlternativas[0]}-${escolhasAlternativas[1]}`]; }
-            else if (etapaAleatoria < 4) { paragrafoAlternativo = BANCO_DE_TEXTOS.desenvolvimento1[`${escolhasAlternativas[2]}-${escolhasAlternativas[3]}`]; }
-            else if (etapaAleatoria < 6) { paragrafoAlternativo = BANCO_DE_TEXTOS.desenvolvimento2[`${escolhasAlternativas[4]}-${escolhasAlternativas[5]}`]; }
-            else { paragrafoAlternativo = BANCO_DE_TEXTOS.conclusao[`${escolhasAlternativas[6]}-${escolhasAlternativas[7]}`]; }
-            document.getElementById('alternative-ending-text').innerHTML = `Se na etapa ${etapaAleatoria + 1}, você tivesse feito uma escolha diferente, o rumo daquele parágrafo da sua história seria: <em>"${paragrafoAlternativo}"</em>`;
-        }
-        function gerarGlossario(texto) {
-            const containerGlossario = document.getElementById('glossary-items');
-            containerGlossario.innerHTML = ''; let palavrasEncontradas = 0;
-            for (const palavra in GLOSSARIO) {
-                const regex = new RegExp(`\\b${palavra}\\b`, 'i');
-                if (regex.test(texto)) {
-                    const item = document.createElement('p');
-                    item.className = 'glossary-item';
-                    item.innerHTML = `<b>${palavra.charAt(0).toUpperCase() + palavra.slice(1)}:</b> ${GLOSSARIO[palavra]}`;
-                    containerGlossario.appendChild(item); palavrasEncontradas++;
-                }
-            }
-            if (palavrasEncontradas === 0) { containerGlossario.innerHTML = '<p>Nenhuma palavra do glossário foi encontrada na sua versão da história.</p>'; }
         }
     </script>
 </body>
