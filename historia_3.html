@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>História 3: O Reino Submerso</title>
+    <style>
+        :root {
+            --cor-primaria: #1e90ff; /* DodgerBlue */
+            --cor-fundo: #f0f8ff; /* AliceBlue */
+            --cor-texto: #333;
+        }
+        body, html {
+            height: 100%; margin: 0; font-family: 'Segoe UI', sans-serif;
+            background-color: var(--cor-fundo); color: var(--cor-texto); overflow: hidden;
+        }
+        .container {
+            display: flex; justify-content: center; align-items: center; height: 100%;
+            padding: 20px; box-sizing: border-box;
+        }
+        .etapa {
+            background-color: white; padding: 40px; border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1); text-align: center;
+            width: 100%; max-width: 650px;
+        }
+        .hidden { display: none; }
+        h2 { font-size: 1.6rem; color: var(--cor-primaria); margin-top: 0; }
+        p { font-size: 1.1rem; line-height: 1.6; }
+        .options { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; }
+        .choice-btn {
+            padding: 15px; border: 2px solid var(--cor-primaria);
+            border-radius: 10px; background-color: white; color: var(--cor-primaria);
+            font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s;
+        }
+        .choice-btn:hover { background-color: var(--cor-primaria); color: white; }
+        #final-text-container { text-align: left; margin-bottom: 20px; }
+        #senha-final {
+            background-color: #eee; padding: 10px; border-radius: 5px;
+            font-family: 'Courier New', Courier, monospace; font-weight: bold;
+            color: #555; margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="etapa-1" class="etapa">
+            <h2>Em um dia na praia, um objeto curioso na areia chama sua atenção. O que você encontra?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(1, 1)">Uma concha ornamentada que parece sussurrar.</button>
+                <button class="choice-btn" onclick="fazerEscolha(1, 2)">Um medalhão antigo com um mapa gravado.</button>
+            </div>
+        </div>
+        <div id="etapa-2" class="etapa hidden">
+            <h2>O objeto te convida para o mar. Como você entra na água?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(2, 1)">Mergulha para seguir um peixe de luz própria.</button>
+                <button class="choice-btn" onclick="fazerEscolha(2, 2)">Usa uma máscara de mergulho e nada com determinação.</button>
+            </div>
+        </div>
+        <div id="etapa-3" class="etapa hidden">
+            <h2>Você atravessa uma barreira mágica e encontra uma cidade submarina! Como ela é?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(3, 1)">Feita de cristais que brilham com luz interior.</button>
+                <button class="choice-btn" onclick="fazerEscolha(3, 2)">Construída sobre ruínas antigas cobertas de corais.</button>
+            </div>
+        </div>
+        <div id="etapa-4" class="etapa hidden">
+            <h2>Os habitantes percebem sua presença. Quem te recebe?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(4, 1)">A princesa dos tritões, curiosa e amigável.</button>
+                <button class="choice-btn" onclick="fazerEscolha(4, 2)">Um golem guardião, feito de corais e rochas.</button>
+            </div>
+        </div>
+        <div id="etapa-5" class="etapa hidden">
+            <h2>A cidade tem um problema: sua luz está se apagando. Qual é a causa?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(5, 1)">Uma criatura das fossas abissais está roubando a luz.</button>
+                <button class="choice-btn" onclick="fazerEscolha(5, 2)">A Pérola-Coração da cidade perdeu seu brilho.</button>
+            </div>
+        </div>
+        <div id="etapa-6" class="etapa hidden">
+            <h2>Para restaurar a luz, você precisa de um item raro. Qual missão você aceita?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(6, 1)">Buscar uma flor que brilha no escuro da fossa abissal.</button>
+                <button class="choice-btn" onclick="fazerEscolha(6, 2)">Pedir ajuda à Tartaruga Anciã, que vive em um vulcão.</button>
+            </div>
+        </div>
+        <div id="etapa-7" class="etapa hidden">
+            <h2>Você consegue o item e a luz da cidade é restaurada! O que você faz?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(7, 1)">Aceita um presente e decide voltar à superfície.</button>
+                <button class="choice-btn" onclick="fazerEscolha(7, 2)">Participa de um grande festival em sua homenagem.</button>
+            </div>
+        </div>
+        <div id="etapa-8" class="etapa hidden">
+            <h2>Ao voltar para a praia, o que resta da sua aventura?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(8, 1)">Apenas a memória e a promessa de um dia retornar.</button>
+                <button class="choice-btn" onclick="fazerEscolha(8, 2)">O presente mágico que recebeu, que ainda funciona.</button>
+            </div>
+        </div>
+        
+        <div id="etapa-final" class="etapa hidden">
+            <h2>Sua história está completa!</h2>
+            <div id="final-text-container"></div>
+            <p>A sua jornada única gerou a seguinte senha:</p>
+            <div id="senha-final"></div>
+            <div class="options">
+                <button class="choice-btn" onclick="window.location.href = 'index.html'">Voltar ao Início</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const BANCO_DE_TEXTOS = {
+            introducao: {
+                '1-1': "O sol da tarde dourava a areia quando você encontrou uma concha diferente de todas as outras, com espirais iridescentes. Ao levá-la ao ouvido, em vez do som do mar, você ouviu um sussurro convidativo. Seguindo o chamado, você mergulhou e viu um peixe brilhante, que parecia te esperar. Você o seguiu por entre os corais, sentindo que uma aventura estava prestes a começar.",
+                '1-2': "Durante sua caminhada na praia, uma concha polida pelo mar te chamou a atenção. Ao pegá-la, você ouviu um leve sussurro e decidiu que precisava ver o que havia sob as ondas. Com uma máscara de mergulho, você nadou com determinação, e a voz da concha pareceu te guiar para uma correnteza mágica que te puxou suavemente para as profundezas.",
+                '2-1': "Seus dedos encontraram o metal frio de um medalhão semi-enterrado na areia. Nele, um mapa rudimentar de uma localização submarina estava gravado. Com o coração aventureiro, você colocou uma máscara e mergulhou, seguindo um peixe luminoso que surgiu como se fosse um guia. O medalhão em seu pescoço começou a esquentar à medida que você se aproximava do destino.",
+                '2-2': "Enquanto o detector de metais apitava, você desenterrou um antigo medalhão. As gravuras pareciam um mapa. Sem hesitar, você pegou seu equipamento de mergulho e nadou na direção indicada. A água ficava mais clara e quente, e logo você avistou uma fenda na rocha submarina, de onde emanava uma luz suave, exatamente como o medalhão previa."
+            },
+            desenvolvimento1: {
+                '1-1': "A correnteza te levou a uma caverna que se abria para uma cidade feita de puro cristal. Torres luminosas se erguiam do solo oceânico, conectadas por pontes de luz, e seres com caudas de peixe nadavam graciosamente. Curiosa com sua chegada, a princesa do reino, com cabelos que flutuavam como algas, se aproximou com um sorriso, dando-lhe as boas-vindas à cidade de Cristalys.",
+                '1-2': "Após passar pela fenda, você se deparou com uma cidade magnífica, toda esculpida em cristal. Os habitantes, seres elegantes meio humanos, meio peixes, te observavam com espanto. Um golem imenso, feito de corais vivos e rocha, se materializou à sua frente, não de forma ameaçadora, mas protetora. Ele estendeu uma mão e te guiou em segurança para o centro da cidade.",
+                '2-1': "A jornada terminou em frente a ruínas majestosas, cobertas por corais vibrantes que formavam novas estruturas sobre as antigas. Era uma cidade renascida. Enquanto você explorava, foi abordado pela princesa do povo que ali vivia. Ela explicou que eles honravam os 'Antigos' e que sua chegada através do portal das ruínas era um sinal aguardado há muito tempo.",
+                '2-2': "Você chegou a uma cidade impressionante, construída sobre as ruínas de uma civilização perdida. Corais coloridos formavam as novas paredes e torres, num espetáculo de vida sobre a morte. De repente, um guardião feito dos próprios corais se moveu, seus olhos de pérola te analisando. Ele reconheceu o medalhão em seu pescoço e se curvou, permitindo sua passagem."
+            },
+            desenvolvimento2: {
+                '1-1': "Apesar da beleza, uma sombra pairava sobre a cidade: a luz interna dos cristais estava diminuindo. A princesa explicou que uma criatura das fossas abissais, o Sombra-Mar, estava drenando a energia vital da cidade. Para detê-lo, era preciso encontrar a Flor da Luz, uma planta rara que só crescia na escuridão total da fossa, um lugar de onde ninguém jamais retornou.",
+                '1-2': "A princesa revelou o grande problema de seu povo: a Pérola-Coração que iluminava e protegia a cidade estava perdendo seu brilho. A única maneira de restaurá-la era com a luz da lendária Flor Abissal. A missão era perigosa, pois a flor crescia em uma fossa profunda, guardada por criaturas temíveis, mas era a única esperança para a sobrevivência de Cristalys.",
+                '2-1': "O guardião golem te mostrou o problema: a luz da cidade vinha da Pérola-Coração, que estava se apagando. A lenda dizia que somente a sabedoria da Tartaruga Anciã, um ser milenar que dormia em um vulcão submarino adormecido, poderia revelar o segredo para reacender a pérola. Despertar a tartaruga e convencê-la a ajudar seria seu grande desafio.",
+                '2-2': "O líder da cidade explicou a situação: uma criatura sombria estava enfraquecendo a cidade ao drenar a luz da Pérola-Coração. A única solução era buscar o conselho da Tartaruga Anciã. Ela era a única que conhecia um ritual antigo para fortalecer a pérola e banir as sombras, mas a criatura não te deixaria chegar até o vulcão da tartaruga sem uma luta."
+            },
+            conclusao: {
+                '1-1': "Com coragem, você enfrentou a escuridão e encontrou a flor, cuja luz baniu a criatura sombria para sempre. De volta à cidade, a luz foi restaurada. Como agradecimento, a princesa te deu uma pequena pérola que permitia respirar debaixo d'água. Você se despediu e voltou à superfície. A pérola no seu bolso era a prova de que reinos mágicos existem.",
+                '1-2': "Você encontrou a Tartaruga Anciã e, com respeito, ouviu seu segredo, realizando o ritual que reacendeu a Pérola-Coração. A cidade voltou a brilhar mais forte do que nunca. Após um grande festival em sua homenagem, você se despediu dos novos amigos. Ao voltar para a praia, o portal se fechou, mas a memória da cidade de cristal permaneceu viva em seu coração.",
+                '2-1': "A jornada foi árdua, mas você conseguiu. A cidade estava salva e em festa. Após a celebração, você decidiu voltar para seu mundo. A princesa te presenteou com uma concha que, ao ser tocada, mostrava imagens da cidade submarina. De volta à areia, a vida parecia normal, mas você sabia que bastava um toque na concha para revisitar seus amigos.",
+                '2-2': "Com a sabedoria da Tartaruga Anciã, você restaurou o poder da cidade. Agradecidos, os habitantes te declararam um herói. Você participou de uma festa inesquecível, dançando com seres marinhos. Ao final, decidiu voltar. Na praia, tudo parecia um sonho, até você olhar para seu pulso e ver uma pulseira de coral luminoso, um presente que brilhava com a magia do reino submerso."
+            }
+        };
+
+        let escolhas = [];
+        function fazerEscolha(etapa, numeroDaEscolha) {
+            escolhas.push(numeroDaEscolha);
+            document.getElementById('etapa-' + etapa).classList.add('hidden');
+            if (etapa === 8) { montarTextoFinal(); } else { document.getElementById('etapa-' + (etapa + 1)).classList.remove('hidden'); }
+        }
+        function montarTextoFinal() {
+            const keyIntro = `${escolhas[0]}-${escolhas[1]}`, keyDev1 = `${escolhas[2]}-${escolhas[3]}`, keyDev2 = `${escolhas[4]}-${escolhas[5]}`, keyConc = `${escolhas[6]}-${escolhas[7]}`;
+            const textoFinal = `<p>${BANCO_DE_TEXTOS.introducao[keyIntro]}</p><p>${BANCO_DE_TEXTOS.desenvolvimento1[keyDev1]}</p><p>${BANCO_DE_TEXTOS.desenvolvimento2[keyDev2]}</p><p>${BANCO_DE_TEXTOS.conclusao[keyConc]}</p>`;
+            document.getElementById('final-text-container').innerHTML = textoFinal;
+            document.getElementById('senha-final').innerText = `3: ${escolhas.join('-')}`;
+            document.getElementById('etapa-final').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
