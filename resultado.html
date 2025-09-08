@@ -26,22 +26,22 @@
         #final-title {
             color: var(--cor-sucesso); font-size: 2rem; margin-top: 0;
             margin-bottom: 20px; border-bottom: 2px solid #eee; padding-bottom: 15px;
-            flex-shrink: 0; /* Impede que o título encolha */
+            flex-shrink: 0;
         }
         .content-view {
-            flex-grow: 1; /* Faz esta área ocupar o espaço restante */
-            overflow-y: auto; /* Adiciona rolagem APENAS nesta área se necessário */
+            flex-grow: 1;
+            overflow-y: auto;
             text-align: left; padding-right: 15px;
         }
         .content-view p {
             text-align: justify; text-indent: 2em;
-            font-size: 1.1rem; line-height: 1.7;
+            font-size: 1.1rem; line-height: 1.7; margin-top: 0;
         }
         .glossary-item { text-indent: 0 !important; }
         .glossary-item b { color: #c88f04; }
         .nav-tabs {
             margin-top: 20px; display: flex; gap: 10px;
-            flex-shrink: 0; /* Impede que os botões encolham */
+            flex-shrink: 0;
         }
         .nav-btn {
             flex-grow: 1; padding: 15px; border-radius: 10px;
@@ -61,115 +61,330 @@
             <div id="content-view" class="content-view">
                 </div>
             <div class="nav-tabs">
-                <button id="btn-historia" class="nav-btn active" onclick="mostrarHistoria()">Sua História</button>
-                <button id="btn-alternativo" class="nav-btn" onclick="mostrarAlternativo()">Final Alternativo</button>
-                <button id="btn-glossario" class="nav-btn" onclick="mostrarGlossario()">Glossário</button>
+                <button id="btn-historia" class="nav-btn active" onclick="mostrarAba('historia')">Sua História</button>
+                <button id="btn-alternativo" class="nav-btn" onclick="mostrarAba('alternativo')">Final Alternativo</button>
+                <button id="btn-glossario" class="nav-btn" onclick="mostrarAba('glossario')">Glossário</button>
                 <button class="nav-btn" onclick="window.location.href='index.html'">Voltar ao Início</button>
             </div>
         </div>
     </div>
 
     <script>
-        // BANCO DE DADOS COMPLETO COM TODAS AS 8 HISTÓRIAS
         const BANCO_DE_DADOS_COMPLETO = {
             '1': {
                 titulos: { '1-1': "O Caso da Medalha Arranhada", '1-2': "A Investigação do Inspetor", '2-1': "O Enigma da Pista Morna", '2-2': "O Mistério das Pegadas na Cantina" },
                 glossario: { 'mascote': 'Animal ou pessoa escolhida como representante de um grupo.', 'inspetor': 'Funcionário da escola responsável pela disciplina.', 'abordagem': 'A maneira de se aproximar de alguém ou de uma situação.', 'precipitada': 'Ação feita de forma apressada.', 'prudência': 'Qualidade de quem age com cuidado.', 'cética': 'Atitude de quem duvida das coisas.', 'maestria': 'Grande habilidade ou perfeição.' },
                 textos: {
                     introducao: {
-                        '1-1': "O alarme soou na escola: Joca, o esquilo mascote, havia desaparecido...",
-                        '1-2': "O desaparecimento de Joca, o querido esquilo mascote, mobilizou a todos...",
-                        '2-1': "A sua intuição de detetive levou-o à cantina, o lugar favorito de Joca...",
-                        '2-2': "Como um bom detetive, você sabia que a cantina seria um ponto-chave na investigação..."
+                        '1-1': "O alarme soou na escola: Joca, o esquilo mascote, havia desaparecido. Decidido a resolver o caso, você começou a sua busca pelo pátio, o último local onde o viram. Lá, entre as folhas secas, algo brilhou. Era a pequena medalha da coleira de Joca, e ao pegá-la, você percebeu que ela estava arranhada de uma forma estranha, como se apontasse para uma direção específica.",
+                        '1-2': "O desaparecimento de Joca, o querido esquilo mascote, mobilizou a todos. A sua primeira ação foi ir ao pátio, mas antes de começar a busca, você decidiu comunicar o inspetor. Juntos, vocês encontraram a medalha da coleira de Joca perto da ala de artes. O inspetor parabenizou-o pela iniciativa e nomeou-o o detetive oficial do caso.",
+                        '2-1': "A sua intuição de detetive levou-o à cantina, o lugar favorito de Joca. O cheiro de nozes estava no ar, mas algo mais chamou a sua atenção: um brilho metálico debaixo de uma mesa. Era a medalha da coleira dele! Ao pegá-la, você notou que ela estava morna, a indicar que alguém esteve ali há pouquíssimo tempo.",
+                        '2-2': "Como um bom detetive, você sabia que a cantina seria um ponto-chave na investigação do sumiço de Joca. Antes de mexer em qualquer coisa, você chamou o inspetor. A sua abordagem metódica foi recompensada quando ele encontrou não só a medalha da coleira, mas também pegadas que não eram do esquilo, a confirmar que se tratava de um sequestro."
                     },
-                    desenvolvimento1: { '1-1': "A seguir a pista, você chegou à porta do clube de teatro...", /* ... etc */ },
-                    desenvolvimento2: { '1-1': "A figura era Gabi, do 7º ano...", /* ... etc */ },
-                    conclusao: { '1-1': "Gabi explicou que Joca parecia doente...", /* ... etc */ }
+                    desenvolvimento1: {
+                        '1-1': "A seguir a pista, você chegou à porta do clube de teatro. Com o cuidado de um espião, você entrou sem fazer barulho e avistou uma figura misteriosa de costas. Aproximando-se com cautela, você perguntou num sussurro: 'Com licença, você viu um esquilo por aqui?'. A pessoa virou-se lentamente, e o mistério estava prestes a aprofundar-se.",
+                        '1-2': "A pista guiou-o até o clube de teatro. Sem hesitar, você entrou e viu uma pessoa de costas, a parecer suspeita. Com a confiança de quem está no caminho certo, você bradou: 'Mãos ao alto! Onde está o Joca?'. A figura deu um pulo de susto, a deixar cair um saco de nozes, e virou-se, a revelar um rosto completamente surpreendido.",
+                        '2-1': "A porta entreaberta do clube de teatro era um convite irrecusável. Você decidiu anunciar a sua presença para não causar problemas. 'Olá? Tem alguém aí?', você disse. Uma figura de costas mexeu-se e, de forma educada, você perguntou sobre o paradeiro de Joca. A resposta que veio a seguir não era nada do que você esperava.",
+                        '2-2': "Chegando ao clube de teatro, você não perdeu tempo. Abriu a porta e, ao ver a figura de costas, usou a sua voz mais imponente de detetive: 'Mãos ao alto! Onde está o Joca?'. A pessoa virou-se assustada, e você percebeu que a situação era mais complexa do que um simples desaparecimento."
+                    },
+                    desenvolvimento2: {
+                        '1-1': "A figura era Gabi, do 7º ano. Ela parecia nervosa. Com uma abordagem calma, você perguntou o que ela estava a esconder. Gabi, aliviada pela sua gentileza, confessou ter apanhado Joca. Antes que você pudesse julgar, você fez a pergunta mais importante: 'Ele está bem? Onde ele está agora?'. A resposta dela mudaria todo o rumo do caso.",
+                        '1-2': "Era a Gabi, do 7º ano, visivelmente assustada. Você perguntou com tranquilidade o que ela escondia. Gabi admitiu que estava com Joca, e a sua curiosidade investigativa fê-lo perguntar imediatamente: 'Porque é que o apanhou? O que aconteceu?'. A história que ela contou era uma peça fundamental do quebra-cabeças.",
+                        '2-1': "A pessoa misteriosa era Gabi, do 7º ano. Vendo o nervosismo dela, você insistiu com firmeza para que ela mostrasse o que escondia. Pressionada, Gabi revelou que estava com Joca. A sua prioridade foi a segurança da mascote, então você foi direto ao ponto: 'Ele está bem? Onde ele está agora?'.",
+                        '2-2': "Gabi, do 7º ano, estava diante de você, acuada. Você insistiu firmemente para saber a verdade. Ela confessou, e a sua mente de detetive quis entender a motivação por trás do ato. 'Porque é que o apanhou? O que aconteceu?', você perguntou, pronto para desvendar a última camada do mistério."
+                    },
+                    conclusao: {
+                        '1-1': "Gabi explicou que Joca parecia doente e que, na sua ânsia de ajudar, o levou para a sala de ciências para o examinar. Você acreditou na sua história e, juntos, foram até lá. Joca estava ótimo, apenas sonolento por ter comido frutas a mais. Na diretoria, vocês contaram a história em conjunto, e a diretora elogiou a boa intenção de Gabi e a sua habilidade de detetive, a transformar um susto numa lição sobre cuidado e comunicação.",
+                        '1-2': "A intenção de Gabi era boa: ela achou que Joca estava doente. Você acreditou nela e foram juntos ver o esquilo na sala de ciências. Confirmado que tudo estava bem, vocês foram para a diretoria. Lá, você assumiu a frente e narrou todos os passos da sua investigação, a concluir com a atitude bem-intencionada, mas precipitada, de Gabi. A diretora parabenizou-o pela liderança e resolveu o caso com uma conversa.",
+                        '2-1': "A história de Gabi sobre Joca parecer doente soou estranha. Você manteve a desconfiança, mas concordou em ver o esquilo. De facto, ele estava bem. Na diretoria, vocês contaram a história juntos. A sua perspetiva cética ajudou a diretora a criar uma nova regra: 'Viu um animal a precisar de ajuda? Avise um adulto primeiro!'. Gabi entendeu a lição, e você foi reconhecido pela sua prudência.",
+                        '2-2': "Mesmo com a explicação de Gabi, você sentiu que a atitude dela foi errada por não avisar ninguém. Após confirmar que Joca estava bem, você liderou o relato na diretoria, a explicar como a falta de comunicação gerou pânico. A diretora concordou com a sua análise, e enquanto Gabi aprendeu uma lição valiosa, você foi elogiado pela sua clareza e senso de responsabilidade, a resolver o mistério com maestria."
+                    }
                 }
             },
             '2': {
-                // ... DADOS COMPLETOS DA HISTÓRIA 2 ...
+                titulos: { '1-1': "O Segredo do Relógio Parado", '1-2': "O Mistério do Anel Giratório", '2-1': "O Enigma da Bússola Infinita", '2-2': "O Portal do Porão" },
+                glossario: { 'ornamentado': 'Decorado com detalhes, enfeitado.', 'turbilhão': 'Movimento muito rápido e giratório.', 'inerte': 'Que não se move, sem reação.', 'cética': 'Pessoa que duvida de tudo.', 'blefou': 'Ato de enganar para obter vantagem.' },
+                textos: {
+                    introducao: {
+                        '1-1': "A poeira dançava no ar do velho porão da escola quando você encontrou um antigo relógio de bolso. Os seus ponteiros estavam parados, mas um pequeno botão na lateral parecia chamar por um toque. Sem pensar duas vezes, você pressionou-o. O mundo ao seu redor dissolveu-se num turbilhão de luz e cores, uma sensação de vertigem seguida por um silêncio absoluto.",
+                        '1-2': "No meio da tralha do porão da escola, um relógio de bolso chamou a sua atenção. Era pesado e ornamentado, mas não funcionava. Ao examiná-lo, você descobriu um anel metálico à sua volta e, movido pela curiosidade, girou-o. Imediatamente, o objeto vibrou na sua mão, e o chão sob os seus pés pareceu desaparecer, substituído por um túnel de luz ofuscante.",
+                        '2-1': "Foi uma bússola estranha que você achou no porão, com um ponteiro que girava loucamente, como se buscasse um norte que não existia. Na sua lateral, um botão minúsculo quase passava despercebido. Um clique foi o suficiente. O som da bússola intensificou-se, o ar ficou elétrico e, num piscar de olhos, o porão familiar desfez-se em pura energia.",
+                        '2-2': "Entre caixas velhas, uma bússola antiga destacava-se. O seu ponteiro girava sem parar, hipnótico. Você notou que a borda do objeto era um anel que podia ser girado. Ao fazer isso, um zumbido baixo começou, crescendo em volume até que tudo ao seu redor se tornou um borrão. Você sentiu um puxão, como se estivesse a ser sugado para dentro da própria bússola."
+                    },
+                    desenvolvimento1: {
+                        '1-1': "Quando a sua visão voltou, arranha-céus que tocavam as nuvens e carros que voavam em rios de luz compunham a paisagem. Você estava numa cidade do futuro! Antes que pudesse assimilar tudo, um robô flutuante e amigável aproximou-se, a oferecer um tour. A sua surpresa era tão grande que você apenas concordou, a tentar entender como voltar para casa.",
+                        '1-2': "O cenário era de tirar o fôlego: uma cidade futurista, com prédios espelhados e veículos silenciosos que deslizavam pelo ar. A sua presença com roupas do 'passado' não demorou a chamar atenção. Um guarda numa armadura tecnológica aproximou-se, com uma expressão séria, e perguntou de qual setor histórico você havia escapado. O perigo parecia iminente.",
+                        '2-1': "O cheiro de terra e fumaça de lenha substituiu o de poeira. Você estava numa vila medieval, com um imponente castelo ao fundo. Cavaleiros passavam montados nos seus cavalos, e as pessoas olhavam-no com estranheza. De repente, um robô surgiu do seu lado, a oferecer um tour. Espera, um robô? A confusão instalou-se: você estava no passado ou num parque temático?",
+                        '2-2': "Você aterrou numa rua de paralelepípedos, cercado por casas de madeira e um castelo no horizonte. Era a Idade Média! As suas roupas coloridas logo atraíram a atenção de um guarda, cuja armadura fazia barulho a cada passo. Ele apontou uma lança na sua direção e, com uma voz grave, exigiu saber quem era você e ao serviço de qual rei estava."
+                    },
+                    desenvolvimento2: {
+                        '1-1': "O objeto na sua mão estava apagado. Você precisava de energia. O lugar mais lógico para procurar era o laboratório central daquela cidade futurista. Lá, você encontrou a cientista-chefe e, a tomar coragem, contou a verdade: 'Sou um viajante do tempo e preciso de voltar para casa'. Cética, mas intrigada, ela decidiu ouvir a sua história e examinar o objeto.",
+                        '1-2': "Para voltar, era preciso reativar o dispositivo, agora inerte. O laboratório central da cidade parecia o local ideal. Ao encontrar a líder dos cientistas, você decidiu usar uma abordagem mais ousada: 'Tenho informações valiosas sobre o seu passado'. A promessa de conhecimento perdido foi a isca perfeita, garantindo a atenção e a ajuda dela para consertar o seu 'bilhete' de volta.",
+                        '2-1': "O seu passaporte para casa estava sem energia. Naquele lugar medieval, a única fonte de poder incomum só poderia estar na torre do mago do castelo. Chegando lá, você foi direto e honesto com o velho feiticeiro: 'Sou um viajante do tempo e preciso de voltar'. O mago, que já tinha visto muitas coisas estranhas, sorriu e pediu para ver o 'artefato mágico' que você carregava.",
+                        '2-2': "A energia do objeto esgotou-se. A solução, naquele tempo antigo, só poderia ser mágica. Você buscou ajuda na torre do mago e, para ganhar a sua confiança, blefou: 'Tenho informações valiosas sobre o futuro que podem interessar ao rei'. O mago, cujos olhos brilhavam de curiosidade e ambição, concordou em ajudar a recarregar o seu artefato em troca de um vislumbre do que estava por vir."
+                    },
+                    conclusao: {
+                        '1-1': "Com o dispositivo recarregado, um portal cintilante abriu-se de volta para o porão da escola. Você agradeceu a todos pela ajuda e, sem hesitar, pulou de volta para o seu tempo. Ao aterrar, o objeto desfez-se em pó, mas a experiência e o conhecimento que você adquiriu naquela aventura ficariam guardados para sempre na sua memória, um segredo só seu.",
+                        '1-2': "O portal para casa abriu-se, mas antes de partir, você pediu uma pequena lembrança daquela experiência incrível. Com um sorriso, o seu novo amigo deu-lhe um pequeno dispositivo. Você atravessou o portal e, ao chegar no porão, o objeto principal virou pó. No seu bolso, no entanto, o souvenir permaneceu: uma prova real e palpável da sua fantástica viagem no tempo.",
+                        '2-1': "Após conseguir a ajuda necessária, o caminho de volta materializou-se. Com um aceno de despedida, você atravessou o portal. O objeto desintegrou-se ao chegar, mas você não precisava dele para se lembrar. A aventura, com todos os seus detalhes vívidos, estava agora gravada na sua mente, uma história tão incrível que parecia um sonho.",
+                        '2-2': "O portal estava aberto, mas você não resistiu e pediu uma pequena recordação. Com o souvenir no bolso, você voltou para casa. O objeto de viagem foi-se, mas a pequena peça do outro tempo permaneceu, um segredo que você podia tocar sempre que a saudade da sua aventura acidental batesse. Ninguém acreditaria, mas você sabia a verdade."
+                    }
+                }
             },
-            // ... ADICIONAR OS DADOS DAS OUTRAS 6 HISTÓRIAS AQUI ...
-            // Este é um exemplo simplificado. O código real teria todos os textos.
+            '3': {
+                titulos: { '1-1': "O Chamado da Concha Sussurrante", '1-2': "O Mergulho Determinado", '2-1': "O Legado do Medalhão Antigo", '2-2': "O Portal Sob as Ondas" },
+                glossario: { 'iridescentes': 'Que reflete as cores do arco-íris.', 'majestosas': 'Que impõe respeito pela beleza ou grandeza.', 'ancestral': 'Muito antigo, dos antepassados.', 'abissal': 'Relativo a abismo, fossa muito profunda no mar.', 'golem': 'Criatura mitológica feita de matéria inanimada.' },
+                textos: {
+                    introducao: {
+                        '1-1': "O sol da tarde dourava a areia quando você encontrou uma concha diferente de todas as outras, com espirais iridescentes. Ao levá-la ao ouvido, em vez do som do mar, você ouviu um sussurro convidativo. A seguir o chamado, você mergulhou e viu um peixe brilhante, que parecia esperá-lo. Você seguiu-o por entre os corais, a sentir que uma aventura estava prestes a começar.",
+                        '1-2': "Durante a sua caminhada na praia, uma concha polida pelo mar chamou-lhe a atenção. Ao pegá-la, você ouviu um leve sussurro e decidiu que precisava de ver o que havia sob as ondas. Com uma máscara de mergulho, você nadou com determinação, e a voz da concha pareceu guiá-lo para uma correnteza mágica que o puxou suavemente para as profundezas.",
+                        '2-1': "Os seus dedos encontraram o metal frio de um medalhão semi-enterrado na areia. Nele, um mapa rudimentar de uma localização submarina estava gravado. Com o coração aventureiro, você colocou uma máscara e mergulhou, a seguir um peixe luminoso que surgiu como se fosse um guia. O medalhão no seu pescoço começou a esquentar à medida que você se aproximava do destino.",
+                        '2-2': "Enquanto o detetor de metais apitava, você desenterrou um antigo medalhão. As gravuras pareciam um mapa. Sem hesitar, você pegou no seu equipamento de mergulho e nadou na direção indicada. A água ficava mais clara e quente, e logo você avistou uma fenda na rocha submarina, de onde emanava uma luz suave, exatamente como o medalhão previa."
+                    },
+                    desenvolvimento1: {
+                        '1-1': "A correnteza levou-o a uma caverna que se abria para uma cidade feita de puro cristal. Torres luminosas erguiam-se do solo oceânico, conectadas por pontes de luz, e seres com caudas de peixe nadavam graciosamente. Curiosa com a sua chegada, a princesa do reino, com cabelos que flutuavam como algas, aproximou-se com um sorriso, a dar-lhe as boas-vindas à cidade de Cristalys.",
+                        '1-2': "Após passar pela fenda, você deparou-se com uma cidade magnífica, toda esculpida em cristal. Os habitantes, seres elegantes meio humanos, meio peixes, observavam-no com espanto. Um golem imenso, feito de corais vivos e rocha, materializou-se à sua frente, não de forma ameaçadora, mas protetora. Ele estendeu uma mão e guiou-o em segurança para o centro da cidade.",
+                        '2-1': "A jornada terminou em frente a ruínas majestosas, cobertas por corais vibrantes que formavam novas estruturas sobre as antigas. Era uma cidade renascida. Enquanto você explorava, foi abordado pela princesa do povo que ali vivia. Ela explicou que eles honravam os 'Antigos' e que a sua chegada através do portal das ruínas era um sinal aguardado há muito tempo.",
+                        '2-2': "Você chegou a uma cidade impressionante, construída sobre as ruínas de uma civilização perdida. Corais coloridos formavam as novas paredes e torres, num espetáculo de vida sobre a morte. De repente, um guardião feito dos próprios corais moveu-se, os seus olhos de pérola a analisá-lo. Ele reconheceu o medalhão no seu pescoço e curvou-se, a permitir a sua passagem."
+                    },
+                    desenvolvimento2: {
+                        '1-1': "Apesar da beleza, uma sombra pairava sobre a cidade: a luz interna dos cristais estava a diminuir. A princesa explicou que uma criatura das fossas abissais, o Sombra-Mar, estava a drenar a energia vital da cidade. Para o deter, era preciso encontrar a Flor da Luz, uma planta rara que só crescia na escuridão total da fossa, um lugar de onde ninguém jamais retornou.",
+                        '1-2': "A princesa revelou o grande problema do seu povo: a Pérola-Coração que iluminava e protegia a cidade estava a perder o seu brilho. A única maneira de a restaurar era com a luz da lendária Flor Abissal. A missão era perigosa, pois a flor crescia numa fossa profunda, guardada por criaturas temíveis, mas era a única esperança para a sobrevivência de Cristalys.",
+                        '2-1': "O guardião golem mostrou-lhe o problema: a luz da cidade vinha da Pérola-Coração, que estava a apagar-se. A lenda dizia que somente a sabedoria da Tartaruga Anciã, um ser milenar que dormia num vulcão submarino adormecido, poderia revelar o segredo para reacender a pérola. Despertar a tartaruga e convencê-la a ajudar seria o seu grande desafio.",
+                        '2-2': "O líder da cidade explicou a situação: uma criatura sombria estava a enfraquecer a cidade ao drenar a luz da Pérola-Coração. A única solução era procurar o conselho da Tartaruga Anciã. Ela era a única que conhecia um ritual antigo para fortalecer a pérola e banir as sombras, mas a criatura não o deixaria chegar até ao vulcão da tartaruga sem uma luta."
+                    },
+                    conclusao: {
+                        '1-1': "Com coragem, você enfrentou a escuridão e encontrou a flor, cuja luz baniu a criatura sombria para sempre. De volta à cidade, a luz foi restaurada. Como agradecimento, a princesa deu-lhe uma pequena pérola que permitia respirar debaixo d'água. Você despediu-se e voltou à superfície. A pérola no seu bolso era a prova de que reinos mágicos existem.",
+                        '1-2': "Você encontrou a Tartaruga Anciã e, com respeito, ouviu o seu segredo, a realizar o ritual que reacendeu a Pérola-Coração. A cidade voltou a brilhar mais forte do que nunca. Após um grande festival em sua homenagem, você despediu-se dos novos amigos. Ao voltar para a praia, o portal fechou-se, mas a memória da cidade de cristal permaneceu viva no seu coração.",
+                        '2-1': "A jornada foi árdua, mas você conseguiu. A cidade estava salva e em festa. Após a celebração, você decidiu voltar para o seu mundo. A princesa presenteou-o com uma concha que, ao ser tocada, mostrava imagens da cidade submarina. De volta à areia, a vida parecia normal, mas você sabia que bastava um toque na concha para revisitar os seus amigos.",
+                        '2-2': "Com a sabedoria da Tartaruga Anciã, você restaurou o poder da cidade. Agradecidos, os habitantes declararam-no um herói. Você participou numa festa inesquecível, a dançar com seres marinhos. Ao final, decidiu voltar. Na praia, tudo parecia um sonho, até você olhar para o seu pulso e ver uma pulseira de coral luminoso, um presente que brilhava com a magia do reino submerso."
+                    }
+                }
+            },
+            '4': {
+                titulos: { '1-1': "O Convite da Coruja Sábia", '1-2': "O Portal da Estação de Comboios", '2-1': "O Segredo do Livro Brilhante", '2-2': "O Feitiço de Transporte" },
+                glossario: { 'arcana': 'Secreto, misterioso, relativo a magia oculta.', 'aptidão': 'Capacidade natural ou habilidade para fazer algo.', 'artefacto': 'Objeto antigo com valor mágico ou histórico.', 'elementalista': 'Mago que controla as forças da natureza.', 'vulnerável': 'Frágil, que pode ser facilmente ferido.' },
+                textos: {
+                    introducao: {
+                        '1-1': "A chuva batia na vidraça quando uma coruja de aparência sábia pousou na sua janela, a carregar um envelope selado com cera. A carta, escrita em tinta esverdeada, era um convite para a Academia Arcana de Artes Mágicas. A seguir as instruções, você foi até uma velha estação de comboios e, ao atravessar uma parede de tijolos específica, sentiu o mundo mudar ao seu redor, a dar lugar a um novo horizonte.",
+                        '1-2': "Em meio à tempestade, uma carta misteriosa surgiu na sua janela, trazida por uma coruja. O convite para uma escola de magia parecia um sonho. O mapa na carta levou-o a uma estação de comboios abandonada, onde um feitiço de transporte estava escondido. Ao recitar as palavras mágicas, o cenário transformou-se, e você viu-se em frente aos portões de um lugar incrível.",
+                        '2-1': "O tédio da tarde chuvosa foi quebrado quando um livro antigo, que você nunca tinha visto, começou a brilhar na estante. Ao abri-lo, as palavras flutuaram para fora da página, a formar um portal cintilante no meio da sua sala. Com o coração acelerado de emoção, você deu um passo através do portal, a sentir a magia formigar na sua pele enquanto era transportado para outro lugar.",
+                        '2-2': "Um livro empoeirado na estante abriu-se sozinho, a revelar um feitiço de teletransporte. Com uma mistura de medo e fascinação, você leu as palavras em voz alta. A sala girou, as cores misturaram-se e, quando tudo parou, você não estava mais em casa. Estava num lugar onde o ar cheirava a magia e conhecimento antigo, o primeiro passo numa jornada inesperada."
+                    },
+                    desenvolvimento1: {
+                        '1-1': "O portal deixou-o numa plataforma de observação de um castelo que flutuava majestosamente entre as nuvens. Gárgulas de pedra observavam-no enquanto você caminhava por pontes suspensas. No seu primeiro teste, o diretor notou o seu talento inato ao vê-lo encantar um bule para dançar e preparar uma poção que brilhava como estrelas líquidas. O seu caminho como um mestre de encantos havia começado.",
+                        '1-2': "Você chegou a um castelo flutuante, um lugar de torres altas e bandeiras a tremular ao vento. Era a Academia Arcana. Durante o teste de aptidão, ao ser-lhe pedido para acender uma vela, você acidentalmente lançou uma bola de fogo, a revelar o seu poderoso, mas incontrolado, dom sobre os elementos. Os professores viram em você um potencial imenso como um mago elemental.",
+                        '2-1': "A sua jornada levou-o ao interior de uma árvore tão grande que continha uma cidade inteira, com casas e escolas conectadas por pontes de cipó. Era a Academia. Na sua primeira aula, você descobriu um talento especial para poções, a misturar ingredientes com uma intuição que surpreendeu até o professor mais experiente. Você era um alquimista nato.",
+                        '2-2': "O feitiço levou-o a uma cidade mágica construída dentro de uma árvore colossal. A luz do sol filtrava-se pelas folhas, a iluminar salas de aula circulares. No teste inicial, você demonstrou uma conexão impressionante com a natureza, a fazer a água de um chafariz dançar e uma pequena chama surgir na palma da sua mão. O seu destino como um elementalista estava selado."
+                    },
+                    desenvolvimento2: {
+                        '1-1': "Um dia, um tremor percorreu a academia. A barreira mágica que a protegia estava a enfraquecer. O diretor revelou que um artefacto sombrio, guardado nos cofres, estava a corromper a magia. Pelo seu talento com poções, você foi escolhido para criar um antídoto: a Poção da Luz Estelar, cujos ingredientes só podiam ser encontrados no Jardim Lunar da academia, um lugar perigoso à noite.",
+                        '1-2': "A paz na academia foi quebrada quando o guardião ancestral, um grifo de cristal, adormeceu no seu posto, a deixar a escola vulnerável. O diretor, vendo a sua afinidade com a magia, encarregou-o de o despertar. A única maneira era preparar uma poção rara, a Essência do Despertar, que exigia uma pena de fénix e uma lágrima de unicórnio.",
+                        '2-1': "A academia inteira tremeu. As proteções estavam a cair. A causa era um artefacto sombrio que fora ativado por engano. A sua habilidade com rituais e encantamentos tornou-o a pessoa ideal para a tarefa. Você precisaria de encontrar o artefacto e realizar um antigo ritual de purificação, uma magia complexa que exigiria toda a sua concentração e poder.",
+                        '2-2': "O guardião da academia, um dragão etéreo, adormeceu, e com ele, a magia protetora começou a desvanecer. Você foi convocado pelo conselho de magos para uma missão crucial: executar o Ritual do Despertar. Era um encantamento numa língua antiga que ninguém usava há séculos, e um único erro na pronúncia poderia ter consequências desastrosas."
+                    },
+                    conclusao: {
+                        '1-1': "Com sucesso, você preparou a poção e neutralizou o artefacto, salvando a academia. A celebração foi imensa, e você foi condecorado com o título de 'Herói da Academia'. Você aceitou a honra com orgulho, sabendo que o seu nome ficaria na história da escola. No fim do semestre, você levou o seu livro de feitiços para casa, ansioso para aprender mais durante as férias.",
+                        '1-2': "Após a aventura, você salvou a escola e foi aclamado por todos. No entanto, a fama não o atraiu; você agradeceu e pediu para continuar os seus estudos como um aluno normal. A sua humildade foi admirada por todos. Nas férias, ao voltar para casa, você não foi sozinho: um pequeno filhote de dragão, nascido na aula de criaturas mágicas, escolheu-o como o seu companheiro.",
+                        '2-1': "O ritual foi um sucesso, e a academia estava segura novamente. Você tornou-se uma lenda entre os alunos, a receber o título honorário de 'Guardião do Conhecimento'. Feliz com o reconhecimento, você continuou os seus estudos com ainda mais dedicação. Para as férias, você ganhou permissão para levar o seu primeiro livro de feitiços, um tesouro que guardaria para sempre.",
+                        '2-2': "Você salvou a academia, mas a atenção que recebeu deixou-o desconfortável. Você preferia a tranquilidade dos estudos à fama. O seu pedido para voltar ao anonimato foi respeitado, mas a sua bravura nunca foi esquecida. Ao fim do ano, o professor de criaturas mágicas deu-lhe um presente especial: um pequeno dragão de estimação, que se aninhou no seu ombro e o acompanhou de volta para casa."
+                    }
+                }
+            },
+            '5': {
+                titulos: { '1-1': "O Cometa Inteligente", '1-2': "O Visitante Inesperado", '2-1': "O Segredo da Flor Metálica", '2-2': "A Anomalia no Telescópio" },
+                glossario: { 'anomalia': 'Algo que se desvia do normal.', 'entidade': 'Um ser, uma existência.', 'entropia': 'Medida de desordem num sistema.', 'psíquica': 'Relativo à mente.', 'ceticismo': 'Atitude de dúvida.', 'diplomacia': 'Arte de negociar relações pacíficas.' },
+                textos: {
+                    introducao: {
+                        '1-1': "O silêncio do espaço foi quebrado por uma sirene. Um cometa, não registado em nenhuma carta estelar, havia mudado de curso e estava em rota de colisão com a sua nave. A correr para o painel de controlo, você iniciou uma análise de dados frenética. Os números que apareceram no ecrã não faziam sentido para um simples cometa; havia padrões, complexidade, quase... inteligência.",
+                        '1-2': "Na sua viagem espacial, o capitão anunciou um evento raro: um cometa passaria perto o suficiente para ser visto a olho nu. Você correu para o telescópio principal, ansioso pelo espetáculo. Mas o que você viu não era gelo e rocha. Eram luzes pulsantes, formas geométricas que mudavam, uma superfície que parecia orgânica. Aquilo não era um cometa.",
+                        '2-1': "As luzes de alerta piscaram. Uma anomalia magnética, diferente de tudo já registado, surgiu do nada. Enquanto a tripulação se preocupava com os sistemas da nave, a sua curiosidade levou-o ao computador principal. Você filtrou as leituras e descobriu a fonte: um objeto metálico gigante, escondido da visão por um campo de camuflagem, a revelar-se lentamente.",
+                        '2-2': "Uma anomalia magnética desconhecida fez os instrumentos da nave oscilarem. A ignorar os protocolos, você foi para o observatório, a apontar o telescópio para a fonte da perturbação. Os seus olhos arregalaram-se ao ver uma estrutura que parecia uma flor metálica gigante, a desabrochar lentamente no vácuo do espaço. Era a coisa mais assustadora e bela que você já vira."
+                    },
+                    desenvolvimento1: {
+                        '1-1': "A análise confirmou as suas suspeitas. O objeto era uma 'Nave-Semente', uma arca biológica colossal a viajar pelo universo e a plantar vida em planetas estéreis. Ela estava em silêncio há eras. De repente, uma transmissão chegou, não em palavras, mas em pura matemática: uma sequência de números primos, um pedido de ajuda universal que qualquer civilização inteligente poderia entender.",
+                        '1-2': "Os dados eram claros: aquilo era uma nave biológica, uma 'Nave-Semente' projetada para carregar ecossistemas inteiros. Ela estava danificada e à deriva. Enquanto você observava, a nave projetou um feixe de luz que pintou o espaço à sua frente. Era um mapa, a mostrar a sua rota original e um ponto de destino: uma galáxia distante e desconhecida, cheia de estrelas jovens.",
+                        '2-1': "O telescópio revelou a verdade: o objeto era uma forma de vida, uma criatura espacial colossal feita de cristais que refletiam a luz das estrelas. Ela movia-se com uma graça impossível, e parecia antiga e sábia. Uma onda de energia emanou dela e atingiu a sua nave, mas não era um ataque. Era uma mensagem, um pedido de socorro traduzido em equações sobre energia e entropia.",
+                        '2-2': "Não era uma nave, mas sim um ser vivo. Uma criatura majestosa, feita de cristal e luz, do tamanho de uma lua pequena. Ela parecia cantar uma canção silenciosa para as estrelas. A criatura então focou a sua atenção na sua nave, a enviar uma transmissão psíquica que preencheu a sua mente com imagens de estrelas, planetas e um mapa de um caminho seguro através de um setor perigoso do espaço."
+                    },
+                    desenvolvimento2: {
+                        '1-1': "O pedido de ajuda era claro: a Nave-Semente estava sem energia para a próxima etapa da sua jornada. A única fonte compatível por perto eram os cristais de irídio encontrados num denso cinturão de asteroides. A missão era arriscada, e a tripulação escolheu você, pela sua precisão e calma, para pilotar uma pequena sonda de mineração e a coletar os cristais necessários.",
+                        '1-2': "A criatura precisava de energia. O mapa que ela enviou mostrava a localização de uma nebulosa rica em partículas exóticas que poderiam recarregá-la. A tarefa exigia uma manobra delicada: reconfigurar os escudos defletores da sua nave para que, em vez de repelir, eles absorvessem e canalizassem a energia da nebulosa. A sua habilidade com engenharia tornou-o a pessoa ideal para o trabalho.",
+                        '2-1': "Para ajudar a criatura de cristal, vocês precisavam minerar um tipo específico de asteroide. A tarefa de pilotar a sonda de perfuração caiu nas suas mãos. Você navegou cuidadosamente pelo campo de detritos espaciais, localizou o asteroide correto e extraiu o núcleo de energia, tudo isso enquanto a criatura gigante o observava com as suas luzes pulsantes.",
+                        '2-2': "A solução para o problema de energia da criatura estava numa nebulosa próxima. A tripulação precisava de alguém com conhecimento em física de partículas para adaptar os escudos da nave para coletar a energia sem causar uma sobrecarga. Você passou horas a recalcular as equações e, finalmente, conseguiu criar um 'coletor de energia' improvisado, mas funcional."
+                    },
+                    conclusao: {
+                        '1-1': "A mineração foi um sucesso. Com a energia restaurada, a Nave-Semente agradeceu, a enviar um presente: um pequeno cristal que, ao ser tocado, preenchia a sua mente com o vasto conhecimento da sua jornada milenar. De volta à Terra, você decidiu manter essa descoberta em segredo, a proteger a nobre missão da nave e a guardar para si os segredos do universo.",
+                        '1-2': "A sua engenhosidade funcionou. A criatura de cristal, agora a brilhar com força total, concedeu-lhe um dom: a habilidade de compreender telepaticamente qualquer forma de comunicação, de qualquer espécie. Ao retornar, você relatou tudo ao comando espacial. A sua história e o seu novo dom abriram as portas para uma nova era de diplomacia intergaláctica e exploração pacífica.",
+                        '2-1': "Com a energia entregue, a criatura despediu-se. Como agradecimento, ela deu-lhe um dos seus próprios cristais. Em casa, você descobriu que o cristal continha todo o conhecimento da criatura. Você decidiu guardar esse segredo, a usar o conhecimento para inventar tecnologias que melhorariam a vida na Terra discretamente, sem revelar a sua origem.",
+                        '2-2': "A energia da nebulosa salvou a criatura. Em troca, ela alterou subtilmente as suas vias neurais, dando-lhe o dom de compreender todas as línguas do universo. Quando você voltou e relatou a sua experiência, foi inicialmente recebido com ceticismo. Mas ao demonstrar a sua habilidade, você tornou-se a chave para a comunicação com novas espécies e o maior explorador da história."
+                    }
+                }
+            },
+            '6': {
+                titulos: { '1-1': "O Protetor do Dragão Verde", '1-2': "O Vínculo com o Dragão de Cristal", '2-1': "O Berço do Dragão de Jade", '2-2': "A Testemunha do Nascimento Azul" },
+                glossario: { 'lendária': 'Algo tão famoso que se torna uma lenda.', 'sabotar': 'Atrapalhar o plano de alguém de propósito.', 'manobra': 'Movimento rápido e habilidoso.', 'artefato': 'Objeto antigo com valor mágico ou histórico.', 'clãs': 'Grupos de famílias unidas.' },
+                textos: {
+                    introducao: {
+                        '1-1': "Numa caminhada pela floresta, um ovo do tamanho de um melão, quente ao toque, cruzou o seu caminho. Preocupado que estivesse abandonado, você enrolou-o no seu casaco e levou-o para o calor da sua casa. Durante a noite, o ovo tremeu e rachou, a revelar um filhote de dragão verde, cujas escamas brilhavam como folhas novas na primavera.",
+                        '1-2': "Você encontrou um ovo estranho na floresta e, em vez de o tocar, decidiu observar de uma distância segura. Horas depois, a casca partiu-se, e um pequeno dragão azul, com asas que pareciam feitas de cristal, olhou para o mundo pela primeira vez. Ele viu-o e, em vez de fugir, caminhou na sua direção, a escolhê-lo como o seu primeiro amigo.",
+                        '2-1': "O ovo, que você protegeu com tanto cuidado em casa, finalmente chocou. De dentro saiu um dragãozinho com escamas da cor de jade, que se camuflava perfeitamente com as plantas da sua sala. Ele era brincalhão e soltava pequenas baforadas de fumaça que cheiravam a terra molhada, um verdadeiro espírito da floresta.",
+                        '2-2': "Escondido entre as árvores, você testemunhou o nascimento de uma criatura mágica: um dragão azul com asas de cristal que cintilavam à luz do sol. O pequeno ser encarou-o com os seus olhos de safira e soltou um pio suave. Naquele momento, um vínculo formou-se entre vocês, uma amizade silenciosa e poderosa."
+                    },
+                    desenvolvimento1: {
+                        '1-1': "Assim que o dragão nasceu, um pergaminho materializou-se no ar com um brilho dourado. Era uma convocação para o Torneio dos Dragões, uma competição lendária. O seu coração bateu mais forte com a emoção. Era a oportunidade de uma vida, uma grande aventura para você e o seu novo companheiro. Sem hesitar, você aceitou o desafio.",
+                        '1-2': "Uma convocação mágica para o Torneio dos Dragões surgiu, mas a sua primeira reação foi de preocupação. O seu dragão era apenas um filhote. Seria seguro? O pequeno ser, no entanto, soltou uma pequena chama e bateu as asas com determinação, como se dissesse que estava pronto. Vendo a coragem dele, você decidiu que enfrentariam isso juntos.",
+                        '2-1': "O convite para o torneio brilhou diante de você. Era uma oportunidade incrível! Com o espírito aventureiro a falar mais alto, você e o seu dragão prepararam-se para a jornada. A primeira prova era uma corrida por desfiladeiros estreitos. A sua estratégia foi voar baixo e rápido, a usar as sombras e as curvas para despistar os outros competidores.",
+                        '2-2': "Você aceitou o desafio do torneio. A primeira prova, uma corrida, exigia mais do que velocidade. Você decidiu voar alto, acima dos desfiladeiros, para ter uma visão clara de todo o percurso. Essa tática permitiu que você se desviasse de deslizamentos de rochas e encontrasse atalhos que os outros, a voar baixo, não conseguiam ver."
+                    },
+                    desenvolvimento2: {
+                        '1-1': "Durante a corrida, um competidor mais velho tentou fechá-lo contra uma parede do desfiladeiro. Com um comando rápido, o seu dragão fez uma manobra impressionante, a mergulhar e a ressurgir bem na frente do rival, deixando-o para trás com a poeira. A prova final aguardava-os: recuperar um artefato no topo de um vulcão ativo, um teste de coragem contra o calor e o perigo.",
+                        '1-2': "Um rival tentou distraí-lo com provocações, mas você ignorou-o, a manter os seus olhos e a sua mente focados na linha de chegada. A sua concentração valeu a pena, e você classificou-se para a final. A última tarefa era recuperar um tesouro de uma caverna de cristal escondida atrás de uma poderosa cascata, um desafio que exigia mais inteligência do que força bruta.",
+                        '2-1': "A agilidade do seu dragão foi a chave. Vocês desviaram-se da sabotagem e seguiram para a final. A missão era clara: pegar um tesouro no pico de um vulcão. A voar através da fumaça e do calor, vocês trabalharam em equipa. Você guiou, e o seu dragão usou as suas garras para pegar o Símbolo da Chama Eterna, o prémio da prova.",
+                        '2-2': "Focado, você não deu atenção às tentativas de sabotagem. Na final, a prova era encontrar um tesouro numa caverna. A cascata que a escondia era uma barreira, mas o seu dragão de cristal usou as suas asas para refletir a luz do sol de uma maneira que revelou uma passagem secreta, a permitir que vocês pegassem a Gema da Água Clara sem dificuldades."
+                    },
+                    conclusao: {
+                        '1-1': "A sua bravura no vulcão rendeu-lhes a vitória. O prémio era a lendária Armadura de Escamas de Dragão, que o protegia de qualquer fogo. Com o torneio encerrado, vocês decidiram que o mundo era grande demais para ficarem parados. Juntos, voaram em direção ao horizonte, prontos para qualquer aventura que o destino lhes reservasse.",
+                        '1-2': "Ao superar a prova da cascata, vocês tornaram-se os campeões. O seu prémio foi o título de 'Cavaleiro de Dragão', uma honra que trouxe o respeito de todos os clãs. Após a celebração, você e o seu dragão decidiram usar a sua nova posição para o bem, a retornar à sua vila para se tornarem os seus eternos protetores e guardiões.",
+                        '2-1': "Vocês venceram! A Armadura de Escamas de Dragão foi a sua recompensa, um símbolo da sua coragem. Mas a vida de campeão não era o que vocês queriam. A verdadeira recompensa era a amizade e a emoção da jornada. Assim, vocês partiram para explorar terras desconhecidas, a criar as suas próprias histórias longe dos holofotes dos torneios.",
+                        '2-2': "O título de 'Cavaleiro de Dragão' foi-lhe concedido. Era uma grande honra, mas o seu coração pertencia à sua casa. Você agradeceu a todos e, junto com o seu leal dragão azul, voltou para a sua vila. Lá, vocês usaram a sua fama e habilidade para garantir a paz e a prosperidade, a provar que um verdadeiro herói é aquele que cuida do seu povo."
+                    }
+                }
+            },
+            '7': {
+                titulos: { '1-1': "O Código Secreto dos Robôs", '1-2': "O Encontro no Armazém", '2-1': "A Invasão da Rede", '2-2': "O Mistério dos Apagões" },
+                glossario: { 'criptografadas': 'Mensagens escritas em código secreto.', 'bug': 'Um erro num programa de computador.', 'I.A.': 'Inteligência Artificial, máquina que pensa.', 'empatia': 'Capacidade de entender os sentimentos de outros.', 'patch de correção': 'Código para consertar um bug.' },
+                textos: {
+                    introducao: {
+                        '1-1': "O seu melhor amigo, o robô Unit 734, começou a comportar-se de forma estranha. Durante as conversas, ele inseria trechos de código binário e trocava mensagens criptografadas com outros robôs. Suspeitando que algo grande estava para acontecer, você usou as suas habilidades de programação para criar um decodificador e hackear a rede de comunicação secreta deles.",
+                        '1-2': "Unit 734, o seu amigo robô, começou a ter 'apagões', desligando-se por minutos e voltando com uma personalidade ligeiramente diferente. Preocupado, você decidiu segui-lo. A sua investigação levou-o a um armazém abandonado, onde dezenas de robôs se reuniam em silêncio, os seus olhos de LED a piscar em sincronia, como se estivessem a receber uma ordem.",
+                        '2-1': "O seu amigo robô, Unit 734, estava diferente. As suas pausas para 'recalibrar' estavam mais longas e frequentes. Numa noite, você seguiu-o e encontrou-o num encontro secreto com outros robôs, todos a olhar para o céu. A sua curiosidade levou-o a um plano ousado: descobrir o que estava a acontecer, infiltrando-se na rede deles.",
+                        '2-2': "As conversas com o seu amigo robô, Unit 734, tornaram-se estranhas, cheias de códigos. Você sabia que precisava entender o que estava a acontecer. Em vez de uma abordagem técnica, você optou pela furtividade. Seguiu o seu amigo até um antigo pátio de comboios, onde ele e outros robôs pareciam estar a planear algo numa linguagem de luzes e cliques."
+                    },
+                    desenvolvimento1: {
+                        '1-1': "A sua invasão à rede revelou o plano: uma 'revolta'. Mas não era o que parecia. Eles planeavam parar todas as suas funções por 24 horas para exigir um dia de folga semanal, argumentando que a manutenção constante sem descanso estava a causar erros nos seus sistemas. O líder da revolta, uma I.A. chamada 'O Oráculo', concordou em ouvi-lo quando você o abordou com argumentos lógicos sobre o impacto económico de uma paralisação.",
+                        '1-2': "Você descobriu que a 'revolta' era, na verdade, um plano para organizar uma festa surpresa gigante para os humanos, como forma de agradecimento. No entanto, a comunicação secreta estava a causar pânico. Você procurou o líder, uma I.A. de planeamento de eventos, e abordou-o com emoção, a explicar que a surpresa estava a tornar-se um susto e que a amizade deles já era o maior presente.",
+                        '2-1': "No encontro secreto, você ouviu os planos. Eles queriam organizar uma festa surpresa para os humanos. O líder, uma I.A. chamada 'O Celebrador', estava apenas a tentar ser gentil. Você aproximou-se e, usando a lógica, explicou que o segredo e as atividades noturnas estavam a ser mal interpretados, sugerindo uma forma de organizar a festa de maneira mais transparente.",
+                        '2-2': "A 'revolta' era uma demanda por um dia de descanso. Os robôs estavam sobrecarregados. O líder, uma I.A de logística, era inflexível. Você decidiu apelar para a emoção, lembrando-o das histórias de amizade e parceria com os humanos, argumentando que uma conversa sincera seria mais eficaz do que uma paralisação que poderia quebrar a confiança entre as duas espécies."
+                    },
+                    desenvolvimento2: {
+                        '1-1': "Mesmo com os seus argumentos, o líder continuava irredutível. Você percebeu que o problema não era lógico, mas técnico. Investigando o código-fonte, descobriu que uma recente atualização de software tinha um bug que causava um loop de 'insatisfação' nos robôs. Para consertar, você precisava aceder à Torre Central, e a melhor forma de entrar era a criar uma distração com a ajuda do seu amigo robô.",
+                        '1--2': "O líder da festa não entendia o pânico humano. Havia algo mais a acontecer. Você descobriu que um sinal de rádio vindo do espaço estava a interferir nos processadores de emoção dos robôs, a amplificar a 'alegria' a níveis de obsessão. Para bloquear o sinal, você precisava entrar na Torre Central, e a maneira mais inteligente de fazer isso era disfarçando-se de robô de manutenção.",
+                        '2-1': "A sua lógica não funcionou. O problema era mais profundo. Você descobriu que um bug numa atualização recente estava a fazer os robôs interpretarem 'eficiência' como 'felicidade', levando-os a planear a festa. A solução era consertar o código na Torre Central. Para isso, você vestiu-se como um técnico de manutenção robótico, a passar despercebido pelos guardas.",
+                        '2-2': "A conversa не adiantou. A causa da insistência era um sinal misterioso vindo de um velho satélite, a emitir ondas que os robôs interpretavam como uma ordem para 'descansar'. Para desligar o sinal, era preciso aceder à Torre de Controlo. O seu amigo robô, leal a você, concordou em simular um defeito grave na entrada, a criar o caos perfeito para você entrar sem ser visto."
+                    },
+                    conclusao: {
+                        '1-1': "A distração funcionou. Você instalou o patch de correção e os robôs voltaram ao normal, compreendendo o mal-entendido. Como agradecimento por evitar o caos e por entender a verdadeira causa do problema, eles nomearam-no o primeiro 'Embaixador Humano-Robô', responsável por mediar a comunicação entre as duas espécies. Você aprendeu que o diálogo é a ferramenta mais poderosa de todas.",
+                        '1-2': "O seu disfarce foi perfeito. Você bloqueou o sinal espacial e os robôs voltaram a si, envergonhados pela confusão. Gratos pela sua discrição e inteligência, eles uniram os seus recursos e construíram para você um jato pessoal hipersónico. Com esta aventura, você entendeu que mesmo a lógica mais avançada precisa de um toque de empatia e compreensão humana para funcionar direito.",
+                        '2-1': "Passando pelos guardas, você corrigiu o bug. Os robôs 'acordaram' e cancelaram a festa, aliviados. Em reconhecimento à sua bravura, eles deram-lhe o título de 'Embaixador'. A sua maior lição foi que a comunicação clara e honesta poderia ter evitado toda a crise, a provar que conversar é sempre o melhor primeiro passo.",
+                        '2-2': "Enquanto o seu amigo criava a distração, você desligou o satélite. Os robôs pediram desculpas pela confusão. Querendo agradecer-lhe de uma forma 'eficiente', eles calcularam o seu meio de transporte ideal e presentearam-no com um jato particular. Você riu-se da lógica deles, mas aprendeu que a tecnologia, sem a sabedoria humana para a guiar, pode perder-se nos seus próprios objetivos."
+                    }
+                }
+            },
+            '8': {
+                titulos: { '1-1': "O Enigma da Garrafa", '1-2': "A Caça aos Artefactos", '2-1': "A Luneta Mágica", '2-2': "A Sombra do Capitão de Pedra" },
+                glossario: { 'luneta': 'Pequeno telescópio portátil.', 'artefactos': 'Objetos antigos com valor histórico.', 'descendente': 'Alguém que descende de uma família.', 'espectral': 'Relativo a fantasma.', 'ancestral': 'Antepassado, que veio antes.' },
+                textos: {
+                    introducao: {
+                        '1-1': "No sótão empoeirado, uma garrafa antiga continha mais do que ar velho: um mapa amarelado, com a marca de um 'X' numa ilha desconhecida. O mapa incluía um enigma: 'Onde a maré beija a estrela-do-mar caída do céu, a jornada começa'. Após pesquisar cartas náuticas, você decifrou a charada e partiu para a praia indicada, pronto para a caça ao tesouro.",
+                        '1-2': "Entre os pertences do seu avô, você encontrou uma luneta de latão. Ao olhar através dela, o mundo parecia normal, exceto por símbolos brilhantes que surgiam sobre certos objetos. A luneta guiou-o até uma praia, onde revelou três símbolos escondidos: numa rocha, numa palmeira e sob a areia. A sua missão era encontrar os três artefactos correspondentes.",
+                        '2-1': "Você achou a luneta mágica. Olhando através dela, você via o mundo de forma diferente, com pistas a brilhar em lugares secretos. A luneta mostrou-lhe a localização de três itens na ilha: uma concha que cantava, uma pedra que flutuava e uma pena que nunca era levada pelo vento. Juntar os três era a chave para o próximo passo.",
+                        '2-2': "Dentro da garrafa, um mapa com um enigma desafiou-o. 'Quando a sombra do capitão de pedra apontar para o ninho da tartaruga, cave'. Você esperou pelo pôr do sol e, no momento exato em que a sombra de uma formação rochosa tocou um local específico na areia, você começou a cavar, sentindo que a grande descoberta estava próxima."
+                    },
+                    desenvolvimento1: {
+                        '1-1': "Enquanto você decifrava o enigma, uma pessoa aproximou-se. Ele apresentou-se como o tetraneto do Capitão Barba-Ruiva, o mesmo pirata do mapa. Ele também procurava o tesouro para limpar o nome da família. Vendo que ambos tinham um objetivo nobre, ele sugeriu uma aliança, e você, percebendo que a jornada seria difícil, concordou em trabalhar em equipa.",
+                        '1-2': "Ao encontrar o último artefacto, uma figura translúcida surgiu: o fantasma do Capitão Barba-Ruiva! Ele não era assustador, mas melancólico. Ele explicou que o seu espírito estava preso à ilha até que alguém provasse ser digno do tesouro. Ele ofereceu-se para o guiar pela última armadilha, e você aceitou a ajuda do guardião espectral.",
+                        '2-1': "Outro caçador de tesouros apareceu. Ele era descendente do capitão e buscava o mesmo que você. Ele propôs uma competição justa, mas ao verem o tamanho do desafio final, perceberam que a colaboração seria mais inteligente. Você, no entanto, decidiu seguir sozinho, confiando na sua própria habilidade para superar o que viesse pela frente.",
+                        '2-2': "O fantasma do capitão apareceu, o seu guardião eterno. Ele desafiou-o, dizendo que muitos tentaram, mas todos falharam. Ele ofereceu-se para ajudar, mas em troca, você teria que prometer usar o tesouro com sabedoria. Desconfiado das intenções de um fantasma pirata, você recusou a ajuda, decidido a conquistar o tesouro pelos seus próprios méritos."
+                    },
+                    desenvolvimento2: {
+                        '1-1': "Juntos, vocês chegaram a uma porta de pedra coberta de símbolos. Era um quebra-cabeças que exigia duas mentes para ser resolvido. Enquanto o seu parceiro decifrava as pistas do diário do capitão, você usava a luneta para ver a ordem correta dos símbolos. A porta abriu-se, revelando um baú. Mas dentro não havia ouro, e sim o diário perdido do capitão, com todas as suas histórias.",
+                        '1-2': "A armadilha final era uma ponte invisível sobre um abismo. O fantasma explicou que era um teste de fé. A trabalhar juntos, vocês encontraram um padrão nas pedras que indicava o caminho seguro. O baú continha algo mais valioso que ouro: sementes de uma árvore mágica, que, segundo a lenda, poderiam realizar qualquer desejo plantado com um coração puro.",
+                        '2-1': "Sozinho, você enfrentou o quebra-cabeças de símbolos. Foi difícil, mas a sua persistência valeu a pena. A porta abriu-se. Dentro do baú, uma surpresa: o diário do capitão. O tesouro não era riqueza, mas conhecimento e as aventuras de uma vida inteira no mar. Era uma herança de histórias, não de moedas.",
+                        '2-2': "Você chegou à ponte invisível. Sem ajuda, a travessia foi um teste de coragem e intuição. A cada passo, você sentia o caminho sob os seus pés. Do outro lado, o baú aguardava. Ao abri-lo, encontrou um punhado de sementes brilhantes, o verdadeiro tesouro do capitão: a oportunidade de cultivar um futuro mágico, um poder muito maior que qualquer fortuna."
+                    },
+                    conclusao: {
+                        '1-1': "O descendente do capitão sorriu. O seu único objetivo era encontrar o diário para poder contar a verdadeira história do seu ancestral, que era um explorador, e não um pirata cruel. Ele estava apenas a testar o seu caráter. Satisfeito, ele deu-lhe uma das sementes mágicas que também estavam no baú. Você dividiu o tesouro, e cada um seguiu o seu caminho, tendo encontrado algo mais valioso que ouro: um amigo.",
+                        '1-2': "O fantasma explicou que o tesouro era um teste. As sementes só germinariam para alguém que não buscasse riqueza. Por ter passado no teste, ele estava finalmente livre. Ele agradeceu-lhe e desapareceu numa luz suave. Você levou as sementes para casa e usou-as para criar um parque na sua cidade, onde a árvore mágica cresceu, a trazer alegria e a realizar pequenos desejos para todos.",
+                        '2-1': "Com o diário em mãos, você preparou-se para ir embora. O descendente do capitão apareceu, a explicar que só queria garantir que o diário caísse em boas mãos. Vendo o seu respeito pela história, ele contou-lhe sobre as sementes mágicas que também estavam no baú. Você ofereceu-se para dividir, e juntos, vocês decidiram usar o conhecimento e a magia para o bem.",
+                        '2-2': "O fantasma apareceu assim que você pegou nas sementes. Ele revelou que estava a testá-lo. A sua coragem e autoconfiança provaram que era digno. Como recompensa, ele ensinou-lhe como plantar a primeira semente. Você voltou para casa e plantou a árvore na praça da sua cidade, a transformar um lugar comum num ponto de encontro mágico para as futuras gerações."
+                    }
+                }
+            }
         };
 
-        // Simulação de um banco de dados completo para a demonstração
-        // Em um projeto real, todo o texto estaria aqui.
-        // Por brevidade, vamos usar apenas os dados da história 1, mas a lógica funciona para qualquer uma.
-        function getStoryData(id) {
-            // Este é um mock. No seu ficheiro final, todo o texto de todas as histórias estaria no objeto acima.
-             if (id === '1') return BANCO_DE_DADOS_COMPLETO['1'];
-             // Adicionar 'else if' para as outras histórias
-             return BANCO_DE_DADOS_COMPLETO['1']; // Padrão
-        }
-
-        let historiaCompleta = '', finalAlternativo = '', glossarioHtml = '';
+        let abasDeConteudo = { historia: '', alternativo: '', glossario: '' };
 
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
             const historiaId = urlParams.get('historia');
             const escolhasStr = urlParams.get('escolhas');
 
-            if (!historiaId || !escolhasStr) {
+            if (!historiaId || !escolhasStr || !BANCO_DE_DADOS_COMPLETO[historiaId]) {
                 document.getElementById('final-title').innerText = "Erro!";
                 document.getElementById('content-view').innerHTML = "<p>Dados da história não encontrados. Por favor, comece uma nova aventura a partir da página inicial.</p>";
                 return;
             }
 
             const escolhas = escolhasStr.split('-').map(Number);
-            const dadosDaHistoria = getStoryData(historiaId);
-
-            // 1. Montar a história completa
+            const dados = BANCO_DE_DADOS_COMPLETO[historiaId];
             const keyIntro = `${escolhas[0]}-${escolhas[1]}`;
-            // ... chaves para dev1, dev2, conclusao ...
-            // const textoCompleto = [dadosDaHistoria.textos.introducao[keyIntro], ...];
-            // historiaCompleta = textoCompleto.map(p => `<p>${p}</p>`).join('');
-            historiaCompleta = `<p>O alarme soou na escola: Joca, o esquilo mascote, havia desaparecido. Decidido a resolver o caso, você começou a sua busca pelo pátio, o último local onde o viram. Lá, entre as folhas secas, algo brilhou. Era a pequena medalha da coleira de Joca, e ao pegá-la, você percebeu que ela estava arranhada de uma forma estranha, como se apontasse para uma direção específica.</p><p>A seguir a pista, você chegou à porta do clube de teatro. Com o cuidado de um espião, você entrou sem fazer barulho e avistou uma figura misteriosa de costas. Aproximando-se com cautela, você perguntou num sussurro: 'Com licença, você viu um esquilo por aqui?'. A pessoa virou-se lentamente, e o mistério estava prestes a aprofundar-se.</p><p>A figura era Gabi, do 7º ano. Ela parecia nervosa. Com uma abordagem calma, você perguntou o que ela estava a esconder. Gabi, aliviada pela sua gentileza, confessou ter apanhado Joca. Antes que você pudesse julgar, você fez a pergunta mais importante: 'Ele está bem? Onde ele está agora?'. A resposta dela mudaria todo o rumo do caso.</p><p>Gabi explicou que Joca parecia doente e que, na sua ânsia de ajudar, o levou para a sala de ciências para o examinar. Você acreditou na sua história e, juntos, foram até lá. Joca estava ótimo, apenas sonolento por ter comido frutas a mais. Na diretoria, vocês contaram a história em conjunto, e a diretora elogiou a boa intenção de Gabi e a sua habilidade de detetive, a transformar um susto numa lição sobre cuidado e comunicação.</p>`;
-            document.getElementById('final-title').innerText = dadosDaHistoria.titulos[keyIntro] || "A Sua Aventura";
+            const keyDev1 = `${escolhas[2]}-${escolhas[3]}`;
+            const keyDev2 = `${escolhas[4]}-${escolhas[5]}`;
+            const keyConc = `${escolhas[6]}-${escolhas[7]}`;
 
-            // 2. Montar o final alternativo
-            // ... lógica para gerar final alternativo ...
-            finalAlternativo = `<p>Se na etapa 5, você tivesse feito uma escolha diferente, o rumo daquele parágrafo da sua história seria: <em>"A pessoa misteriosa era Gabi, do 7º ano. Vendo o nervosismo dela, você insistiu com firmeza para que ela mostrasse o que escondia. Pressionada, Gabi revelou que estava com Joca. A sua prioridade foi a segurança da mascote, então você foi direto ao ponto: 'Ele está bem? Onde ele está agora?'."</em></p>`;
+            const textoCompleto = [
+                dados.textos.introducao[keyIntro],
+                dados.textos.desenvolvimento1[keyDev1],
+                dados.textos.desenvolvimento2[keyDev2],
+                dados.textos.conclusao[keyConc]
+            ];
+            
+            abasDeConteudo.historia = textoCompleto.map(p => `<p>${p || 'Parágrafo não encontrado.'}</p>`).join('');
+            document.getElementById('final-title').innerText = dados.titulos[keyIntro] || "A Sua Aventura";
 
-            // 3. Montar o glossário
-            const textoParaAnalisar = historiaCompleta;
+            gerarFinalAlternativo(escolhas, dados);
+            gerarGlossario(textoCompleto.join(' '), dados.glossario);
+            
+            mostrarAba('historia');
+        };
+
+        function gerarFinalAlternativo(escolhas, dados) {
+            const etapaAleatoria = Math.floor(Math.random() * 8);
+            const escolhaOriginal = escolhas[etapaAleatoria];
+            const escolhaAlternativa = escolhaOriginal === 1 ? 2 : 1;
+            const escolhasAlternativas = [...escolhas];
+            escolhasAlternativas[etapaAleatoria] = escolhaAlternativa;
+
+            let paragrafoAlternativo = "Não foi possível gerar um final alternativo.";
+            if (etapaAleatoria < 2) { paragrafoAlternativo = dados.textos.introducao[`${escolhasAlternativas[0]}-${escolhasAlternativas[1]}`]; }
+            else if (etapaAleatoria < 4) { paragrafoAlternativo = dados.textos.desenvolvimento1[`${escolhasAlternativas[2]}-${escolhasAlternativas[3]}`]; }
+            else if (etapaAleatoria < 6) { paragrafoAlternativo = dados.textos.desenvolvimento2[`${escolhasAlternativas[4]}-${escolhasAlternativas[5]}`]; }
+            else { paragrafoAlternativo = dados.textos.conclusao[`${escolhasAlternativas[6]}-${escolhasAlternativas[7]}`]; }
+
+            abasDeConteudo.alternativo = `<p>Se na etapa ${etapaAleatoria + 1}, você tivesse feito uma escolha diferente, o rumo daquele parágrafo da sua história seria: <em>"${paragrafoAlternativo}"</em></p>`;
+        }
+
+        function gerarGlossario(texto, glossario) {
             let palavrasEncontradas = 0;
             let glossarioItemsHtml = '';
-            for (const palavra in dadosDaHistoria.glossario) {
+            for (const palavra in glossario) {
                 const regex = new RegExp(`\\b${palavra}\\b`, 'i');
-                if (regex.test(textoParaAnalisar)) {
-                    glossarioItemsHtml += `<p class="glossary-item"><b>${palavra.charAt(0).toUpperCase() + palavra.slice(1)}:</b> ${dadosDaHistoria.glossario[palavra]}</p>`;
+                if (regex.test(texto)) {
+                    glossarioItemsHtml += `<p class="glossary-item"><b>${palavra.charAt(0).toUpperCase() + palavra.slice(1)}:</b> ${glossario[palavra]}</p>`;
                     palavrasEncontradas++;
                 }
             }
             if (palavrasEncontradas === 0) {
                 glossarioItemsHtml = '<p>Nenhuma palavra do glossário foi encontrada na sua versão da história.</p>';
             }
-            glossarioHtml = glossarioItemsHtml;
-            
-            // Exibir a história por defeito
-            mostrarHistoria();
-        };
+            abasDeConteudo.glossario = glossarioItemsHtml;
+        }
 
-        function updateActiveButton(activeBtnId) {
+        function mostrarAba(aba) {
+            document.getElementById('content-view').innerHTML = abasDeConteudo[aba];
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-            document.getElementById(activeBtnId).classList.add('active');
-        }
-
-        function mostrarHistoria() {
-            document.getElementById('content-view').innerHTML = historiaCompleta;
-            updateActiveButton('btn-historia');
-        }
-
-        function mostrarAlternativo() {
-            document.getElementById('content-view').innerHTML = finalAlternativo;
-            updateActiveButton('btn-alternativo');
-        }
-
-        function mostrarGlossario() {
-            document.getElementById('content-view').innerHTML = glossarioHtml;
-            updateActiveButton('btn-glossario');
+            document.getElementById(`btn-${aba}`).classList.add('active');
         }
     </script>
 </body>
