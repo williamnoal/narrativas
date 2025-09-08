@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>História 8: O Segredo do Tesouro Pirata</title>
+    <style>
+        :root {
+            --cor-primaria: #cd853f; /* Peru */
+            --cor-fundo: #f5fffa; /* MintCream */
+            --cor-texto: #333;
+        }
+        body, html { height: 100%; margin: 0; font-family: 'Segoe UI', sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto); overflow: hidden; }
+        .container { display: flex; justify-content: center; align-items: center; height: 100%; padding: 20px; box-sizing: border-box; }
+        .etapa { background-color: white; padding: 40px; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 650px; }
+        .hidden { display: none; }
+        h2 { font-size: 1.6rem; color: var(--cor-primaria); margin-top: 0; }
+        p { font-size: 1.1rem; line-height: 1.6; }
+        .options { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; }
+        .choice-btn { padding: 15px; border: 2px solid var(--cor-primaria); border-radius: 10px; background-color: white; color: var(--cor-primaria); font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s; }
+        .choice-btn:hover { background-color: var(--cor-primaria); color: white; }
+        #final-text-container { text-align: left; margin-bottom: 20px; }
+        #senha-final { background-color: #eee; padding: 10px; border-radius: 5px; font-family: 'Courier New', Courier, monospace; font-weight: bold; color: #555; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="etapa-1" class="etapa">
+            <h2>Explorando o sótão do seu avô, você encontra um item de um antigo pirata. O que é?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(1, 1)">Um mapa do tesouro enrolado dentro de uma garrafa.</button>
+                <button class="choice-btn" onclick="fazerEscolha(1, 2)">Uma luneta de latão que mostra mais do que os olhos veem.</button>
+            </div>
+        </div>
+        <div id="etapa-2" class="etapa hidden">
+            <h2>O item te leva a uma praia deserta. O que você precisa fazer para encontrar o tesouro?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(2, 1)">Resolver um enigma sobre as marés e as estrelas.</button>
+                <button class="choice-btn" onclick="fazerEscolha(2, 2)">Encontrar três artefatos escondidos na ilha.</button>
+            </div>
+        </div>
+        <div id="etapa-3" class="etapa hidden">
+            <h2>Você não está sozinho! Outro caçador de tesouros aparece. Quem é?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(3, 1)">Um descendente do capitão que enterrou o tesouro.</button>
+                <button class="choice-btn" onclick="fazerEscolha(3, 2)">Um pirata fantasma que guarda o tesouro.</button>
+            </div>
+        </div>
+        <div id="etapa-4" class="etapa hidden">
+            <h2>Ele propõe uma aliança para superar o obstáculo final. Você aceita?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(4, 1)">Sim, a união faz a força.</button>
+                <button class="choice-btn" onclick="fazerEscolha(4, 2)">Não, você prefere trabalhar sozinho.</button>
+            </div>
+        </div>
+        <div id="etapa-5" class="etapa hidden">
+            <h2>A entrada para o tesouro está protegida por uma armadilha. Qual?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(5, 1)">Um quebra-cabeça de símbolos que precisa ser decifrado.</button>
+                <button class="choice-btn" onclick="fazerEscolha(5, 2)">Uma ponte invisível que só pode ser atravessada com fé.</button>
+            </div>
+        </div>
+        <div id="etapa-6" class="etapa hidden">
+            <h2>Finalmente, o baú do tesouro! Mas o que tem dentro não é ouro. O que é?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(6, 1)">O diário do capitão, cheio de histórias e lições de vida.</button>
+                <button class="choice-btn" onclick="fazerEscolha(6, 2)">Sementes de uma árvore mágica que realiza desejos.</button>
+            </div>
+        </div>
+        <div id="etapa-7" class="etapa hidden">
+            <h2>Seu 'rival' revela seu verdadeiro propósito. Qual é?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(7, 1)">Ele só queria honrar a memória de seu ancestral.</button>
+                <button class="choice-btn" onclick="fazerEscolha(7, 2)">Ele estava testando você para ver se era digno do tesouro.</button>
+            </div>
+        </div>
+        <div id="etapa-8" class="etapa hidden">
+            <h2>Você volta para casa com o verdadeiro tesouro. O que você faz com ele?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(8, 1)">Divide o tesouro com seu novo amigo.</button>
+                <button class="choice-btn" onclick="fazerEscolha(8, 2)">Usa o tesouro para melhorar a vida em sua cidade.</button>
+            </div>
+        </div>
+
+        <div id="etapa-final" class="etapa hidden">
+            <h2>Sua história está completa!</h2>
+            <div id="final-text-container"></div>
+            <p>A sua jornada única gerou a seguinte senha:</p>
+            <div id="senha-final"></div>
+            <div class="options">
+                <button class="choice-btn" onclick="window.location.href = 'index.html'">Voltar ao Início</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const BANCO_DE_TEXTOS = {
+            introducao: {
+                '1-1': "No sótão empoeirado, uma garrafa antiga continha mais do que ar velho: um mapa amarelado, com a marca de um 'X' numa ilha desconhecida. O mapa incluía um enigma: 'Onde a maré beija a estrela-do-mar caída do céu, a jornada começa'. Após pesquisar cartas náuticas, você decifrou a charada e partiu para a praia indicada, pronto para a caça ao tesouro.",
+                '1-2': "Entre os pertences do seu avô, você encontrou uma luneta de latão. Ao olhar através dela, o mundo parecia normal, exceto por símbolos brilhantes que surgiam sobre certos objetos. A luneta te guiou até uma praia, onde revelou três símbolos escondidos: em uma rocha, em uma palmeira e sob a areia. Sua missão era encontrar os três artefatos correspondentes.",
+                '2-1': "Você achou a luneta mágica. Olhando através dela, você via o mundo de forma diferente, com pistas brilhando em lugares secretos. A luneta te mostrou a localização de três itens na ilha: uma concha que cantava, uma pedra que flutuava e uma pena que nunca era levada pelo vento. Juntar os três era a chave para o próximo passo.",
+                '2-2': "Dentro da garrafa, um mapa com um enigma te desafiou. 'Quando a sombra do capitão de pedra apontar para o ninho da tartaruga, cave'. Você esperou o pôr do sol e, no momento exato em que a sombra de uma formação rochosa tocou um local específico na areia, você começou a cavar, sentindo que a grande descoberta estava próxima."
+            },
+            desenvolvimento1: {
+                '1-1': "Enquanto você decifrava o enigma, uma pessoa se aproximou. Ele se apresentou como o tataraneto do Capitão Barba-Ruiva, o mesmo pirata do mapa. Ele também procurava o tesouro para limpar o nome da família. Vendo que ambos tinham um objetivo nobre, ele sugeriu uma aliança, e você, percebendo que a jornada seria difícil, concordou em trabalhar em equipe.",
+                '1-2': "Ao encontrar o último artefato, uma figura translúcida surgiu: o fantasma do Capitão Barba-Ruiva! Ele não era assustador, mas melancólico. Ele explicou que seu espírito estava preso à ilha até que alguém provasse ser digno do tesouro. Ele se ofereceu para te guiar pela última armadilha, e você aceitou a ajuda do guardião espectral.",
+                '2-1': "Outro caçador de tesouros apareceu. Ele era descendente do capitão e buscava o mesmo que você. Ele propôs uma competição justa, mas ao verem o tamanho do desafio final, perceberam que a colaboração seria mais inteligente. Você, no entanto, decidiu seguir sozinho, confiando em sua própria habilidade para superar o que viesse pela frente.",
+                '2-2': "O fantasma do capitão apareceu, seu guardião eterno. Ele te desafiou, dizendo que muitos tentaram, mas todos falharam. Ele se ofereceu para ajudar, mas em troca, você teria que prometer usar o tesouro com sabedoria. Desconfiado das intenções de um fantasma pirata, você recusou a ajuda, decidido a conquistar o tesouro por seus próprios méritos."
+            },
+            desenvolvimento2: {
+                '1-1': "Juntos, vocês chegaram a uma porta de pedra coberta de símbolos. Era um quebra-cabeça que exigia duas mentes para ser resolvido. Enquanto seu parceiro decifrava as pistas do diário do capitão, você usava a luneta para ver a ordem correta dos símbolos. A porta se abriu, revelando um baú. Mas dentro não havia ouro, e sim o diário perdido do capitão, com todas as suas histórias.",
+                '1-2': "A armadilha final era uma ponte invisível sobre um abismo. O fantasma explicou que era um teste de fé. Trabalhando juntos, vocês encontraram um padrão nas pedras que indicava o caminho seguro. O baú continha algo mais valioso que ouro: sementes de uma árvore mágica, que, segundo a lenda, poderiam realizar qualquer desejo plantado com um coração puro.",
+                '2-1': "Sozinho, você enfrentou o quebra-cabeça de símbolos. Foi difícil, mas sua persistência valeu a pena. A porta se abriu. Dentro do baú, uma surpresa: o diário do capitão. O tesouro não era riqueza, mas conhecimento e as aventuras de uma vida inteira no mar. Era uma herança de histórias, não de moedas.",
+                '2-2': "Você chegou à ponte invisível. Sem ajuda, a travessia foi um teste de coragem e intuição. A cada passo, você sentia o caminho sob seus pés. Do outro lado, o baú aguardava. Ao abri-lo, encontrou um punhado de sementes brilhantes, o verdadeiro tesouro do capitão: a chance de cultivar um futuro mágico, um poder muito maior que qualquer fortuna."
+            },
+            conclusao: {
+                '1-1': "O descendente do capitão sorriu. Seu único objetivo era encontrar o diário para poder contar a verdadeira história de seu ancestral, que era um explorador, e não um pirata cruel. Ele estava apenas testando seu caráter. Satisfeito, ele te deu uma das sementes mágicas que também estavam no baú. Você dividiu o tesouro, e cada um seguiu seu caminho, tendo encontrado algo mais valioso que ouro: um amigo.",
+                '1-2': "O fantasma explicou que o tesouro era um teste. As sementes só germinariam para alguém que não buscasse riqueza. Por ter passado no teste, ele estava finalmente livre. Ele te agradeceu e desapareceu numa luz suave. Você levou as sementes para casa e as usou para criar um parque na sua cidade, onde a árvore mágica cresceu, trazendo alegria e realizando pequenos desejos para todos.",
+                '2-1': "Com o diário em mãos, você se preparou para ir embora. O descendente do capitão apareceu, explicando que só queria garantir que o diário caísse em boas mãos. Vendo seu respeito pela história, ele te contou sobre as sementes mágicas que também estavam no baú. Você ofereceu dividir, e juntos, vocês decidiram usar o conhecimento e a magia para o bem.",
+                '2-2': "O fantasma apareceu assim que você pegou as sementes. Ele revelou que estava te testando. Sua coragem e autoconfiança o provaram digno. Como recompensa, ele te ensinou como plantar a primeira semente. Você voltou para casa e plantou a árvore na praça da sua cidade, transformando um lugar comum em um ponto de encontro mágico para as futuras gerações."
+            }
+        };
+        let escolhas = [];
+        function fazerEscolha(etapa, numeroDaEscolha) {
+            escolhas.push(numeroDaEscolha);
+            document.getElementById('etapa-' + etapa).classList.add('hidden');
+            if (etapa === 8) { montarTextoFinal(); } else { document.getElementById('etapa-' + (etapa + 1)).classList.remove('hidden'); }
+        }
+        function montarTextoFinal() {
+            const keyIntro = `${escolhas[0]}-${escolhas[1]}`, keyDev1 = `${escolhas[2]}-${escolhas[3]}`, keyDev2 = `${escolhas[4]}-${escolhas[5]}`, keyConc = `${escolhas[6]}-${escolhas[7]}`;
+            const textoFinal = `<p>${BANCO_DE_TEXTOS.introducao[keyIntro]}</p><p>${BANCO_DE_TEXTOS.desenvolvimento1[keyDev1]}</p><p>${BANCO_DE_TEXTOS.desenvolvimento2[keyDev2]}</p><p>${BANCO_DE_TEXTOS.conclusao[keyConc]}</p>`;
+            document.getElementById('final-text-container').innerHTML = textoFinal;
+            document.getElementById('senha-final').innerText = `8: ${escolhas.join('-')}`;
+            document.getElementById('etapa-final').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
