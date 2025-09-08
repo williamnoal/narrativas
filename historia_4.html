@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>História 4: A Academia Secreta de Magia</title>
+    <style>
+        :root {
+            --cor-primaria: #9932cc; /* DarkOrchid */
+            --cor-fundo: #faf0e6; /* Linen */
+            --cor-texto: #333;
+        }
+        body, html {
+            height: 100%; margin: 0; font-family: 'Segoe UI', sans-serif;
+            background-color: var(--cor-fundo); color: var(--cor-texto); overflow: hidden;
+        }
+        /* O restante do CSS é idêntico ao da história anterior, então pode ser mantido */
+        .container { display: flex; justify-content: center; align-items: center; height: 100%; padding: 20px; box-sizing: border-box; }
+        .etapa { background-color: white; padding: 40px; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); text-align: center; width: 100%; max-width: 650px; }
+        .hidden { display: none; }
+        h2 { font-size: 1.6rem; color: var(--cor-primaria); margin-top: 0; }
+        p { font-size: 1.1rem; line-height: 1.6; }
+        .options { display: flex; flex-direction: column; gap: 12px; margin-top: 25px; }
+        .choice-btn { padding: 15px; border: 2px solid var(--cor-primaria); border-radius: 10px; background-color: white; color: var(--cor-primaria); font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s; }
+        .choice-btn:hover { background-color: var(--cor-primaria); color: white; }
+        #final-text-container { text-align: left; margin-bottom: 20px; }
+        #senha-final { background-color: #eee; padding: 10px; border-radius: 5px; font-family: 'Courier New', Courier, monospace; font-weight: bold; color: #555; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="etapa-1" class="etapa">
+            <h2>Numa tarde chuvosa, algo mágico acontece. O que é?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(1, 1)">Uma coruja bate na janela com uma carta no bico.</button>
+                <button class="choice-btn" onclick="fazerEscolha(1, 2)">Um livro antigo na estante começa a brilhar.</button>
+            </div>
+        </div>
+        <div id="etapa-2" class="etapa hidden">
+            <h2>O objeto te mostra o caminho para um lugar secreto. Como você chega lá?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(2, 1)">Atravessando um portal escondido numa estação de trem.</button>
+                <button class="choice-btn" onclick="fazerEscolha(2, 2)">Recitando um feitiço do livro que te transporta.</button>
+            </div>
+        </div>
+        <div id="etapa-3" class="etapa hidden">
+            <h2>Você chega à Academia Arcana! Qual a aparência dela?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(3, 1)">Um majestoso castelo que flutua entre as nuvens.</button>
+                <button class="choice-btn" onclick="fazerEscolha(3, 2)">Uma cidade construída dentro de uma árvore gigante.</button>
+            </div>
+        </div>
+        <div id="etapa-4" class="etapa hidden">
+            <h2>No seu primeiro teste de aptidão mágica, qual talento você descobre?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(4, 1)">Um dom natural para criar poções e encantar objetos.</button>
+                <button class="choice-btn" onclick="fazerEscolha(4, 2)">A habilidade de controlar os elementos, como fogo e água.</button>
+            </div>
+        </div>
+        <div id="etapa-5" class="etapa hidden">
+            <h2>Um alarme soa! A magia que protege a academia está falhando. Qual a origem do problema?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(5, 1)">Um artefato sombrio escondido nos cofres da escola.</button>
+                <button class="choice-btn" onclick="fazerEscolha(5, 2)">O guardião ancestral da academia adormeceu.</button>
+            </div>
+        </div>
+        <div id="etapa-6" class="etapa hidden">
+            <h2>Você é escolhido para ajudar. Qual é a solução para o problema?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(6, 1)">Preparar uma poção de luz com ingredientes raros.</button>
+                <button class="choice-btn" onclick="fazerEscolha(6, 2)">Executar um antigo ritual para despertar o guardião.</button>
+            </div>
+        </div>
+        <div id="etapa-7" class="etapa hidden">
+            <h2>Você consegue e salva a academia! Como você lida com a fama repentina?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(7, 1)">Aceita o título de 'Herói da Academia' com orgulho.</button>
+                <button class="choice-btn" onclick="fazerEscolha(7, 2)">Agradece, mas prefere voltar a ser um aluno comum.</button>
+            </div>
+        </div>
+        <div id="etapa-8" class="etapa hidden">
+            <h2>No fim do semestre, você pode levar algo para casa nas férias. O que você escolhe?</h2>
+            <div class="options">
+                <button class="choice-btn" onclick="fazerEscolha(8, 1)">Seu primeiro livro de feitiços para praticar.</button>
+                <button class="choice-btn" onclick="fazerEscolha(8, 2)">Um pequeno dragão de estimação que nasceu na aula.</button>
+            </div>
+        </div>
+
+        <div id="etapa-final" class="etapa hidden">
+            <h2>Sua história está completa!</h2>
+            <div id="final-text-container"></div>
+            <p>A sua jornada única gerou a seguinte senha:</p>
+            <div id="senha-final"></div>
+            <div class="options">
+                <button class="choice-btn" onclick="window.location.href = 'index.html'">Voltar ao Início</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const BANCO_DE_TEXTOS = {
+            introducao: {
+                '1-1': "A chuva batia na vidraça quando uma coruja de aparência sábia pousou em sua janela, carregando um envelope selado com cera. A carta, escrita em tinta esverdeada, era um convite para a Academia Arcana de Artes Mágicas. Seguindo as instruções, você foi até uma velha estação de trem e, ao atravessar uma parede de tijolos específica, sentiu o mundo mudar ao seu redor, dando lugar a um novo horizonte.",
+                '1-2': "Em meio à tempestade, uma carta misteriosa surgiu em sua janela, trazida por uma coruja. O convite para uma escola de magia parecia um sonho. O mapa na carta te levou a uma estação de trem abandonada, onde um feitiço de transporte estava escondido. Ao recitar as palavras mágicas, o cenário se transformou, e você se viu em frente aos portões de um lugar incrível.",
+                '2-1': "O tédio da tarde chuvosa foi quebrado quando um livro antigo, que você nunca tinha visto, começou a brilhar na estante. Ao abri-lo, as palavras flutuaram para fora da página, formando um portal cintilante no meio da sua sala. Com o coração acelerado de emoção, você deu um passo através do portal, sentindo a magia formigar em sua pele enquanto era transportado para outro lugar.",
+                '2-2': "Um livro empoeirado na estante abriu-se sozinho, revelando um feitiço de teletransporte. Com uma mistura de medo e fascinação, você leu as palavras em voz alta. A sala girou, as cores se misturaram e, quando tudo parou, você não estava mais em casa. Estava em um lugar onde o ar cheirava a magia e conhecimento antigo, o primeiro passo em uma jornada inesperada."
+            },
+            desenvolvimento1: {
+                '1-1': "O portal te deixou em uma plataforma de observação de um castelo que flutuava majestosamente entre as nuvens. Gárgulas de pedra te observavam enquanto você caminhava por pontes suspensas. No seu primeiro teste, o diretor notou seu talento inato ao ver você encantar um bule para dançar e preparar uma poção que brilhava como estrelas líquidas. Seu caminho como um mestre de encantos havia começado.",
+                '1-2': "Você chegou a um castelo flutuante, um lugar de torres altas e bandeiras tremulando ao vento. Era a Academia Arcana. Durante o teste de aptidão, ao ser pedido para acender uma vela, você acidentalmente lançou uma bola de fogo, revelando seu poderoso, mas incontrolado, dom sobre os elementos. Os professores viram em você um potencial imenso como um mago elemental.",
+                '2-1': "Sua jornada te levou ao interior de uma árvore tão grande que continha uma cidade inteira, com casas e escolas conectadas por pontes de cipó. Era a Academia. Em sua primeira aula, você descobriu um talento especial para poções, misturando ingredientes com uma intuição que surpreendeu até o professor mais experiente. Você era um alquimista nato.",
+                '2-2': "O feitiço te levou a uma cidade mágica construída dentro de uma árvore colossal. A luz do sol se filtrava pelas folhas, iluminando salas de aula circulares. No teste inicial, você demonstrou uma conexão impressionante com a natureza, fazendo a água de um chafariz dançar e uma pequena chama surgir na palma da sua mão. Seu destino como um elementalista estava selado."
+            },
+            desenvolvimento2: {
+                '1-1': "Um dia, um tremor percorreu a academia. A barreira mágica que a protegia estava enfraquecendo. O diretor revelou que um artefato sombrio, guardado nos cofres, estava corrompendo a magia. Por seu talento com poções, você foi escolhido para criar um antídoto: a Poção da Luz Estelar, cujos ingredientes só podiam ser encontrados no Jardim Lunar da academia, um lugar perigoso à noite.",
+                '1-2': "A paz na academia foi quebrada quando o guardião ancestral, um grifo de cristal, adormeceu em seu posto, deixando a escola vulnerável. O diretor, vendo sua afinidade com a magia, te encarregou de despertá-lo. A única maneira era preparar uma poção rara, a Essência do Despertar, que exigia uma pena de fênix e uma lágrima de unicórnio.",
+                '2-1': "A academia inteira tremeu. As proteções estavam caindo. A causa era um artefato sombrio que fora ativado por engano. Sua habilidade com rituais e encantamentos te tornou a pessoa ideal para a tarefa. Você precisaria encontrar o artefato e realizar um antigo ritual de purificação, uma magia complexa que exigiria toda a sua concentração e poder.",
+                '2-2': "O guardião da academia, um dragão etéreo, adormeceu, e com ele, a magia protetora começou a desvanecer. Você foi convocado pelo conselho de magos para uma missão crucial: executar o Ritual do Despertar. Era um encantamento em uma língua antiga que ninguém usava há séculos, e um único erro na pronúncia poderia ter consequências desastrosas."
+            },
+            conclusao: {
+                '1-1': "Com sucesso, você preparou a poção e neutralizou o artefato, salvando a academia. A celebração foi imensa, e você foi condecorado com o título de 'Herói da Academia'. Você aceitou a honra com orgulho, sabendo que seu nome ficaria na história da escola. No fim do semestre, você levou seu livro de feitiços para casa, ansioso para aprender mais durante as férias.",
+                '1-2': "Após a aventura, você salvou a escola e foi aclamado por todos. No entanto, a fama não te atraiu; você agradeceu e pediu para continuar seus estudos como um aluno normal. Sua humildade foi admirada por todos. Nas férias, ao voltar para casa, você não foi sozinho: um pequeno filhote de dragão, nascido na aula de criaturas mágicas, te escolheu como seu companheiro.",
+                '2-1': "O ritual foi um sucesso, e a academia estava segura novamente. Você se tornou uma lenda entre os alunos, recebendo o título honorário de 'Guardião do Conhecimento'. Feliz com o reconhecimento, você continuou seus estudos com ainda mais dedicação. Para as férias, você ganhou permissão para levar seu primeiro livro de feitiços, um tesouro que guardaria para sempre.",
+                '2-2': "Você salvou a academia, mas a atenção que recebeu o deixou desconfortável. Você preferia a tranquilidade dos estudos à fama. Seu pedido para voltar ao anonimato foi respeitado, mas sua bravura nunca foi esquecida. Ao fim do ano, o professor de criaturas mágicas te deu um presente especial: um pequeno dragão de estimação, que se aninhou em seu ombro e te acompanhou de volta para casa."
+            }
+        };
+
+        let escolhas = [];
+        function fazerEscolha(etapa, numeroDaEscolha) {
+            escolhas.push(numeroDaEscolha);
+            document.getElementById('etapa-' + etapa).classList.add('hidden');
+            if (etapa === 8) { montarTextoFinal(); } else { document.getElementById('etapa-' + (etapa + 1)).classList.remove('hidden'); }
+        }
+        function montarTextoFinal() {
+            const keyIntro = `${escolhas[0]}-${escolhas[1]}`, keyDev1 = `${escolhas[2]}-${escolhas[3]}`, keyDev2 = `${escolhas[4]}-${escolhas[5]}`, keyConc = `${escolhas[6]}-${escolhas[7]}`;
+            const textoFinal = `<p>${BANCO_DE_TEXTOS.introducao[keyIntro]}</p><p>${BANCO_DE_TEXTOS.desenvolvimento1[keyDev1]}</p><p>${BANCO_DE_TEXTOS.desenvolvimento2[keyDev2]}</p><p>${BANCO_DE_TEXTOS.conclusao[keyConc]}</p>`;
+            document.getElementById('final-text-container').innerHTML = textoFinal;
+            document.getElementById('senha-final').innerText = `4: ${escolhas.join('-')}`;
+            document.getElementById('etapa-final').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
